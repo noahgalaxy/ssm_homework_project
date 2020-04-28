@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fisheep.dao.UserHasGroupMapper">
+
+    <select id="getGroupByUid" resultType="java.util.HashMap">
+        select uhg.uhggroupid, g.groupname
+        from userhasgroup uhg
+        inner join hw_group g
+        on uhg.uhggroupid = g.groupid
+        where uhg.uhguid = 4
+    </select>
+</mapper>

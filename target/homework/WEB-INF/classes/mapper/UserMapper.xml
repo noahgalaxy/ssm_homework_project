@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fisheep.dao.UserMapper">
+    <insert id="insertUser" parameterType="com.fisheep.bean.User">
+        insert into hw_user(email, password) values(#{email}, #{passWord})
+        <selectKey keyColumn="uid" keyProperty="uid" resultType="java.lang.Integer" order="AFTER">
+            select last_insert_id()
+        </selectKey>
+    </insert>
+
+    <select id="getEmailCounts" parameterType="java.lang.String" resultType="java.lang.Integer">
+        select count(1) from hw_user u where u.email = #{email}
+    </select>
+
+    <select id="getUserByEmail" parameterType="java.lang.String" resultType="com.fisheep.bean.User">
+        select * from hw_user where email = #{email} group by email;
+    </select>
+</mapper>
