@@ -6,7 +6,10 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="080d8b1e-07e4-4b55-999c-f5efe8c06f82" name="Default Changelist" comment="" />
+    <list default="true" id="080d8b1e-07e4-4b55-999c-f5efe8c06f82" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -51,6 +54,9 @@
         <option value="Class" />
       </list>
     </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="LogFilters">
     <option name="FILTER_ERRORS" value="false" />
@@ -239,6 +245,8 @@
       <workItem from="1587622750646" duration="31821000" />
       <workItem from="1587711671556" duration="24962000" />
       <workItem from="1587955069956" duration="20497000" />
+      <workItem from="1588060398901" duration="624000" />
+      <workItem from="1588066674518" duration="685000" />
     </task>
     <servers />
   </component>
@@ -378,10 +386,10 @@
       <screen x="0" y="0" width="1366" height="738" />
     </state>
     <state width="1325" height="212" key="GridCell.Tab.5.right/0.0.1366.738@0.0.1366.738" timestamp="1587977316655" />
-    <state x="214" y="12" key="SettingsEditor" timestamp="1587825804415">
+    <state x="214" y="12" key="SettingsEditor" timestamp="1588066723238">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state x="214" y="12" key="SettingsEditor/0.0.1366.738@0.0.1366.738" timestamp="1587825804415" />
+    <state x="214" y="12" key="SettingsEditor/0.0.1366.738@0.0.1366.738" timestamp="1588066723238" />
     <state x="399" y="20" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog" timestamp="1587971792004">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
