@@ -7,8 +7,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="080d8b1e-07e4-4b55-999c-f5efe8c06f82" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/fisheep/bean/Group.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/test/com/fisheep/test/TestController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/fisheep/bean/UserHasGroup.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fisheep/bean/UserHasGroup.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/fisheep/controller/UserHasGroupController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fisheep/controller/UserHasGroupController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/fisheep/dao/UserHasGroupMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fisheep/dao/UserHasGroupMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/fisheep/service/UserHasGroupService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fisheep/service/UserHasGroupService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/fisheep/service/impl/UserHasGroupServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fisheep/service/impl/UserHasGroupServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/UserHasGroupMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/UserHasGroupMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/test/com/fisheep/test/TestDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/test/com/fisheep/test/TestDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/re.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/re.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fisheep/bean/UserHasGroup.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fisheep/bean/UserHasGroup.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fisheep/controller/UserHasGroupController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fisheep/controller/UserHasGroupController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fisheep/dao/UserHasGroupMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fisheep/dao/UserHasGroupMapper.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fisheep/service/UserHasGroupService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fisheep/service/UserHasGroupService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fisheep/service/impl/UserHasGroupServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fisheep/service/impl/UserHasGroupServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/mapper/UserHasGroupMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mapper/UserHasGroupMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/com/fisheep/test/TestDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/com/fisheep/test/TestDao.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -97,13 +113,60 @@
     </key>
   </component>
   <component name="RunDashboard">
-    <option name="excludedTypes">
+    <option name="configurationTypes">
       <set>
-        <option value="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" />
+        <option value="TestNG" />
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.TestDao.testUserHasGroupMapperGetGroupByUid">
+  <component name="RunManager" selected="JUnit.TestController.testGetGroupByUid">
+    <configuration name="KehuiBei" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="homework" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.fisheep.test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.fisheep.test" />
+      <option name="MAIN_CLASS_NAME" value="com.fisheep.test.KehuiBei" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="KehuiBei.compute" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="homework" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.fisheep.test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.fisheep.test" />
+      <option name="MAIN_CLASS_NAME" value="com.fisheep.test.KehuiBei" />
+      <option name="METHOD_NAME" value="compute" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TestController.testGetGroupByUid" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="homework" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.fisheep.test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.fisheep.test" />
+      <option name="MAIN_CLASS_NAME" value="com.fisheep.test.TestController" />
+      <option name="METHOD_NAME" value="testGetGroupByUid" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="TestDao.testUserHasGroupMapperGetGroupByUid" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="homework" />
       <extension name="coverage">
@@ -115,6 +178,22 @@
       <option name="PACKAGE_NAME" value="com.fisheep.test" />
       <option name="MAIN_CLASS_NAME" value="com.fisheep.test.TestDao" />
       <option name="METHOD_NAME" value="testUserHasGroupMapperGetGroupByUid" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TestDao.testUserHasGroupMapperGetGroupsByUid" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="homework" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.fisheep.test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.fisheep.test" />
+      <option name="MAIN_CLASS_NAME" value="com.fisheep.test.TestDao" />
+      <option name="METHOD_NAME" value="testUserHasGroupMapperGetGroupsByUid" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -194,6 +273,10 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.TestController.testGetGroupByUid" />
+        <item itemvalue="JUnit.KehuiBei.compute" />
+        <item itemvalue="JUnit.KehuiBei" />
+        <item itemvalue="JUnit.TestDao.testUserHasGroupMapperGetGroupsByUid" />
         <item itemvalue="JUnit.TestDao.testUserHasGroupMapperGetGroupByUid" />
       </list>
     </recent_temporary>
@@ -207,22 +290,16 @@
             <expand>
               <path>
                 <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
-                <item name="root:homework@localhost" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+                <item name="Tomcat Server" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+              </path>
+              <path>
+                <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
+                <item name="Tomcat Server" type="7427dc5b:ServiceModel$ServiceGroupNode" />
+                <item name="Running" type="7427dc5b:ServiceModel$ServiceGroupNode" />
               </path>
               <path>
                 <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
                 <item name="root:homework@localhost" type="7427dc5b:ServiceModel$ServiceGroupNode" />
-                <item name="com.intellij.database.console.session.MessageBusSession@f03a1a1" type="9fbbdea:ServiceModel$ServiceNode" />
-              </path>
-              <path>
-                <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
-                <item name="root:homework@localhost" type="7427dc5b:ServiceModel$ServiceGroupNode" />
-                <item name="com.intellij.database.console.session.MessageBusSession@9229644" type="9fbbdea:ServiceModel$ServiceNode" />
-              </path>
-              <path>
-                <item name="services root" type="e789fda9:ObjectUtils$Sentinel" />
-                <item name="root:homework@localhost" type="7427dc5b:ServiceModel$ServiceGroupNode" />
-                <item name="com.intellij.database.console.session.MessageBusSession@3f066f99" type="9fbbdea:ServiceModel$ServiceNode" />
               </path>
             </expand>
             <select />
@@ -246,7 +323,7 @@
       <workItem from="1587711671556" duration="24962000" />
       <workItem from="1587955069956" duration="20497000" />
       <workItem from="1588060398901" duration="624000" />
-      <workItem from="1588066674518" duration="685000" />
+      <workItem from="1588066674518" duration="20440000" />
     </task>
     <servers />
   </component>
@@ -254,14 +331,14 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="274" y="31" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1587712611959">
+    <state x="274" y="31" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1588085505178">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state x="274" y="31" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.738@0.0.1366.738" timestamp="1587712611959" />
-    <state x="399" y="70" key="#com.intellij.ide.util.MemberChooser" timestamp="1587987970288">
+    <state x="274" y="31" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.738@0.0.1366.738" timestamp="1588085505178" />
+    <state x="399" y="70" key="#com.intellij.ide.util.MemberChooser" timestamp="1588074681467">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state x="399" y="70" key="#com.intellij.ide.util.MemberChooser/0.0.1366.738@0.0.1366.738" timestamp="1587987970288" />
+    <state x="399" y="70" key="#com.intellij.ide.util.MemberChooser/0.0.1366.738@0.0.1366.738" timestamp="1588074681467" />
     <state x="413" y="116" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1587711798115">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
@@ -270,10 +347,10 @@
       <screen x="0" y="0" width="1366" height="738" />
     </state>
     <state x="113" y="116" width="1166" height="467" key="DiffContextDialog/0.0.1366.738@0.0.1366.738" timestamp="1587563585163" />
-    <state x="463" y="124" key="FileChooserDialogImpl" timestamp="1587988238088">
+    <state x="463" y="124" key="FileChooserDialogImpl" timestamp="1588086065147">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state x="463" y="124" key="FileChooserDialogImpl/0.0.1366.738@0.0.1366.738" timestamp="1587988238088" />
+    <state x="463" y="124" key="FileChooserDialogImpl/0.0.1366.738@0.0.1366.738" timestamp="1588086065147" />
     <state x="334" y="311" width="1325" height="423" key="GridCell.Tab.-1.bottom" timestamp="1587713612117">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
@@ -290,54 +367,54 @@
       <screen x="0" y="0" width="1366" height="738" />
     </state>
     <state x="334" y="311" width="1325" height="423" key="GridCell.Tab.-1.right/0.0.1366.738@0.0.1366.738" timestamp="1587713612117" />
-    <state width="1325" height="112" key="GridCell.Tab.0.bottom" timestamp="1587991517919">
+    <state width="1078" height="271" key="GridCell.Tab.0.bottom" timestamp="1588089007294">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state width="1325" height="112" key="GridCell.Tab.0.bottom/0.0.1366.738@0.0.1366.738" timestamp="1587991517919" />
-    <state width="1325" height="112" key="GridCell.Tab.0.center" timestamp="1587991517919">
+    <state width="1078" height="271" key="GridCell.Tab.0.bottom/0.0.1366.738@0.0.1366.738" timestamp="1588089007294" />
+    <state width="1078" height="271" key="GridCell.Tab.0.center" timestamp="1588089007294">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state width="1325" height="112" key="GridCell.Tab.0.center/0.0.1366.738@0.0.1366.738" timestamp="1587991517919" />
-    <state width="1325" height="112" key="GridCell.Tab.0.left" timestamp="1587991517919">
+    <state width="1078" height="271" key="GridCell.Tab.0.center/0.0.1366.738@0.0.1366.738" timestamp="1588089007294" />
+    <state width="1078" height="271" key="GridCell.Tab.0.left" timestamp="1588089007293">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state width="1325" height="112" key="GridCell.Tab.0.left/0.0.1366.738@0.0.1366.738" timestamp="1587991517919" />
-    <state width="1325" height="112" key="GridCell.Tab.0.right" timestamp="1587991517919">
+    <state width="1078" height="271" key="GridCell.Tab.0.left/0.0.1366.738@0.0.1366.738" timestamp="1588089007293" />
+    <state width="1078" height="271" key="GridCell.Tab.0.right" timestamp="1588089007294">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state width="1325" height="112" key="GridCell.Tab.0.right/0.0.1366.738@0.0.1366.738" timestamp="1587991517919" />
-    <state width="1325" height="112" key="GridCell.Tab.1.bottom" timestamp="1587991517920">
+    <state width="1078" height="271" key="GridCell.Tab.0.right/0.0.1366.738@0.0.1366.738" timestamp="1588089007294" />
+    <state width="1078" height="271" key="GridCell.Tab.1.bottom" timestamp="1588089007130">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state width="1325" height="112" key="GridCell.Tab.1.bottom/0.0.1366.738@0.0.1366.738" timestamp="1587991517920" />
-    <state width="1325" height="112" key="GridCell.Tab.1.center" timestamp="1587991517919">
+    <state width="1078" height="271" key="GridCell.Tab.1.bottom/0.0.1366.738@0.0.1366.738" timestamp="1588089007130" />
+    <state width="1078" height="271" key="GridCell.Tab.1.center" timestamp="1588089007130">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state width="1325" height="112" key="GridCell.Tab.1.center/0.0.1366.738@0.0.1366.738" timestamp="1587991517919" />
-    <state width="1325" height="112" key="GridCell.Tab.1.left" timestamp="1587991517919">
+    <state width="1078" height="271" key="GridCell.Tab.1.center/0.0.1366.738@0.0.1366.738" timestamp="1588089007130" />
+    <state width="1078" height="271" key="GridCell.Tab.1.left" timestamp="1588089007130">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state width="1325" height="112" key="GridCell.Tab.1.left/0.0.1366.738@0.0.1366.738" timestamp="1587991517919" />
-    <state width="1325" height="112" key="GridCell.Tab.1.right" timestamp="1587991517920">
+    <state width="1078" height="271" key="GridCell.Tab.1.left/0.0.1366.738@0.0.1366.738" timestamp="1588089007130" />
+    <state width="1078" height="271" key="GridCell.Tab.1.right" timestamp="1588089007130">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state width="1325" height="112" key="GridCell.Tab.1.right/0.0.1366.738@0.0.1366.738" timestamp="1587991517920" />
-    <state x="334" y="311" width="1325" height="112" key="GridCell.Tab.2.bottom" timestamp="1587991517920">
+    <state width="1078" height="271" key="GridCell.Tab.1.right/0.0.1366.738@0.0.1366.738" timestamp="1588089007130" />
+    <state x="334" y="311" width="1078" height="271" key="GridCell.Tab.2.bottom" timestamp="1588089007131">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state x="334" y="311" width="1325" height="112" key="GridCell.Tab.2.bottom/0.0.1366.738@0.0.1366.738" timestamp="1587991517920" />
-    <state x="334" y="311" width="1325" height="112" key="GridCell.Tab.2.center" timestamp="1587991517920">
+    <state x="334" y="311" width="1078" height="271" key="GridCell.Tab.2.bottom/0.0.1366.738@0.0.1366.738" timestamp="1588089007131" />
+    <state x="334" y="311" width="1078" height="271" key="GridCell.Tab.2.center" timestamp="1588089007131">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state x="334" y="311" width="1325" height="112" key="GridCell.Tab.2.center/0.0.1366.738@0.0.1366.738" timestamp="1587991517920" />
-    <state x="334" y="311" width="1325" height="112" key="GridCell.Tab.2.left" timestamp="1587991517920">
+    <state x="334" y="311" width="1078" height="271" key="GridCell.Tab.2.center/0.0.1366.738@0.0.1366.738" timestamp="1588089007131" />
+    <state x="334" y="311" width="1078" height="271" key="GridCell.Tab.2.left" timestamp="1588089007131">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state x="334" y="311" width="1325" height="112" key="GridCell.Tab.2.left/0.0.1366.738@0.0.1366.738" timestamp="1587991517920" />
-    <state x="334" y="311" width="1325" height="112" key="GridCell.Tab.2.right" timestamp="1587991517920">
+    <state x="334" y="311" width="1078" height="271" key="GridCell.Tab.2.left/0.0.1366.738@0.0.1366.738" timestamp="1588089007131" />
+    <state x="334" y="311" width="1078" height="271" key="GridCell.Tab.2.right" timestamp="1588089007131">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state x="334" y="311" width="1325" height="112" key="GridCell.Tab.2.right/0.0.1366.738@0.0.1366.738" timestamp="1587991517920" />
+    <state x="334" y="311" width="1078" height="271" key="GridCell.Tab.2.right/0.0.1366.738@0.0.1366.738" timestamp="1588089007131" />
     <state x="349" y="125" width="1325" height="368" key="GridCell.Tab.3.bottom" timestamp="1587713750717">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
@@ -414,9 +491,9 @@
       <screen x="0" y="0" width="1366" height="738" />
     </state>
     <state x="339" y="165" key="run.anything.popup/0.0.1366.738@0.0.1366.738" timestamp="1587785524515" />
-    <state x="346" y="59" width="672" height="678" key="search.everywhere.popup" timestamp="1587986644179">
+    <state x="346" y="59" width="672" height="678" key="search.everywhere.popup" timestamp="1588080798227">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state x="346" y="59" width="672" height="678" key="search.everywhere.popup/0.0.1366.738@0.0.1366.738" timestamp="1587986644179" />
+    <state x="346" y="59" width="672" height="678" key="search.everywhere.popup/0.0.1366.738@0.0.1366.738" timestamp="1588080798227" />
   </component>
 </project>

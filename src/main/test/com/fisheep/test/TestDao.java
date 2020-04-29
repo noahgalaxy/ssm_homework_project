@@ -1,6 +1,7 @@
 package com.fisheep.test;
 
 
+import com.fisheep.bean.UserHasGroup;
 import com.fisheep.dao.UserHasGroupMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,16 +20,15 @@ public class TestDao {
     UserHasGroupMapper userHasGroupMapper;
 
     @Test
-    public void testUserHasGroupMapperGetGroupByUid(){
-        List<Map<Integer, String>> groups = userHasGroupMapper.getGroupByUid(4);
+    public void testUserHasGroupMapperGetGroupsByUid(){
+        List<UserHasGroup> groups = userHasGroupMapper.getGroupsByUid(22);
         System.out.println(groups);
+        System.out.println(groups.isEmpty());
+        System.out.println(null == groups);
+        System.out.println(groups.size());
         if(groups.size() > 0){
-            Map<Integer, String> groupsMap = new HashMap<Integer, String>();
-            for(Map<Integer, String> map: groups){
-                for(Integer key: map.keySet()){
-                    System.out.println(key);
-                    groupsMap.put(key, map.get(key));
-                }
+            for(UserHasGroup uhg: groups){
+                System.out.println(uhg);
             }
         }
     }

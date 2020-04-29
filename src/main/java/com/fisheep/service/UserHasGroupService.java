@@ -1,5 +1,8 @@
 package com.fisheep.service;
 
+import com.fisheep.bean.UserHasGroup;
+
+import java.util.List;
 import java.util.Map;
 
 public interface UserHasGroupService {
@@ -9,5 +12,7 @@ public interface UserHasGroupService {
      * @param uid
      * @return
      */
-    Map<Integer, String> getGroupByUid(Integer uid);
+//    Map<Integer, String> getGroupByUid(Integer uid);
+
+    List<UserHasGroup> getGroupsByUid(Integer uid);
 }

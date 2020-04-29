@@ -3,12 +3,30 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.fisheep.dao.UserHasGroupMapper">
+    <resultMap id="allGroupsUserIn" type="com.fisheep.bean.UserHasGroup">
+        <id property="uhsId" column="uhgid"></id>
+        <result property="uhgUid" column="uhguid"></result>
+        <result property="uhgGroupId" column="uhggroupid"></result>
+        <collection property="group" ofType="com.fisheep.bean.Group">
+            <id property="groupId" column="groupid"></id>
+            <result property="groupName" column="groupname"></result>
+            <result property="groupCode" column="groupcode"></result>
+            <result property="creatorId" column="creatorid"></result>
+        </collection>
+    </resultMap>
 
-    <select id="getGroupByUid" resultType="java.util.HashMap">
-        select uhg.uhggroupid, g.groupname
-        from userhasgroup uhg
+<!--    <select id="getGroupByUid" resultType="java.util.HashMap">-->
+<!--        select uhg.uhggroupid, g.groupname-->
+<!--        from userhasgroup uhg-->
+<!--        inner join hw_group g-->
+<!--        on uhg.uhggroupid = g.groupid-->
+<!--        where uhg.uhguid = 4-->
+<!--    </select>-->
+    
+    <select id="getGroupsByUid" parameterType="java.lang.Integer" resultMap="allGroupsUserIn">
+        select * from  userhasgroup uhg
         inner join hw_group g
         on uhg.uhggroupid = g.groupid
-        where uhg.uhguid = 4
+        where uhg.uhguid = #{uid}
     </select>
 </mapper>

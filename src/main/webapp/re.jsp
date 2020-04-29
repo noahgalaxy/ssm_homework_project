@@ -26,7 +26,30 @@
 </head>
 <body>
 
-<h1>作业发布</h1>
+<%--<h1>作业发布</h1>--%>
+<%--<ul class="nav nav-pills navbar-inverse">--%>
+
+<%--</ul>--%>
+<%--navbar-inverse--%>
+<nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
+    <div class="container">
+        <ul class="nav nav-pills">
+            <li role="presentation" class="active"><a href="#">Home</a></li>
+<%--            <li role="presentation"><a href="#">Profile</a></li>--%>
+            <li role="presentation" ><a href="#" role="button">群 组</a></li>
+            <li role="presentation" ><a role="button">发布作业</a></li>
+        </ul>
+    </div>
+</nav>
+<br>
+<br>
+<br>
+<br>
+<%--<nav class="navbar navbar-default navbar-fixed-bottom ">--%>
+<%--    <div class="container">--%>
+
+<%--    </div>--%>
+<%--</nav>--%>
 <%--作业发布模态框--%>
 <div class="modal fade" id="modal_homework_release" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
@@ -43,12 +66,12 @@
                     </div>
                     <div class="form-group">
                         <label for="homework-group">所属组</label>
-                        <select class="form-control" id="homework-group">
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
+                        <select multiple class="form-control" id="homework-group">
+<%--                            <option>1</option>--%>
+<%--                            <option>2</option>--%>
+<%--                            <option>3</option>--%>
+<%--                            <option>4</option>--%>
+<%--                            <option>5</option>--%>
                         </select>
                     </div>
                     <div class="form-group">
@@ -151,13 +174,26 @@
 
     //用uid查询组；
     function getGroupByUid(uid) {
+        //清楚样式
+        // $("#homework-group").removeAttr("disabled");
+        $("#homework-group").empty();
         $.ajax({
             url:"${pageContext.request.contextPath}/getGroupByUid/"+uid,
             type: "GET",
             success:function (result) {
                 if(result.code == 100){
-
-                }else return false;
+                    var groupsList = result.extend.groupsList;
+                    // var options;
+                    $.each(groupsList, function (index, item) {
+                        console.log(item.groupId);
+                        console.log(item.groupName);
+                        $("#homework-group").append($("<option></option>").append(item.groupName).attr("groupId", item.groupId));
+                    })
+                    // options.appendTo($("#homework-group"));
+                }
+                // else{
+                //     $("#homework-group").attr("disabled");
+                // }
             }
         })
     }
@@ -169,11 +205,13 @@
             <%--url:"${pageContext.request.contextPath}/getUidBySession",--%>
             type:"GET",
             success:function (result) {
-                console.log("result:"+result);
+                // console.log("result:"+result);
                 if(result.code == 100){
-                    var uid = result.extend.uid;
-                    //2.用uid查询组
-
+                    getGroupByUid(40);
+                    // var groupsResult = getGroupByUid(4);
+                    // var groups = groupsResult.extend.groupsMap;
+                    // //2.用uid查询组
+                    // console.log(groups);
                 }
             }
         })
