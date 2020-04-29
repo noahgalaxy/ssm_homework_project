@@ -36,8 +36,8 @@
         <ul class="nav nav-pills">
             <li role="presentation" class="active"><a href="#">Home</a></li>
 <%--            <li role="presentation"><a href="#">Profile</a></li>--%>
-            <li role="presentation" ><a href="#" role="button">群 组</a></li>
-            <li role="presentation" ><a role="button">发布作业</a></li>
+            <li role="presentation" ><a href="#" role="button">Groups</a></li>
+            <li role="presentation" ><a class="btn" role="button" id="btn_homework_release">发布作业</a></li>
         </ul>
     </div>
 </nav>
@@ -59,41 +59,48 @@
                 <h4 class="modal-title">发布作业</h4>
             </div>
             <div class="modal-body">
-                <form>
+                <form id="modal-homework-form">
                     <div class="form-group">
                         <label for="homework-name">作业名称</label>
-                        <input type="text" class="form-control" id="homework-name" placeholder="作业名称">
+                        <input type="text" name="homeworkName" class="form-control" id="homework-name" placeholder="作业名称">
                     </div>
                     <div class="form-group">
                         <label for="homework-group">所属组</label>
-                        <select multiple class="form-control" id="homework-group">
+                        <select multiple class="form-control" name="groupsId"  id="homework-group">
+<%--                            此处动态生成--%>
 <%--                            <option>1</option>--%>
 <%--                            <option>2</option>--%>
-<%--                            <option>3</option>--%>
-<%--                            <option>4</option>--%>
-<%--                            <option>5</option>--%>
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="homework-total-students">作业人数</label>
-                        <input type="text" class="form-control" id="homework-total-students" placeholder="作业人数">
+                        <input type="text" name="homeworktotalnums" class="form-control" id="homework-total-students" placeholder="作业人数">
                     </div>
 
                     <div class="form-group">
-                        <label>选择日期+时间：</label>
+                        <label>选择结束时间：</label>
                         <!--指定 date标记-->
                         <div class='input-group date' id='datetimepicker2'>
-                            <input type='text' class="form-control" />
+                            <input type='text' name="homeworkDead" class="form-control" />
                             <span class="input-group-addon">
                                 <span class="glyphicon glyphicon-calendar"></span>
                             </span>
                         </div>
+<%--                        --%>
+<%--                        <label>选择日期+时间：</label>--%>
+<%--                        <!--指定 date标记-->--%>
+<%--                        <div class='input-group date' id='datetimepicker2'>--%>
+<%--                            <input type='text' name="homeworkDead" class="form-control" />--%>
+<%--                            <span class="input-group-addon">--%>
+<%--                                <span class="glyphicon glyphicon-calendar"></span>--%>
+<%--                            </span>--%>
+<%--                        </div>--%>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn btn-primary">发布</button>
+                <button type="button" class="btn btn-primary" id="modal-homework-relese">发布</button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
@@ -102,10 +109,10 @@
 <%--作业列表--%>
 <div class="container">
     <div class="row">
-        <div class="col-md-4">
-            <button type="button" class="btn btn-primary">Group</button>
-            <button type="button" id="btn_homework_release" class="btn btn-success">发布作业</button>
-        </div>
+<%--        <div class="col-md-4">--%>
+<%--            <button type="button" class="btn btn-primary">Group</button>--%>
+<%--            <button type="button" id="btn_homework_release" class="btn btn-success">发布作业</button>--%>
+<%--        </div>--%>
     </div>
 
     <div class="row">
@@ -167,7 +174,7 @@
             locale: moment.locale("zh-cn")
         });
         $('#datetimepicker2').datetimepicker({
-            format: "YYYY-MM-DD hh:mm",
+            format: "YYYY-MM-DD HH:mm",
             locale: moment.locale("zh-cn")
         });
     })
@@ -187,7 +194,8 @@
                     $.each(groupsList, function (index, item) {
                         console.log(item.groupId);
                         console.log(item.groupName);
-                        $("#homework-group").append($("<option></option>").append(item.groupName).attr("groupId", item.groupId));
+                        //这里options选择框，需要把value放上去，不然提交表单的时候没有值
+                        $("#homework-group").append($("<option></option>").append(item.groupName).attr("value", item.groupId));
                     })
                     // options.appendTo($("#homework-group"));
                 }
@@ -207,7 +215,7 @@
             success:function (result) {
                 // console.log("result:"+result);
                 if(result.code == 100){
-                    getGroupByUid(40);
+                    getGroupByUid(4);
                     // var groupsResult = getGroupByUid(4);
                     // var groups = groupsResult.extend.groupsMap;
                     // //2.用uid查询组
@@ -223,6 +231,32 @@
         });
         //建立所属组选择
         createGroupselect();
+    })
+
+    // 发布作业模态框提交
+    $("#modal-homework-relese").click(function () {
+        console.log("序列化表单：\n"+$("#modal-homework-form").serialize());
+        $.ajax({
+            url:"/homework/homeworkRelease",
+            type:"POST",
+            // data:"homeworkName="+15135+"&homeworktotalnums="+45,
+            // data:"homeworkName=测试uoy&groupsId=6&homeworktotalnums=66",
+            // data:"homeworkName=测试uoy&groupsId=6&homeworktotalnums=66",
+            data:$("#modal-homework-form").serialize(),
+            success:function (result) {
+                if(result.code == 100){
+                    //1.显示发布成功；
+                    alert("发布成功")
+                    //2.刷新作业页面；
+                }else{
+                    //1.显示发布异常
+                    alert("发布失败，请重试")
+                }
+            },
+            error:function () {
+                alert("前端提交异常！")
+            }
+        })
     })
 </script>
 

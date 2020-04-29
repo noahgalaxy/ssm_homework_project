@@ -57,4 +57,5 @@
             <tx:method name="get*" read-only="true"></tx:method>
         </tx:attributes>
     </tx:advice>
+
 </beans>
