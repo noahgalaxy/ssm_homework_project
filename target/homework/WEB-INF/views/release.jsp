@@ -233,8 +233,27 @@
         createGroupselect();
     })
 
+    /**
+     *获取发布作业框的所选组,并发一个ajax
+     */
+    function getSelectedGroup(){
+        //对于multiple的select元素，返回数组;
+        var gr1 = $("#homework-group ").val();
+        // var gr2 = $("#homework-group option:selected").val();
+        console.log("gr1:"+gr1);
+        console.log("a比对"+gr1.length);
+        //返回拼接的字符串
+        return gr1.length > 0?gr1.join("-"):"-";
+        // console.log("gr2:"+gr2);
+        //遍历
+        // for(gr in gr1){
+        //     console.log(gr+"啦啦啦啦");
+        // }
+    }
+
     // 发布作业模态框提交
     $("#modal-homework-relese").click(function () {
+        var groupsIdString = getSelectedGroup();
         console.log("序列化表单：\n"+$("#modal-homework-form").serialize());
         $.ajax({
             url:"/homework/homeworkRelease",
@@ -242,7 +261,7 @@
             // data:"homeworkName="+15135+"&homeworktotalnums="+45,
             // data:"homeworkName=测试uoy&groupsId=6&homeworktotalnums=66",
             // data:"homeworkName=测试uoy&groupsId=6&homeworktotalnums=66",
-            data:$("#modal-homework-form").serialize(),
+            data:$("#modal-homework-form").serialize()+"&groupsIdString="+groupsIdString,
             success:function (result) {
                 if(result.code == 100){
                     //1.显示发布成功；

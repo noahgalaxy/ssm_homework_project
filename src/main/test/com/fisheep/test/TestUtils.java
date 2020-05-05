@@ -1,6 +1,7 @@
 package com.fisheep.test;
 
 import com.fisheep.utils.SnowAlgorithum;
+import com.fisheep.utils.StringToNum;
 import org.junit.Test;
 
 import java.util.UUID;
@@ -25,5 +26,23 @@ public class TestUtils {
 
         }
     }
+
+    @Test
+    public void testStringToNum(){
+        String[] s = {"-","2-","10-4-5-5","22-0-100-2-"};
+        for(String ss: s){
+//            for(String sss:ss.split("-")){
+//                System.out.print(sss);
+//                if("" ==sss){
+//                    System.out.print("错过");
+//                    continue;
+//                }
+////                System.out.print("解析："+Integer.parseInt(sss)+"\t");
+            System.out.println((StringToNum.numStringToSingleNum(ss)));
+            }
+            System.out.println();
+            System.out.println("=======");
+//            System.out.println(StringToNum.numStringToSingleNum(ss));
+        }
 
 }

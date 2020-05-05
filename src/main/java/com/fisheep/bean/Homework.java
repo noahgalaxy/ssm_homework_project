@@ -12,6 +12,7 @@ public class Homework implements Serializable {
     private int homeworkCreatorId;
     private int homeworktotalnums;
     private int homeworksubmittednums;
+    private String groupsIdString;
 
     @Override
     public String toString() {
@@ -24,6 +25,7 @@ public class Homework implements Serializable {
                 ", homeworkCreatorId=" + homeworkCreatorId +
                 ", homeworktotalnums=" + homeworktotalnums +
                 ", homeworksubmittednums=" + homeworksubmittednums +
+                ", groupsIdString='" + groupsIdString + '\'' +
                 '}';
     }
 
@@ -89,5 +91,13 @@ public class Homework implements Serializable {
 
     public void setHomeworksubmittednums(int homeworksubmittednums) {
         this.homeworksubmittednums = homeworksubmittednums;
+    }
+
+    public String getGroupsIdString() {
+        return groupsIdString;
+    }
+
+    public void setGroupsIdString(String groupsIdString) {
+        this.groupsIdString = groupsIdString;
     }
 }

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fisheep.dao.HomeworkMapper">
+    <insert id="insertHomework" parameterType="com.fisheep.bean.Homework">
+        insert into hw_homework(homeworkname, homeworkcode,homeworkdead, location,
+                                homeworkcreatorid, homeworktotalnums)
+                                values (#{homeworkName}, #{homeworkCode}, #{homeworkDead},
+                                        #{location}, #{homeworkCreatorId},#{homeworktotalnums});
+    </insert>
+</mapper>
