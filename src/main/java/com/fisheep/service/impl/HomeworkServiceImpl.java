@@ -13,7 +13,7 @@ public class HomeworkServiceImpl implements HomeworkService {
 
     @Override
     public int insertHomework(Homework homework) {
-        int rowsAffected = homeworkMapper.insertHomework(homework);
-        return rowsAffected;
+        int lastInsertId = homeworkMapper.insertHomework(homework);
+        return lastInsertId;
     }
 }

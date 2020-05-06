@@ -8,5 +8,8 @@
                                 homeworkcreatorid, homeworktotalnums)
                                 values (#{homeworkName}, #{homeworkCode}, #{homeworkDead},
                                         #{location}, #{homeworkCreatorId},#{homeworktotalnums});
+        <selectKey keyProperty="homeworkId" keyColumn="homeworkid" resultType="java.lang.Integer">
+            select last_insert_id();
+        </selectKey>
     </insert>
 </mapper>

@@ -35,7 +35,7 @@ public class HomeworkController {
     @ResponseBody
     public Msg homeworkRelease(Homework homework, HttpSession session){
         System.out.println("  发布的作业：\n"+homework);
-        System.out.println("groupsIdString:"+homework.getGroupsIdString());
+        System.out.println("groupsIdString:"+homework.getGroupsIdString() + "type:"+homework.getGroupsIdString().getClass());
         int uid;
         if(session.isNew()){
             System.out.println("session is new!! ");
@@ -52,30 +52,25 @@ public class HomeworkController {
             System.out.println("字段空");
             return Msg.fail();
         }
-        //1.从session里面取出uid，作为此作业的发布者id，即是creatorId；
-//        Integer uid = (int)session.getAttribute("uid");
-//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-//        try {
-//            Date date = sdf.parse(homework.getHomeworkDead());
-//        } catch (ParseException e) {
-//            e.printStackTrace();
-//            return Msg.fail();
-//        }
 
         //获取一个code放入homework对象里面；
         homework.setHomeworkCode(SnowAlgorithum.getCode());
+        //设置存放目录
         homework.setLocation("upload");
         System.out.println("--------------\n"+homework);
         int rowsAffected = homeworkServiceImpl.insertHomework(homework);
-        System.out.println("HomeworkController rowsAffected:"+ rowsAffected);
+        System.out.println("HomeworkController lastInsertId:"+ rowsAffected);
         //处理作业所属组字符串，返回由单个数字组成的列表
         List<Integer> groupsIdsList = StringToNum.numStringToSingleNum(homework.getGroupsIdString());
-        System.out.println("groupsIdsList:"+groupsIdsList.toString());
-        if (null != groupsIdsList){
+        System.out.println("groupsIdsList:"+groupsIdsList.toString()+"\nsize:"+groupsIdsList.size());
+        //返回的列表不为空，且长度大于0，有值才能插入。
+        if (null != groupsIdsList && groupsIdsList.size() > 0){
             List<Belong> belongList = new ArrayList<>();
             for(int num: groupsIdsList){
                 belongList.add(new Belong(homework.getHomeworkId(), num));
             }
+            System.out.println("belongList:"+belongList);
+            //插入的行数
             int belongRowsAffected = belongServiceImpl.insertBelong(belongList);
             System.out.println("belongRowsAffected:"+belongRowsAffected+"\tgroupsIdsList.size():"+groupsIdsList.size());
             if(belongRowsAffected != groupsIdsList.size()){

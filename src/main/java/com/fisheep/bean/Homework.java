@@ -14,6 +14,18 @@ public class Homework implements Serializable {
     private int homeworksubmittednums;
     private String groupsIdString;
 
+    public Homework() {
+    }
+
+    public Homework(String homeworkName, String homeworkCode, String homeworkDead, String location, int homeworkCreatorId, int homeworktotalnums) {
+        this.homeworkName = homeworkName;
+        this.homeworkCode = homeworkCode;
+        this.homeworkDead = homeworkDead;
+        this.location = location;
+        this.homeworkCreatorId = homeworkCreatorId;
+        this.homeworktotalnums = homeworktotalnums;
+    }
+
     @Override
     public String toString() {
         return "Homework{" +

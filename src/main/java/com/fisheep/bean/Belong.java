@@ -12,6 +12,9 @@ public class Belong implements Serializable {
     private int belongHomweorkId;
     private int belongGroupId;
 
+    public Belong() {
+    }
+
     public Belong(int belongHomweorkId, int belongGroupId) {
         this.belongHomweorkId = belongHomweorkId;
         this.belongGroupId = belongGroupId;
