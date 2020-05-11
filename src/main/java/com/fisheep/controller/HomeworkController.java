@@ -3,6 +3,7 @@ package com.fisheep.controller;
 import com.fisheep.bean.Belong;
 import com.fisheep.bean.Homework;
 import com.fisheep.service.BelongService;
+import com.fisheep.service.HomeworkAndBelongService;
 import com.fisheep.service.HomeworkService;
 import com.fisheep.service.impl.HomeworkServiceImpl;
 import com.fisheep.utils.Msg;
@@ -12,6 +13,8 @@ import org.mybatis.spring.mapper.MapperScannerConfigurer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -23,13 +26,12 @@ import java.util.Date;
 import java.util.List;
 
 @Controller
+//@Transactional(rollbackFor = {Exception.class})
 public class HomeworkController {
-    @Autowired
-    @Qualifier("homeworkServiceImpl")
-    HomeworkService homeworkServiceImpl;
+
 
     @Autowired
-    BelongService belongServiceImpl;
+    HomeworkAndBelongService homeworkAndBelongServiceImpl;
 
     @RequestMapping(path = "/homeworkRelease")
     @ResponseBody
@@ -42,13 +44,17 @@ public class HomeworkController {
             return Msg.fail();
         }
         try {
+            //session里面取出uid
             uid = (int) session.getAttribute("uid");
             homework.setHomeworkCreatorId(uid);
         }catch (NullPointerException e){
             e.printStackTrace();
+//            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+
         }
-        if(homework.getHomeworkName() == null || homework.getHomeworkCreatorId() == 0 ||
-                homework.getHomeworkDead() == null || homework.getHomeworktotalnums() == 0){
+        //作业名字不能为空，发布者id不能为0或空，截止日期不能为空，作业全部数量不能为空
+        if(homework.getHomeworkName() == "" || homework.getHomeworkCreatorId() == 0 ||
+                homework.getHomeworkDead() == "" || homework.getHomeworktotalnums() == 0){
             System.out.println("字段空");
             return Msg.fail();
         }
@@ -58,29 +64,12 @@ public class HomeworkController {
         //设置存放目录
         homework.setLocation("upload");
         System.out.println("--------------\n"+homework);
-        int rowsAffected = homeworkServiceImpl.insertHomework(homework);
-        System.out.println("HomeworkController lastInsertId:"+ rowsAffected);
-        //处理作业所属组字符串，返回由单个数字组成的列表
-        List<Integer> groupsIdsList = StringToNum.numStringToSingleNum(homework.getGroupsIdString());
-        System.out.println("groupsIdsList:"+groupsIdsList.toString()+"\nsize:"+groupsIdsList.size());
-        //返回的列表不为空，且长度大于0，有值才能插入。
-        if (null != groupsIdsList && groupsIdsList.size() > 0){
-            List<Belong> belongList = new ArrayList<>();
-            for(int num: groupsIdsList){
-                belongList.add(new Belong(homework.getHomeworkId(), num));
-            }
-            System.out.println("belongList:"+belongList);
-            //插入的行数
-            int belongRowsAffected = belongServiceImpl.insertBelong(belongList);
-            System.out.println("belongRowsAffected:"+belongRowsAffected+"\tgroupsIdsList.size():"+groupsIdsList.size());
-            if(belongRowsAffected != groupsIdsList.size()){
-                return Msg.fail();
-            }
+
+        boolean flag = homeworkAndBelongServiceImpl.insertHomeworkAndBelong(homework);
+        if(!flag){
+            return Msg.fail();
         }
-//        homeworkServiceImpl.insertBelong()
-        if(rowsAffected > 0 ){
-            return Msg.success();
-        }
-        return Msg.fail();
+        return Msg.success();
+
     }
 }

@@ -7,16 +7,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="080d8b1e-07e4-4b55-999c-f5efe8c06f82" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/fisheep/service/HomeworkAndBelongService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/fisheep/service/impl/HomeworkAndBelongServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/test/com/fisheep/test/TestService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/groups.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/static/js/release-groups.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/fisheep/bean/Belong.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fisheep/bean/Belong.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/fisheep/bean/Homework.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fisheep/bean/Homework.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/fisheep/controller/HomeworkController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fisheep/controller/HomeworkController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/fisheep/service/impl/HomeworkServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fisheep/service/impl/HomeworkServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/fisheep/utils/StringToNum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fisheep/utils/StringToNum.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/HomeworkMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/HomeworkMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/test/com/fisheep/test/TestDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/test/com/fisheep/test/TestDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/test/com/fisheep/test/TestUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/test/com/fisheep/test/TestUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/fisheep/controller/PageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fisheep/controller/PageController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/springContext.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/springContext.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/release.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/release.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/ha.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/ha.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fisheep/controller/HomeworkController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fisheep/controller/HomeworkController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/fisheep/controller/PageController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fisheep/controller/PageController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/springContext.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/springContext.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/homework/WEB-INF/classes/com/fisheep/controller/HomeworkController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/homework/WEB-INF/classes/com/fisheep/controller/HomeworkController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/homework/WEB-INF/classes/com/fisheep/controller/PageController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/homework/WEB-INF/classes/com/fisheep/controller/PageController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/homework/WEB-INF/classes/springContext.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/homework/WEB-INF/classes/springContext.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/homework/WEB-INF/views/release.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/homework/WEB-INF/views/release.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/homework/ha.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/target/homework/ha.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,9 +69,10 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="spring-beans.schema" />
-        <option value="Jsp File" />
         <option value="Interface" />
         <option value="Class" />
+        <option value="Jsp File" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -112,16 +122,16 @@
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\Fisheep\Desktop\Code\homework\src\main\webapp\static\js" />
-      <recent name="C:\Users\Fisheep\Desktop\Code\homework\src\main\webapp\WEB-INF\views" />
-      <recent name="C:\Users\Fisheep\Desktop\Code\homework\src\main\java" />
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Fisheep\Desktop\Code\homework\src\main\webapp" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.fisheep.utils" />
     </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\Fisheep\Desktop\Code\homework\src\main\webapp" />
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Fisheep\Desktop\Code\homework\src\main\webapp\static\js" />
+      <recent name="C:\Users\Fisheep\Desktop\Code\homework\src\main\webapp\WEB-INF\views" />
+      <recent name="C:\Users\Fisheep\Desktop\Code\homework\src\main\java" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -131,7 +141,7 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.TestUtils.test1">
+  <component name="RunManager" selected="JUnit.TestService.testHomeWorkAndBelongService">
     <configuration name="TestDao.testBelongMapperInsertBelong" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="homework" />
       <extension name="coverage">
@@ -164,7 +174,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TestOther.testSplit" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="TestService.testHomeWorkAndBelongService" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="homework" />
       <extension name="coverage">
         <pattern>
@@ -173,8 +183,8 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.fisheep.test" />
-      <option name="MAIN_CLASS_NAME" value="com.fisheep.test.TestOther" />
-      <option name="METHOD_NAME" value="testSplit" />
+      <option name="MAIN_CLASS_NAME" value="com.fisheep.test.TestService" />
+      <option name="METHOD_NAME" value="testHomeWorkAndBelongService" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -286,11 +296,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.TestService.testHomeWorkAndBelongService" />
         <item itemvalue="JUnit.TestUtils.test1" />
         <item itemvalue="JUnit.TestUtils.testStringToNum" />
         <item itemvalue="JUnit.TestDao.testNull" />
         <item itemvalue="JUnit.TestDao.testBelongMapperInsertBelong" />
-        <item itemvalue="JUnit.TestOther.testSplit" />
       </list>
     </recent_temporary>
   </component>
@@ -337,7 +347,8 @@
       <workItem from="1588252526925" duration="6535000" />
       <workItem from="1588406652881" duration="562000" />
       <workItem from="1588683131819" duration="10960000" />
-      <workItem from="1588745917816" duration="10804000" />
+      <workItem from="1588745917816" duration="21019000" />
+      <workItem from="1589182767115" duration="6042000" />
     </task>
     <task id="LOCAL-00001" summary="发布作业模态框完成，正在做导航栏">
       <created>1588131274240</created>
@@ -373,10 +384,10 @@
       <screen x="0" y="0" width="1366" height="738" />
     </state>
     <state x="274" y="31" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.738@0.0.1366.738" timestamp="1588085505178" />
-    <state x="399" y="70" key="#com.intellij.ide.util.MemberChooser" timestamp="1588752065968">
+    <state x="399" y="70" key="#com.intellij.ide.util.MemberChooser" timestamp="1588834433123">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state x="399" y="70" key="#com.intellij.ide.util.MemberChooser/0.0.1366.738@0.0.1366.738" timestamp="1588752065968" />
+    <state x="399" y="70" key="#com.intellij.ide.util.MemberChooser/0.0.1366.738@0.0.1366.738" timestamp="1588834433123" />
     <state x="413" y="116" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1588151719497">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
@@ -409,54 +420,54 @@
       <screen x="0" y="0" width="1366" height="738" />
     </state>
     <state x="334" y="311" width="1325" height="423" key="GridCell.Tab.-1.right/0.0.1366.738@0.0.1366.738" timestamp="1587713612117" />
-    <state width="1078" height="389" key="GridCell.Tab.0.bottom" timestamp="1588766826113">
+    <state width="1078" height="221" key="GridCell.Tab.0.bottom" timestamp="1589190198502">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state width="1078" height="389" key="GridCell.Tab.0.bottom/0.0.1366.738@0.0.1366.738" timestamp="1588766826113" />
-    <state width="1078" height="389" key="GridCell.Tab.0.center" timestamp="1588766826113">
+    <state width="1078" height="221" key="GridCell.Tab.0.bottom/0.0.1366.738@0.0.1366.738" timestamp="1589190198502" />
+    <state width="1078" height="221" key="GridCell.Tab.0.center" timestamp="1589190198502">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state width="1078" height="389" key="GridCell.Tab.0.center/0.0.1366.738@0.0.1366.738" timestamp="1588766826113" />
-    <state width="1078" height="389" key="GridCell.Tab.0.left" timestamp="1588766826113">
+    <state width="1078" height="221" key="GridCell.Tab.0.center/0.0.1366.738@0.0.1366.738" timestamp="1589190198502" />
+    <state width="1078" height="221" key="GridCell.Tab.0.left" timestamp="1589190198501">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state width="1078" height="389" key="GridCell.Tab.0.left/0.0.1366.738@0.0.1366.738" timestamp="1588766826113" />
-    <state width="1078" height="389" key="GridCell.Tab.0.right" timestamp="1588766826113">
+    <state width="1078" height="221" key="GridCell.Tab.0.left/0.0.1366.738@0.0.1366.738" timestamp="1589190198501" />
+    <state width="1078" height="221" key="GridCell.Tab.0.right" timestamp="1589190198502">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state width="1078" height="389" key="GridCell.Tab.0.right/0.0.1366.738@0.0.1366.738" timestamp="1588766826113" />
-    <state width="1078" height="389" key="GridCell.Tab.1.bottom" timestamp="1588766825964">
+    <state width="1078" height="221" key="GridCell.Tab.0.right/0.0.1366.738@0.0.1366.738" timestamp="1589190198502" />
+    <state width="1078" height="221" key="GridCell.Tab.1.bottom" timestamp="1589190198376">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state width="1078" height="389" key="GridCell.Tab.1.bottom/0.0.1366.738@0.0.1366.738" timestamp="1588766825964" />
-    <state width="1078" height="389" key="GridCell.Tab.1.center" timestamp="1588766825964">
+    <state width="1078" height="221" key="GridCell.Tab.1.bottom/0.0.1366.738@0.0.1366.738" timestamp="1589190198376" />
+    <state width="1078" height="221" key="GridCell.Tab.1.center" timestamp="1589190198375">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state width="1078" height="389" key="GridCell.Tab.1.center/0.0.1366.738@0.0.1366.738" timestamp="1588766825964" />
-    <state width="1078" height="389" key="GridCell.Tab.1.left" timestamp="1588766825963">
+    <state width="1078" height="221" key="GridCell.Tab.1.center/0.0.1366.738@0.0.1366.738" timestamp="1589190198375" />
+    <state width="1078" height="221" key="GridCell.Tab.1.left" timestamp="1589190198375">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state width="1078" height="389" key="GridCell.Tab.1.left/0.0.1366.738@0.0.1366.738" timestamp="1588766825963" />
-    <state width="1078" height="389" key="GridCell.Tab.1.right" timestamp="1588766825964">
+    <state width="1078" height="221" key="GridCell.Tab.1.left/0.0.1366.738@0.0.1366.738" timestamp="1589190198375" />
+    <state width="1078" height="221" key="GridCell.Tab.1.right" timestamp="1589190198376">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state width="1078" height="389" key="GridCell.Tab.1.right/0.0.1366.738@0.0.1366.738" timestamp="1588766825964" />
-    <state x="334" y="311" width="1078" height="389" key="GridCell.Tab.2.bottom" timestamp="1588766825965">
+    <state width="1078" height="221" key="GridCell.Tab.1.right/0.0.1366.738@0.0.1366.738" timestamp="1589190198376" />
+    <state x="334" y="311" width="1078" height="221" key="GridCell.Tab.2.bottom" timestamp="1589190198376">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state x="334" y="311" width="1078" height="389" key="GridCell.Tab.2.bottom/0.0.1366.738@0.0.1366.738" timestamp="1588766825965" />
-    <state x="334" y="311" width="1078" height="389" key="GridCell.Tab.2.center" timestamp="1588766825964">
+    <state x="334" y="311" width="1078" height="221" key="GridCell.Tab.2.bottom/0.0.1366.738@0.0.1366.738" timestamp="1589190198376" />
+    <state x="334" y="311" width="1078" height="221" key="GridCell.Tab.2.center" timestamp="1589190198376">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state x="334" y="311" width="1078" height="389" key="GridCell.Tab.2.center/0.0.1366.738@0.0.1366.738" timestamp="1588766825964" />
-    <state x="334" y="311" width="1078" height="389" key="GridCell.Tab.2.left" timestamp="1588766825964">
+    <state x="334" y="311" width="1078" height="221" key="GridCell.Tab.2.center/0.0.1366.738@0.0.1366.738" timestamp="1589190198376" />
+    <state x="334" y="311" width="1078" height="221" key="GridCell.Tab.2.left" timestamp="1589190198376">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state x="334" y="311" width="1078" height="389" key="GridCell.Tab.2.left/0.0.1366.738@0.0.1366.738" timestamp="1588766825964" />
-    <state x="334" y="311" width="1078" height="389" key="GridCell.Tab.2.right" timestamp="1588766825965">
+    <state x="334" y="311" width="1078" height="221" key="GridCell.Tab.2.left/0.0.1366.738@0.0.1366.738" timestamp="1589190198376" />
+    <state x="334" y="311" width="1078" height="221" key="GridCell.Tab.2.right" timestamp="1589190198376">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state x="334" y="311" width="1078" height="389" key="GridCell.Tab.2.right/0.0.1366.738@0.0.1366.738" timestamp="1588766825965" />
+    <state x="334" y="311" width="1078" height="221" key="GridCell.Tab.2.right/0.0.1366.738@0.0.1366.738" timestamp="1589190198376" />
     <state x="349" y="125" width="1325" height="368" key="GridCell.Tab.3.bottom" timestamp="1587713750717">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
@@ -517,6 +528,10 @@
       <screen x="0" y="0" width="1366" height="738" />
     </state>
     <state x="399" y="20" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog/0.0.1366.738@0.0.1366.738" timestamp="1587971792004" />
+    <state x="434" y="91" key="com.intellij.testIntegration.createTest.CreateTestDialog" timestamp="1588834383805">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state x="434" y="91" key="com.intellij.testIntegration.createTest.CreateTestDialog/0.0.1366.738@0.0.1366.738" timestamp="1588834383805" />
     <state x="218" y="105" width="929" height="599" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1587713200098">
       <screen x="0" y="0" width="1366" height="738" />
     </state>

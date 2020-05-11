@@ -55,6 +55,7 @@
             <tx:method name="*"/>
             <!-- 配置以get开始的方法，我们把这种开头的方法都为查询方法，所以后面可以做调优，read-only来做-->
             <tx:method name="get*" read-only="true"></tx:method>
+            <tx:method name="insert" propagation="REQUIRED" read-only="false" rollback-for="Exception"></tx:method>
         </tx:attributes>
     </tx:advice>
 

@@ -12,5 +12,6 @@
 </head>
 <body>
 <h1>asdfasfdasf</h1>
+<iframe src="re.jsp" width="100%" height="100%" scrolling="no" frameborder="0"/>
 </body>
 </html>
