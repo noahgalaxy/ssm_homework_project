@@ -2,6 +2,7 @@ package com.fisheep.bean;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 public class Homework implements Serializable {
     private int homeworkId;
@@ -13,6 +14,16 @@ public class Homework implements Serializable {
     private int homeworktotalnums;
     private int homeworksubmittednums;
     private String groupsIdString;
+    private List<Group> groups;
+    private boolean expired;
+
+    public boolean isExpired() {
+        return expired;
+    }
+
+    public void setExpired(boolean expired) {
+        this.expired = expired;
+    }
 
     public Homework() {
     }
@@ -38,6 +49,8 @@ public class Homework implements Serializable {
                 ", homeworktotalnums=" + homeworktotalnums +
                 ", homeworksubmittednums=" + homeworksubmittednums +
                 ", groupsIdString='" + groupsIdString + '\'' +
+                ", groups=" + groups +
+                ", expired=" + expired +
                 '}';
     }
 
@@ -111,5 +124,13 @@ public class Homework implements Serializable {
 
     public void setGroupsIdString(String groupsIdString) {
         this.groupsIdString = groupsIdString;
+    }
+
+    public List<Group> getGroups() {
+        return groups;
+    }
+
+    public void setGroups(List<Group> groups) {
+        this.groups = groups;
     }
 }

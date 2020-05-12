@@ -64,4 +64,26 @@ public class TestDao {
         List<Belong> list = new ArrayList<>();
         System.out.println(list.size());
     }
+
+    @Test
+    public void testGetHomeworksWithGroupsByUid(){
+        List<Homework> homeworkList = homeworkMapper.getHomeworksWithGroupsByUid(4);
+        System.out.println(homeworkList==null); //空列表也不是null；
+        System.out.println(homeworkList.size());//而是size==0；
+        for (Homework homework: homeworkList){
+            System.out.println(homework);
+        }
+    }
+    @Test
+    public void testDeleteHomeworkById(){
+        System.out.println(homeworkMapper.deleteHomeworkById(1));
+    }
+
+    @Test
+    public void testDeleteHomeworkByBatchId(){
+        List<Integer> list = new ArrayList<Integer>();
+        list.add(2);
+        list.add(3);
+        System.out.println(homeworkMapper.deleteHomeworkByBatchId(list));
+    }
 }

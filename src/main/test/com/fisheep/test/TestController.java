@@ -44,4 +44,14 @@ public class TestController {
         String result = mvcResult.getResponse().getContentAsString();
         System.out.println("客户端获的数据:" + result);
     }
+
+    @Test
+    public void testGetHomeworksByUid() throws Exception {
+        // 发送请求
+        ResultActions resultActions = this.mockMvc
+                .perform(MockMvcRequestBuilders.get("/getHomeworksByUid").accept(MediaType.APPLICATION_JSON));
+        MvcResult mvcResult = resultActions.andReturn();
+        String result = mvcResult.getResponse().getContentAsString();
+        System.out.println("客户端获的数据:" + result);
+    }
 }

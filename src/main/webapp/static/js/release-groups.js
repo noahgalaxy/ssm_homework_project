@@ -1,4 +1,4 @@
-
+///////////////////////// 这里是发布作业模态框控制js /////////////////////////////////////
 function openHomeworkRelease(){
     $(document).on("click","#btn_homework_release",function () {
         //1.首先清空模态框中的表单中的值
@@ -106,3 +106,114 @@ function getSelectedGroup(){
     //     console.log(gr+"啦啦啦啦");
     // }
 }
+///////////////////////// 这里是发布作业模态框控制js /////////////////////////////////////
+///////////////////////// 这里是加载groups内容的js  /////////////////////////////////////
+
+///////////////////////// 这里是加载groups内容的js  /////////////////////////////////////
+
+
+///////////////////////// 这里是加载release内容的js  /////////////////////////////////////
+// 1.首先拿到数据，跟据登陆这uid来取下面这些数据：作业id，作业名称，所属组，截止时间，已提交/总人数，操作（删除，修改，名单）
+// 2.构造td
+
+/**
+ * status 代表要加载的项目：
+ *      1：全部加载；
+ *      2：加载已截止；
+ *      3：加载未截止；
+ *      4：加载已交满；
+ * @param status
+ */
+function getHomeworks(status) {
+    $.ajax({
+        url:"/homework/getHomeworksByUid",
+        type:"POST",
+        success:function (result) {
+            if (result.code == 100){
+                // alert("获取成功")
+                //1.首先要清空所有元素,将全选那个checkbox置为未选中
+                $("#homework_table tbody").empty();
+                $(".check-all").prop("checked", false);
+
+                console.log(result);
+                var homeworks = result.extend.homeworks;
+                $.each(homeworks, function (index, homework) {
+                    if((status == 4 && homework.homeworksubmittednums != homework.homeworktotalnums)
+                        || (status== 3 && homework.expired == true)
+                        || (status == 2 && homework.expired == false)){
+                        return true; // 跳出本轮循环，类似于continue，而return false类似break，终止循环。
+                    }
+                    var singleCheckBox = $("<td><input type='checkbox' class='check-single'></td>");
+                    var homeId = $("<td></td>").text(homework.homeworkId);
+                    var homeName = $("<td></td>").text(homework.homeworkName.length <= 10?
+                        homework.homeworkName:homework.homeworkName.substr(0, 10) + "...");
+                    var homeCode = $("<td></td>").text(homework.homeworkCode);
+                    var homeDead = $("<td></td>").text(homework.homeworkDead);
+                    var submitAndTotal = $("<td></td>").text(homework.homeworksubmittednums+"/"+homework.homeworktotalnums);
+                    var homeGroupString = "-";
+                    if(homework.groups.length != 0){
+                        homeGroupString = "";
+                        for(var group of homework.groups){
+                            homeGroupString += group.groupName;
+                        }
+                    }
+                    var homeGroup = $("<td></td>").text(homeGroupString);
+
+                    var btnDelete =$("<span></span>").addClass("btn glyphicon glyphicon-remove")
+                                .attr("aria-hidden", true).attr("homeworkid", homework.homeworkId);
+
+                        // $("<button type='button'></button>").addClass("btn btn-default btn-group-sm")
+                        // .append($("<span></span>").addClass("glyphicon glyphicon-remove").attr("aria-hidden", true))
+                        // .attr("type", "button");
+                    var btnModify = $("<span></span>").addClass("btn glyphicon glyphicon-pencil").attr("aria-hidden", true);
+                    var btnGetList = $("<span></span>").addClass("btn glyphicon glyphicon-list").attr("aria-hidden", true);
+                    var btnOperation = $("<td></td>").append(btnDelete).append(btnModify).append(btnGetList);
+
+                    $("<tr></tr>").append(singleCheckBox).append(homeId).append(homeName).append(homeCode)
+                        .append(homeGroup)
+                        .append(homeDead)
+                        .append(submitAndTotal)
+                        .append(btnOperation)
+                        .appendTo("#homework_table tbody");
+                });
+            }
+            else{
+                alert("后端获取失败")
+            }
+        }
+    })
+}
+
+//给操作按钮绑定事件；
+$(document).on("click",".btn.glyphicon",function () {
+    var deleteHomeworkName = $(this).parents("tr").find("td:eq(2)").text();
+    var deleteHomeworkId = $(this).attr("homeworkid");
+    console.log()
+    if(confirm("确认删除作业【"+deleteHomeworkName+"】吗？")){
+        deleteHomeworkByIds(deleteHomeworkId)
+    }
+});
+
+/**
+ * 删除作业
+ * @param deleteHomeworkId：单个id（4）或者由-连接的id字符串（4-6-100）
+ */
+function deleteHomeworkByIds(deleteHomeworkId) {
+    $.ajax({
+        url:"/homework/homework/"+deleteHomeworkId,
+        type:"DELETE",
+        success:function (result) {
+            if(result.code == 100){
+                alert("删除成功！")
+                getHomeworks(status);
+            }else{
+                alert("后端删除失败")
+            }
+        },
+        error:function () {
+            alert("前端异常");
+        }
+
+    })
+}
+///////////////////////// 这里是加载release内容的js  /////////////////////////////////////

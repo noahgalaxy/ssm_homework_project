@@ -1,15 +1,7 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Fisheep
-  Date: 2020/4/23
-  Time: 15:24
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <%@ page language="java" isELIgnored="false" contentType="text/html;charset=UTF-8" %>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+    <meta charset="UTF-8">
     <script type="text/javascript" src="/homework/static/js/jquery-1.12.4.min.js"></script>
     <link href="/homework/static/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="/homework/static/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
@@ -17,7 +9,6 @@
     <title>登陆注册</title>
 </head>
 <body>
-<%--    登陆模态框--%>
     <div class="modal fade" id="modal-sign-up" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -52,7 +43,6 @@
     <div>
         <button type="button" class="btn btn-default" id="btn-sign-in">注册</button>
     </div>
-
 </body>
 <script>
 
@@ -103,9 +93,9 @@
         var flag = true;
         var emailReg = /^[a-z\d]+(\.[a-z\d]+)*@([\da-z](-[\da-z])?)+(\.{1,2}[a-z]+)+$/;
         if(!emailReg.test(email)){
-           $("#email-span").text("邮箱格式不正确");
-           $("#div-email").addClass("has-error");
-           flag = false;
+            $("#email-span").text("邮箱格式不正确");
+            $("#div-email").addClass("has-error");
+            flag = false;
         }
         if(flag){
             console.log("前端提交的email："+email);
@@ -124,13 +114,13 @@
                         $("#div-email").addClass("has-error");
                     }
                 },
-                    error:function () {
-                        alert("系统错误")
-                    }
-                })
-            }
+                error:function () {
+                    alert("系统错误")
+                }
+            })
+        }
 
-        });
+    });
 
     $("#btn-sign-up").click(function () {
         openModal(true);
@@ -181,8 +171,6 @@
                 }
             })
         }
-
-
     });
 </script>
 </html>

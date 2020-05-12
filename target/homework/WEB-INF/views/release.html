@@ -1,15 +1,7 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Fisheep
-  Date: 2020/5/7
-  Time: 17:49
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <%@ page language="java" isELIgnored="false" contentType="text/html;charset=UTF-8" %>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+    <meta charset="UTF-8">
     <script type="text/javascript" src="/homework/static/js/jquery-1.12.4.min.js"></script>
     <link href="/homework/static/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="/homework/static/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
@@ -24,20 +16,23 @@
 
     <script src="/homework/static/js/release-groups.js"></script>
 
-    <title>Gruops</title>
+    <title>发布页面</title>
 </head>
 <body>
     <nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
         <div class="container">
-            <ul class="nav nav-pills">
-                <li role="presentation" ><a href="/homework/toRelease" role="button">Home</a></li>
-                <%--            <li role="presentation" class="active"><a href="#">Profile</a></li>--%>
-                <li role="presentation" class="active"><a href="/homework/toGroup" role="button">Groups</a></li>
-                <li role="presentation" ><a class="btn" role="button" id="btn_homework_release">发布作业</a></li>
+            <ul class="nav  nav-pills">
+                <li role="presentation" class="active"><a href="/homework/toRelease" role="button">Home</a></li>
+                <li ><a href="/homework/toGroup" role="button">Groups</a></li>
+                <li ><a class="btn" role="button" id="btn_homework_release">发布作业</a></li>
             </ul>
         </div>
     </nav>
-<%--    发布作业模态框--%>
+    <br>
+    <br>
+    <br>
+    <br>
+
     <div class="modal fade" id="modal_homework_release" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -54,9 +49,9 @@
                         <div class="form-group">
                             <label for="homework-group">所属组</label>
                             <select multiple class="form-control" name="groupsId"  id="homework-group">
-                                <%--                            此处动态生成--%>
-                                <%--                            <option>1</option>--%>
-                                <%--                            <option>2</option>--%>
+<!--                                此处动态生成-->
+<!--                                <option>1</option>-->
+<!--                                <option>2</option>-->
                             </select>
                         </div>
                         <div class="form-group">
@@ -73,15 +68,6 @@
                                 <span class="glyphicon glyphicon-calendar"></span>
                             </span>
                             </div>
-                            <%--                        --%>
-                            <%--                        <label>选择日期+时间：</label>--%>
-                            <%--                        <!--指定 date标记-->--%>
-                            <%--                        <div class='input-group date' id='datetimepicker2'>--%>
-                            <%--                            <input type='text' name="homeworkDead" class="form-control" />--%>
-                            <%--                            <span class="input-group-addon">--%>
-                            <%--                                <span class="glyphicon glyphicon-calendar"></span>--%>
-                            <%--                            </span>--%>
-                            <%--                        </div>--%>
                         </div>
                     </form>
                 </div>
@@ -91,7 +77,54 @@
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
-    </div><!-- /.modal -->
+    </div>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <ul class="nav nav-pills bg-success">
+                    <li role="presentation"><a role="button">批量删除</a></li>
+<!--                    <li role="presentation"><a role="button">过滤</a></li>-->
+<!--                    <li role="presentation"><a role="button">Messages</a></li>-->
+                    <li>
+                        <a role="button" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            过滤 <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a role="button"  onclick="getHomeworks(2)">已截止</a></li>
+                            <li><a role="button" onclick="getHomeworks(3)">未截止</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a role="button" onclick="getHomeworks(4)">已交满</a></li>
+                        </ul>
+                    </li>
+                    <li role="presentation"><a role="button" onclick="getHomeworks(1)">全部作业</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table table-hover" id="homework_table">
+                    <thead>
+                    <tr >
+                        <th>
+                            <input type="checkbox" class="check-all">
+                        </th>
+                        <th>id</th>
+                        <th>作业名称</th>
+                        <th>作业码</th>
+                        <th>Group</th>
+                        <th>截止时间</th>
+                        <th>已提交/总人数</th>
+                        <th>删除 / 修改 / 名单</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </body>
 <script>
     $(function () {
@@ -103,10 +136,13 @@
             format: "YYYY-MM-DD HH:mm",
             locale: moment.locale("zh-cn")
         });
-    });
 
+        getHomeworks(1);
+    });
+    $('.dropdown-toggle').dropdown();
     openHomeworkRelease();
     homeworkSubmit();
+    //
 
 </script>
 </html>
