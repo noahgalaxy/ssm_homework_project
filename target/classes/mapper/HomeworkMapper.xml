@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fisheep.dao.HomeworkMapper">
+    <resultMap id="homeworksWithGroups" type="com.fisheep.bean.Homework">
+        <id property="homeworkId" column="homeworkid"></id>
+        <result property="homeworkName" column="homeworkname"></result>
+        <result property="homeworkCode" column="homeworkcode"></result>
+        <result property="homeworkDead" column="homeworkdead"></result>
+        <result property="homeworktotalnums" column="homeworktotalnums"></result>
+        <result property="homeworksubmittednums" column="homeworksubmittednums"></result>
+        <result property="expired" column="expired"></result>
+        <collection property="groups" ofType="com.fisheep.bean.Group">
+            <id property="groupId" column="groupid"></id>
+            <result property="groupName" column="groupname"></result>
+            <result property="groupCode" column="groupcode"></result>
+            <result property="creatorId" column="creatorid"></result>
+        </collection>
+    </resultMap>
+
+    <insert id="insertHomework" parameterType="com.fisheep.bean.Homework">
+        insert into hw_homework(homeworkname, homeworkcode,homeworkdead, location,
+                                homeworkcreatorid, homeworktotalnums)
+                                values (#{homeworkName}, #{homeworkCode}, #{homeworkDead},
+                                        #{location}, #{homeworkCreatorId},#{homeworktotalnums});
+        <selectKey keyProperty="homeworkId" keyColumn="homeworkid" resultType="java.lang.Integer">
+            select last_insert_id();
+        </selectKey>
+    </insert>
+
+    <select id="getHomeworksWithGroupsByUid" parameterType="java.lang.Integer" resultMap="homeworksWithGroups">
+        select hi.homeworkid, hi.homeworkname, hi.homeworkcode, hi.homeworkdead,
+                hi.homeworktotalnums, hi.homeworksubmittednums, hi.expired,
+                gr.*
+                from hw_homework hi
+                left join belong be on hi.homeworkid=be.belonghomeworkid
+                left join hw_group gr on be.belonggroupid=gr.groupid
+                where hi.homeworkcreatorid=#{uid};
+    </select>
+
+    <delete id="deleteHomeworkByBatchId" parameterType="java.util.List">
+        delete from hw_homework where homeworkid in
+        <foreach collection="list" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
+
+    <delete id="deleteHomeworkById" parameterType="java.lang.Integer">
+        delete from hw_homework where homeworkid=#{homeworkid}
+    </delete>
+</mapper>

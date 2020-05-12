@@ -1265,8 +1265,7 @@
     </column>
     <column id="310" parent="286" name="homeworkdead">
       <Position>4</Position>
-      <Comment>deadline of homework to be submitted</Comment>
-      <DataType>date|0s</DataType>
+      <DataType>varchar(20)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
     <column id="311" parent="286" name="location">
@@ -1283,112 +1282,126 @@
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="313" parent="286" name="homeworkcode">
+    <column id="313" parent="286" name="homeworktotalnums">
+      <Position>7</Position>
+      <DataType>int unsigned|0s</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>&apos;0&apos;</DefaultExpression>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="314" parent="286" name="homeworksubmittednums">
+      <Position>8</Position>
+      <DataType>int unsigned|0s</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>&apos;0&apos;</DefaultExpression>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <index id="315" parent="286" name="homeworkcode">
       <ColNames>homeworkcode</ColNames>
       <Unique>1</Unique>
       <Type>btree</Type>
     </index>
-    <index id="314" parent="286" name="homework_user">
+    <index id="316" parent="286" name="homework_user">
       <ColNames>homeworkcreatorid</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="315" parent="286" name="PRIMARY">
+    <key id="317" parent="286" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>homeworkid</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="316" parent="286" name="homeworkcode">
+    <key id="318" parent="286" name="homeworkcode">
       <ColNames>homeworkcode</ColNames>
       <UnderlyingIndexName>homeworkcode</UnderlyingIndexName>
     </key>
-    <foreign-key id="317" parent="286" name="homework_user">
+    <foreign-key id="319" parent="286" name="homework_user">
       <ColNames>homeworkcreatorid</ColNames>
       <RefTableName>hw_user</RefTableName>
       <RefColNames>uid</RefColNames>
       <OnDelete>cascade</OnDelete>
     </foreign-key>
-    <column id="318" parent="287" name="uid">
+    <column id="320" parent="287" name="uid">
       <Position>1</Position>
       <DataType>int unsigned|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="319" parent="287" name="email">
+    <column id="321" parent="287" name="email">
       <Position>2</Position>
       <Comment>user email, as login account</Comment>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="320" parent="287" name="password">
+    <column id="322" parent="287" name="password">
       <Position>3</Position>
       <Comment>login password</Comment>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="321" parent="287" name="username">
+    <column id="323" parent="287" name="username">
       <Position>4</Position>
       <Comment>username,seted by user</Comment>
       <DataType>varchar(20)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="322" parent="287" name="email">
+    <index id="324" parent="287" name="email">
       <ColNames>email</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="323" parent="287" name="PRIMARY">
+    <key id="325" parent="287" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>uid</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="324" parent="288" name="id">
+    <column id="326" parent="288" name="id">
       <Position>1</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="325" parent="288" name="email">
+    <column id="327" parent="288" name="email">
       <Position>2</Position>
       <DataType>varchar(40)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="326" parent="288" name="password">
+    <column id="328" parent="288" name="password">
       <Position>3</Position>
       <DataType>varchar(40)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="327" parent="288" name="PRIMARY">
+    <key id="329" parent="288" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="328" parent="289" name="uhgid">
+    <column id="330" parent="289" name="uhgid">
       <Position>1</Position>
       <DataType>int unsigned|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="329" parent="289" name="uhguid">
+    <column id="331" parent="289" name="uhguid">
       <Position>2</Position>
       <Comment>uid of table hw_user</Comment>
       <DataType>int unsigned|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="330" parent="289" name="uhggroupid">
+    <column id="332" parent="289" name="uhggroupid">
       <Position>3</Position>
       <Comment>groupid of table hw_group</Comment>
       <DataType>int unsigned|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="331" parent="289" name="PRIMARY">
+    <key id="333" parent="289" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>uhgid</ColNames>
       <Primary>1</Primary>

@@ -27,4 +27,10 @@ public class PageController {
 //        System.out.println("页面跳转： toLogin");
 //        return "login";
 //    }
+
+    @RequestMapping(path = "/toGroup")
+    public String toGroup(){
+        System.out.println("页面跳转： groups");
+        return "groups";
+    }
 }

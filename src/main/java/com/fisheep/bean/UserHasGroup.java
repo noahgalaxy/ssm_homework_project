@@ -6,6 +6,7 @@ public class UserHasGroup implements Serializable {
     private Integer uhsId;
     private Integer uhgUid;
     private Integer uhgGroupId;
+    private Group group;
 
     @Override
     public String toString() {
@@ -13,8 +14,10 @@ public class UserHasGroup implements Serializable {
                 "uhsId=" + uhsId +
                 ", uhgUid=" + uhgUid +
                 ", uhgGroupId=" + uhgGroupId +
+                ", groupl=" + group +
                 '}';
     }
+
     public Integer getUhsId() {
         return uhsId;
     }
@@ -37,5 +40,13 @@ public class UserHasGroup implements Serializable {
 
     public void setUhgGroupId(Integer uhgGroupId) {
         this.uhgGroupId = uhgGroupId;
+    }
+
+    public Group getGroup() {
+        return group;
+    }
+
+    public void setGroup(Group group) {
+        this.group = group;
     }
 }
