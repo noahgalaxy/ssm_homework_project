@@ -120,4 +120,32 @@ public class HomeworkController {
         }
         return rowsAffected == 0?Msg.fail():Msg.success();
     }
+
+    //跟据homeworkId查询单个作业
+    @RequestMapping(path = "/homework/{id}", method = RequestMethod.GET)
+    @ResponseBody
+    public Msg getHomeworkByHomeId(@PathVariable("id") Integer homeworkId){
+        Homework homework = homeworkService.getHomeworkByHomeId(homeworkId);
+        System.out.println("收到的homeworkId: "+homeworkId+"\ngetHomeworkByHomeId :"+homework);
+        return homework == null ? Msg.fail():Msg.success().add("homework",homework);
+    }
+
+    @RequestMapping(path = "/homework", method = RequestMethod.PUT)
+    @ResponseBody
+    public Msg updateHomework(Homework homework, HttpSession session){
+        System.out.println("  修改的作业：\n"+homework);
+        System.out.println("groupsIdString:"+homework.getGroupsIdString() + "type:"+homework.getGroupsIdString().getClass());
+        int uid;
+        if(session.isNew()){
+            System.out.println("session is new!! ");
+            return Msg.fail();
+        }
+        //作业名字不能为空，截止日期不能为空，作业全部数量不能为空
+        if(homework.getHomeworkName() == "" || homework.getHomeworkDead() == "" || homework.getHomeworktotalnums() == 0){
+            System.out.println("修改字段空");
+            return Msg.fail();
+        }
+        int updateRowsAffected = homeworkService.updateHomework(homework);
+        return Msg.success();
+    }
 }

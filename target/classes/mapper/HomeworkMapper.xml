@@ -49,4 +49,11 @@
     <delete id="deleteHomeworkById" parameterType="java.lang.Integer">
         delete from hw_homework where homeworkid=#{homeworkid}
     </delete>
+
+    <select id="getHomeworkByHomeId" parameterType="java.lang.Integer" resultMap="homeworksWithGroups">
+        select hi.*, hg.* from hw_homework hi
+            left join belong be on hi.homeworkid=be.belonghomeworkid
+            left join hw_group hg on be.belonggroupid=hg.groupid
+            where hi.homeworkid=#{homeworkId};
+    </select>
 </mapper>

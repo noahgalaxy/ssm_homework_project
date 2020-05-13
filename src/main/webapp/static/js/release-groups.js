@@ -1,6 +1,211 @@
 ///////////////////////// 这里是发布作业模态框控制js /////////////////////////////////////
-function openHomeworkRelease(){
-    $(document).on("click","#btn_homework_release",function () {
+function openHomeworkModal(release) {
+    console.log("dadadadl啊啦啦啦啦啦");
+    var clickOpenModalBtn = "#btn_homework_release";
+    var homeworkName = "#homework-name";
+    var homeworkGroup = "#homework-group";
+    var homeworkTotalStudents = "#homework-total-students";
+    var homeworkDead = "#homeworkDead";
+    var modal = "#modal_homework_release";
+    if (release == "modify") {
+        clickOpenModalBtn = ".btn.glyphicon.glyphicon-pencil";
+        homeworkName = "#homework-modify-name";
+        homeworkGroup = "#homework-modify-group";
+        homeworkTotalStudents = "#homework-modify-total-students";
+        homeworkDead = "#homeworkDead-modify";
+        modal = "#modal_homework_modify";
+    }
+    $(document).on("click", clickOpenModalBtn, function () {
+        //1.首先清空模态框中的表单中的值
+        $(homeworkName).val("");
+        // $(homeworkGroup).empty();
+        $(homeworkTotalStudents).val("");
+        $(homeworkDead).val("");
+        //建立所属组选择
+        // createGroupselect(homeworkGroup);
+        //2.再打开模态款
+        $(modal).modal({
+            backdrop: "static"
+        });
+        console.log("clickOpenModalBtn：" + clickOpenModalBtn);
+        console.log("111点击homeworkGroup：" + homeworkGroup);
+        if (release == "release") {
+            console.log("发布作业模态框获取option：" + $("#modal_homework_release").find("option:eq(0)").text());
+            //如果是修改框，还需要给修改框赋值
+        }
+        if (release == "modify") {
+            var homeworkId = $(this).prev("span").attr("homeworkid");
+            console.log("这里这里这里：" + $("#homework-modify-group").find("option:eq(0)").text());
+            console.log("homeworkId: " + homeworkId);
+            getHomeworkByHomeId(homeworkId);
+            // $(document).ready(function() {
+            //
+            // });
+                // getHomeworkByHomeId(homeworkId);
+                // var result = getHomeworkByHomeId(homeworkId);
+                // console.log("单个homework："+result);
+                // homework = result.extend.homework;
+                // console.log("后单个homework："+homework);
+            }
+
+    });
+}
+function createGroupselect(homeworkGroup){
+    console.log("createGroupselect__homeworkGroup："+homeworkGroup)
+    //1.建立之前需要到数据库查询这个user已经有了的组
+    //2.拿到uid，再查询uid的组
+    $.ajax({
+        url:"/homework/getUidBySession",
+        // <%--url:"${pageContext.request.contextPath}/getUidBySession",--%>
+        type:"GET",
+        success:function (result) {
+            // console.log("result:"+result);
+            if(result.code == 100){
+                getGroupByUid(result.extend.uid, homeworkGroup);
+                // var groupsResult = getGroupByUid(4);
+                // var groups = groupsResult.extend.groupsMap;
+                // //2.用uid查询组
+                // console.log(groups);
+            }
+        }
+    })
+}
+
+//用uid查询组；
+function getGroupByUid(uid, homeworkGroup) {
+    //清楚样式
+    // $("#homework-group").removeAttr("disabled");
+    $(homeworkGroup).empty();
+    console.log("getGroupByUid__homeworkGroup："+homeworkGroup)
+
+    $.ajax({
+        url:"/homework/getGroupByUid/"+uid,
+        type: "GET",
+        success:function (result) {
+            if(result.code == 100){
+                var groupsList = result.extend.groupsList;
+                // var options;
+                $.each(groupsList, function (index, item) {
+                    console.log(item.groupId);
+                    console.log(item.groupName);
+                    //这里options选择框，需要把value放上去，不然提交表单的时候没有值
+                    $(homeworkGroup).append($("<option></option>").append(item.groupName).attr("value", item.groupId));
+                })
+                // options.appendTo($("#homework-group"));
+            }
+            // else{
+            //     $("#homework-group").attr("disabled");
+            // }
+        }
+    })
+}
+
+// 发布作业模态框提交
+function homeworkSubmit(release){
+    var modalSubmitButtonClick = "#modal-homework-relese-submit";
+    var modalSubmitForm = "#modal-homework-form";
+    var whichSelect = "#homework-group";
+    var url = "/homework/homeworkRelease";
+    var method = "GET";
+    var successMessage = "发布成功";
+    var failMessage = "发布失败，请重试";
+
+    if(release == "modify"){
+        modalSubmitButtonClick = "#btn-homework-modify-submit";
+        modalSubmitForm = "#modal-homework-modify-form";
+        whichSelect = "#homework-modify-group";
+        url = "/homework/homework";
+        method = "PUT";
+        successMessage = "修改成功";
+        failMessage = "修改失败，请重试";
+    }
+    $(document).on("click",modalSubmitButtonClick, function () {
+        var groupsIdString = getSelectedGroup(whichSelect);
+        console.log("序列化表单：\n"+$("#modal-homework-form").serialize());
+        $.ajax({
+            url:url,
+            type:method,
+            // data:"homeworkName="+15135+"&homeworktotalnums="+45,
+            // data:"homeworkName=测试uoy&groupsId=6&homeworktotalnums=66",
+            // data:"homeworkName=测试uoy&groupsId=6&homeworktotalnums=66",
+            data:$(modalSubmitForm).serialize()+"&groupsIdString="+groupsIdString,
+            success:function (result) {
+                if(result.code == 100){
+                    //1.显示成功消息；
+                    alert(successMessage)
+                    //2.刷新作业页面；
+                    getHomeworks(1);
+                }else{
+                    //1.显示失败消息
+                    alert(failMessage)
+                }
+            },
+            error:function () {
+                alert("前端提交异常！")
+            }
+        })
+    });
+
+}
+/**
+ * 输入selectd的元素选择器
+ *提交之前，获取发布作业框的所选组,
+ */
+function getSelectedGroup(whichSelect){
+    //对于multiple的select元素，返回数组;
+    var gr1 = $(whichSelect).val();
+    // var gr2 = $("#homework-group option:selected").val();
+    console.log("gr1:"+gr1);
+    console.log("a比对"+gr1.length);
+    //返回拼接的字符串
+    return gr1.length > 0?gr1.join("-"):"-";
+    // console.log("gr2:"+gr2);
+    //遍历
+    // for(gr in gr1){
+    //     console.log(gr+"啦啦啦啦");
+    // }
+}
+///////////////////////// 这里是发布作业模态框控制js /////////////////////////////////////
+///////////////////////// 这里是修改作业模态框控制js /////////////////////////////////////
+
+function getHomeworkByHomeId(homeworkId) {
+    //首先需要将所有选中状态置为未选中
+    $("#homework-modify-group").find("option").prop("selected", false);
+    $.ajax({
+        url:"/homework/homework/"+homeworkId,
+        type:"GET",
+        success:function (result) {
+            if(result.code == 100){
+                $("#homework-modify-name").val(result.extend.homework.homeworkName);
+                $("#homework-modify-total-students").val(result.extend.homework.homeworktotalnums);
+                $("#homeworkDead-modify").val(result.extend.homework.homeworkDead);
+                if(result.extend.homework.groups.length != 0){
+                    console.log("进入被选中")
+                    // console.log("被选中的："+$("#homework-modify-group").find("option[value='6']").text());
+                    // $("#homework-modify-group").find("option[value=6]").prop("selected","selected");
+                    for(group of result.extend.homework.groups){
+                        var groupId = group.groupId;
+                        console.log("被选中的："+groupId+"\n文本："+$("#homework-modify-group").find("option[value='"+groupId+"']").text());
+                        $("#homework-modify-group").find("option[value='"+groupId+"']").prop("selected", "selected");
+                    }
+                    //     var groupId = group.groupId;
+                    //     console.log("啊Jake四的groupId: "+groupId);
+                    //    // console.log( "里面: "+$("#homework-modify-group").find("option[value='"+groupId+"']").text());
+                    //    console.log( "里面: "+$("#homework-modify-group option[value=6]").text());
+                    // }
+                    // console.log("被选中的："+$("#homework-modify-group").find('option:selected').text());
+                }
+                // return result;
+            }else {
+                console.log("获取失败");
+                // return null;
+            }
+        }
+    })
+}
+
+function openHomeworkModify(){
+    $(document).on("click",".btn.glyphicon.glyphicon-pencil",function () {
         //1.首先清空模态框中的表单中的值
         $("#homework-name").val("");
         $("#homework-group").empty();
@@ -14,99 +219,7 @@ function openHomeworkRelease(){
         createGroupselect();
     });
 }
-function createGroupselect(){
-    //1.建立之前需要到数据库查询这个user已经有了的组
-    //2.拿到uid，再查询uid的组
-    $.ajax({
-        url:"/homework/getUidBySession",
-        // <%--url:"${pageContext.request.contextPath}/getUidBySession",--%>
-        type:"GET",
-        success:function (result) {
-            // console.log("result:"+result);
-            if(result.code == 100){
-                getGroupByUid(result.extend.uid);
-                // var groupsResult = getGroupByUid(4);
-                // var groups = groupsResult.extend.groupsMap;
-                // //2.用uid查询组
-                // console.log(groups);
-            }
-        }
-    })
-}
-
-//用uid查询组；
-function getGroupByUid(uid) {
-    //清楚样式
-    // $("#homework-group").removeAttr("disabled");
-    $("#homework-group").empty();
-    $.ajax({
-        url:"/homework/getGroupByUid/"+uid,
-        type: "GET",
-        success:function (result) {
-            if(result.code == 100){
-                var groupsList = result.extend.groupsList;
-                // var options;
-                $.each(groupsList, function (index, item) {
-                    console.log(item.groupId);
-                    console.log(item.groupName);
-                    //这里options选择框，需要把value放上去，不然提交表单的时候没有值
-                    $("#homework-group").append($("<option></option>").append(item.groupName).attr("value", item.groupId));
-                })
-                // options.appendTo($("#homework-group"));
-            }
-            // else{
-            //     $("#homework-group").attr("disabled");
-            // }
-        }
-    })
-}
-
-// 发布作业模态框提交
-function homeworkSubmit(){
-    $("#modal-homework-relese").click(function () {
-        var groupsIdString = getSelectedGroup();
-        console.log("序列化表单：\n"+$("#modal-homework-form").serialize());
-        $.ajax({
-            url:"/homework/homeworkRelease",
-            type:"POST",
-            // data:"homeworkName="+15135+"&homeworktotalnums="+45,
-            // data:"homeworkName=测试uoy&groupsId=6&homeworktotalnums=66",
-            // data:"homeworkName=测试uoy&groupsId=6&homeworktotalnums=66",
-            data:$("#modal-homework-form").serialize()+"&groupsIdString="+groupsIdString,
-            success:function (result) {
-                if(result.code == 100){
-                    //1.显示发布成功；
-                    alert("发布成功")
-                    //2.刷新作业页面；
-                }else{
-                    //1.显示发布异常
-                    alert("发布失败，请重试")
-                }
-            },
-            error:function () {
-                alert("前端提交异常！")
-            }
-        })
-    });
-}
-/**
- *提交之前，获取发布作业框的所选组,
- */
-function getSelectedGroup(){
-    //对于multiple的select元素，返回数组;
-    var gr1 = $("#homework-group ").val();
-    // var gr2 = $("#homework-group option:selected").val();
-    console.log("gr1:"+gr1);
-    console.log("a比对"+gr1.length);
-    //返回拼接的字符串
-    return gr1.length > 0?gr1.join("-"):"-";
-    // console.log("gr2:"+gr2);
-    //遍历
-    // for(gr in gr1){
-    //     console.log(gr+"啦啦啦啦");
-    // }
-}
-///////////////////////// 这里是发布作业模态框控制js /////////////////////////////////////
+///////////////////////// 这里是修改作业模态框控制js /////////////////////////////////////
 ///////////////////////// 这里是加载groups内容的js  /////////////////////////////////////
 
 ///////////////////////// 这里是加载groups内容的js  /////////////////////////////////////
@@ -151,16 +264,21 @@ function getHomeworks(status) {
                     var homeDead = $("<td></td>").text(homework.homeworkDead);
                     var submitAndTotal = $("<td></td>").text(homework.homeworksubmittednums+"/"+homework.homeworktotalnums);
                     var homeGroupString = "-";
+                    var homeGroupIdString = "-";
                     if(homework.groups.length != 0){
+                        homeGroupIdString = "";
                         homeGroupString = "";
                         for(var group of homework.groups){
-                            homeGroupString += group.groupName;
+                            homeGroupString += group.groupName+" ";
+                            homeGroupIdString += group.groupId;
                         }
                     }
-                    var homeGroup = $("<td></td>").text(homeGroupString);
+                    var homeGroup = $("<td></td>").text(homeGroupString.length>10?
+                                                        homeGroupString.substr(0, 10) + "...":homeGroupString);
 
                     var btnDelete =$("<span></span>").addClass("btn glyphicon glyphicon-remove")
                                 .attr("aria-hidden", true).attr("homeworkid", homework.homeworkId);
+                                // .attr("hah", "glyphicon-remove11");
 
                         // $("<button type='button'></button>").addClass("btn btn-default btn-group-sm")
                         // .append($("<span></span>").addClass("glyphicon glyphicon-remove").attr("aria-hidden", true))
@@ -176,6 +294,9 @@ function getHomeworks(status) {
                         .append(btnOperation)
                         .appendTo("#homework_table tbody");
                 });
+                //此外还需要构建模态框的组，select里面的组option
+                createGroupselect("#homework-modify-group");
+                createGroupselect("#homework-group");
             }
             else{
                 alert("后端获取失败")
@@ -184,8 +305,9 @@ function getHomeworks(status) {
     })
 }
 
+
 //给操作按钮绑定事件；
-$(document).on("click",".btn.glyphicon",function () {
+$(document).on("click",".glyphicon-remove",function () {
     var deleteHomeworkName = $(this).parents("tr").find("td:eq(2)").text();
     var deleteHomeworkId = $(this).attr("homeworkid");
     console.log()
