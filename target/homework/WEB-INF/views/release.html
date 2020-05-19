@@ -19,6 +19,7 @@
     <title>发布页面</title>
 </head>
 <body>
+<!--    release页面导航条-->
     <nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
         <div class="container">
             <ul class="nav  nav-pills">
@@ -32,7 +33,7 @@
     <br>
     <br>
     <br>
-
+<!--发布作业模态框-->
     <div class="modal fade" id="modal_homework_release" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -73,12 +74,60 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                    <button type="button" class="btn btn-primary" id="modal-homework-relese">发布</button>
+                    <button type="button" class="btn btn-primary" id="modal-homework-relese-submit">发布</button>
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div>
 
+<!--修改作业模态框-->
+    <div class="modal fade" id="modal_homework_modify" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">修改作业</h4>
+                </div>
+                <div class="modal-body">
+                    <form id="modal-homework-modify-form">
+                        <div class="form-group">
+                            <label for="homework-name">作业名称</label>
+                            <input type="text" name="homeworkName" class="form-control" id="homework-modify-name" homework-modify-id="" placeholder="作业名称">
+                        </div>
+                        <div class="form-group">
+                            <label for="homework-group">所属组</label>
+                            <select multiple class="form-control" name="groupsId"  id="homework-modify-group">
+                                <!--                                此处动态生成-->
+                                <!--                                <option>1</option>-->
+                                <!--                                <option>2</option>-->
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="homework-total-students">作业人数</label>
+                            <input type="text" name="homeworktotalnums" class="form-control" id="homework-modify-total-students" placeholder="作业人数">
+                        </div>
+
+                        <div class="form-group">
+                            <label>选择结束时间：</label>
+                            <!--指定 date标记-->
+                            <div class='input-group date' id='datetimepicker3'>
+                                <input type='text' name="homeworkDead" class="form-control" id="homeworkDead-modify" />
+                                <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-primary" id="btn-homework-modify-submit">修改</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div>
+
+<!--release页面内容-->
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
@@ -116,7 +165,7 @@
                         <th>Group</th>
                         <th>截止时间</th>
                         <th>已提交/总人数</th>
-                        <th>删除 / 修改 / 名单</th>
+                        <th>删除 / 修改 / 更多</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -132,7 +181,7 @@
             format: "YYYY-MM-DD",
             locale: moment.locale("zh-cn")
         });
-        $('#datetimepicker2').datetimepicker({
+        $('.date').datetimepicker({
             format: "YYYY-MM-DD HH:mm",
             locale: moment.locale("zh-cn")
         });
@@ -140,9 +189,11 @@
         getHomeworks(1);
     });
     $('.dropdown-toggle').dropdown();
-    openHomeworkRelease();
-    homeworkSubmit();
-    //
+    // openHomeworkRelease("modify");
+    openHomeworkModal("release");
+    openHomeworkModal("modify");
+    homeworkSubmit("release");
+    homeworkSubmit("modify");
 
 </script>
 </html>

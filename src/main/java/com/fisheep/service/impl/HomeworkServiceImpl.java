@@ -35,5 +35,15 @@ public class HomeworkServiceImpl implements HomeworkService {
         return homeworkMapper.deleteHomeworkByBatchId(idList);
     }
 
+    @Override
+    public Homework getHomeworkByHomeId(Integer homeworkId) {
+        return homeworkMapper.getHomeworkByHomeId(homeworkId);
+    }
+
+    @Override
+    public int updateHomework(Homework homework) {
+        return homeworkMapper.updateHomework(homework);
+    }
+
 
 }

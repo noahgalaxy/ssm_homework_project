@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script type="text/javascript" src="/homework/static/js/jquery-1.12.4.min.js"></script>
+    <title>single homework</title>
+</head>
+<body>
+<h1>to single homework page</h1>
+</body>
+
+<script>
+    $(function () {
+        let url = decodeURIComponent(window.location.href);
+        console.log("url:"+url);
+        console.log("hahahahaha____");
+        console.log(url.substr(url.lastIndexOf("/")+1));
+    });
+
+    function getUrlParam (name) {
+        let url = decodeURIComponent(window.location.href);
+        name = name.replace(/[\[\]]/g, "\\$&");
+        let regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)");
+        let results = regex.exec(url);
+        if (!results||!results[2]) {
+            return '';
+        }
+        return results[2].replace(/\+/g, " ");
+    }
+</script>
+</html>

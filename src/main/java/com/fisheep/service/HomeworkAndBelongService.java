@@ -4,4 +4,6 @@ import com.fisheep.bean.Homework;
 
 public interface HomeworkAndBelongService {
     public boolean insertHomeworkAndBelong(Homework homework);
+
+    boolean updateHomeworkAndBelong(Homework homework);
 }

@@ -13,4 +13,8 @@ public interface HomeworkService {
     int deleteHomeworkById(int homeworkId);
 
     int deleteHomeworkByBatchId(List<Integer> idList);
+
+    Homework getHomeworkByHomeId(Integer homeworkId);
+
+    int updateHomework(Homework homework);
 }
