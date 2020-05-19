@@ -56,4 +56,18 @@
             left join hw_group hg on be.belonggroupid=hg.groupid
             where hi.homeworkid=#{homeworkId};
     </select>
+
+    <update id="updateHomework">
+        update hw_homework set
+        <if test="homeworkName != null">
+            homeworkname = #{homeworkName}
+        </if>
+        <if test="homeworkDead != null">
+            ,homeworkdead = #{homeworkDead}
+        </if>
+        <if test="homeworktotalnums != null">
+            ,homeworktotalnums = #{homeworktotalnums}
+        </if>
+        where homeworkid = #{homeworkId}
+    </update>
 </mapper>

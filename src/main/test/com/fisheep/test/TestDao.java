@@ -92,5 +92,16 @@ public class TestDao {
         System.out.println(null == homework);
         System.out.println(homework);
     }
+
+    @Test
+    public void testUpdateHomework(){
+        Homework homework = new Homework();
+        homework.setHomeworkId(36);
+        homework.setHomeworkName("更新作业B");
+        homework.setHomeworktotalnums(10000);
+        homework.setHomeworkDead("2055-9-21 20：");
+        int rowsAffected = homeworkMapper.updateHomework(homework);
+        System.out.println("更新后受影响的行："+rowsAffected);
+    }
 }
 

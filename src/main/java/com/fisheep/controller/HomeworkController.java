@@ -145,7 +145,7 @@ public class HomeworkController {
             System.out.println("修改字段空");
             return Msg.fail();
         }
-        int updateRowsAffected = homeworkService.updateHomework(homework);
-        return Msg.success();
+        boolean flag = homeworkAndBelongServiceImpl.updateHomeworkAndBelong(homework);
+        return flag == true?Msg.success():Msg.fail();
     }
 }

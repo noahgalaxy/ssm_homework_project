@@ -14,6 +14,7 @@ function openHomeworkModal(release) {
         homeworkTotalStudents = "#homework-modify-total-students";
         homeworkDead = "#homeworkDead-modify";
         modal = "#modal_homework_modify";
+        $("#homework-modify-name").attr("homework-modify-id","")
     }
     $(document).on("click", clickOpenModalBtn, function () {
         //1.首先清空模态框中的表单中的值
@@ -121,6 +122,13 @@ function homeworkSubmit(release){
     }
     $(document).on("click",modalSubmitButtonClick, function () {
         var groupsIdString = getSelectedGroup(whichSelect);
+        var data = $(modalSubmitForm).serialize()+"&groupsIdString="+groupsIdString;
+        if(release == "modify"){
+            //首先将拿到作业id这个属性，拼接到表单内数据里面
+            data+="&homeworkId="+$("#homework-modify-name").attr("homework-modify-id");
+            //然后将这个属性置空
+            $("#homework-modify-name").attr("homework-modify-id","")
+        }
         console.log("序列化表单：\n"+$("#modal-homework-form").serialize());
         $.ajax({
             url:url,
@@ -128,7 +136,7 @@ function homeworkSubmit(release){
             // data:"homeworkName="+15135+"&homeworktotalnums="+45,
             // data:"homeworkName=测试uoy&groupsId=6&homeworktotalnums=66",
             // data:"homeworkName=测试uoy&groupsId=6&homeworktotalnums=66",
-            data:$(modalSubmitForm).serialize()+"&groupsIdString="+groupsIdString,
+            data:data,
             success:function (result) {
                 if(result.code == 100){
                     //1.显示成功消息；
@@ -176,6 +184,7 @@ function getHomeworkByHomeId(homeworkId) {
         type:"GET",
         success:function (result) {
             if(result.code == 100){
+                $("#homework-modify-name").attr("homework-modify-id",result.extend.homework.homeworkId);
                 $("#homework-modify-name").val(result.extend.homework.homeworkName);
                 $("#homework-modify-total-students").val(result.extend.homework.homeworktotalnums);
                 $("#homeworkDead-modify").val(result.extend.homework.homeworkDead);
@@ -204,6 +213,9 @@ function getHomeworkByHomeId(homeworkId) {
     })
 }
 
+/**
+ * 给更改作业按钮绑定打开事件
+ */
 function openHomeworkModify(){
     $(document).on("click",".btn.glyphicon.glyphicon-pencil",function () {
         //1.首先清空模态框中的表单中的值
@@ -258,7 +270,7 @@ function getHomeworks(status) {
                     }
                     var singleCheckBox = $("<td><input type='checkbox' class='check-single'></td>");
                     var homeId = $("<td></td>").text(homework.homeworkId);
-                    var homeName = $("<td></td>").text(homework.homeworkName.length <= 10?
+                    var homeName = $("<td></td>").addClass("clickkk").text(homework.homeworkName.length <= 10?
                         homework.homeworkName:homework.homeworkName.substr(0, 10) + "...");
                     var homeCode = $("<td></td>").text(homework.homeworkCode);
                     var homeDead = $("<td></td>").text(homework.homeworkDead);
@@ -284,7 +296,7 @@ function getHomeworks(status) {
                         // .append($("<span></span>").addClass("glyphicon glyphicon-remove").attr("aria-hidden", true))
                         // .attr("type", "button");
                     var btnModify = $("<span></span>").addClass("btn glyphicon glyphicon-pencil").attr("aria-hidden", true);
-                    var btnGetList = $("<span></span>").addClass("btn glyphicon glyphicon-list").attr("aria-hidden", true);
+                    var btnGetList = $("<span></span>").addClass("btn glyphicon glyphicon-th-large").attr("aria-hidden", true);
                     var btnOperation = $("<td></td>").append(btnDelete).append(btnModify).append(btnGetList);
 
                     $("<tr></tr>").append(singleCheckBox).append(homeId).append(homeName).append(homeCode)
@@ -339,3 +351,30 @@ function deleteHomeworkByIds(deleteHomeworkId) {
     })
 }
 ///////////////////////// 这里是加载release内容的js  /////////////////////////////////////
+
+/**
+ * 给作业名称td表格绑定点击事件
+ */
+$(document).on("click","td[class='clickkk']", function () {
+    var homeworkId = $(this).parent().find("td:eq(1)").text();
+    console.log("homeworkId: "+homeworkId);
+    // $.ajax({
+    //     url:"/homework/singlehomework/"+homeworkId,
+    //     type:"GET"
+    // })
+    window.location.href = "/homework/singlehomework/"+homeworkId;
+});
+    // let homeworkId = $(this).parent().find("td:eq(1)").text();
+
+    // window.location.href = "single-homework.html?name="+homeworkId;
+    // window.open("/WEB-INF/views/single-homework.html")
+    // $.ajax({
+    //     url:"/homework/toGroup",
+    //     type:"GET"
+    // })
+
+
+function tdclick() {
+    let homeworkId = $(this).parent().find("td:eq(1)").text();
+    console.log("点击td："+homeworkId);
+}
