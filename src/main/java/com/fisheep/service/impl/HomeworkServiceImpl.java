@@ -45,5 +45,15 @@ public class HomeworkServiceImpl implements HomeworkService {
         return homeworkMapper.updateHomework(homework);
     }
 
+    @Override
+    public Boolean gethomeworkExpiredByHomeCode(String code) {
+        return homeworkMapper.gethomeworkExpiredByHomeCode(code);
+    }
+
+    @Override
+    public Homework getHomeworkByHomeworkCode(String code) {
+        return homeworkMapper.getHomeworkByHomeworkCode(code);
+    }
+
 
 }

@@ -103,5 +103,11 @@ public class TestDao {
         int rowsAffected = homeworkMapper.updateHomework(homework);
         System.out.println("更新后受影响的行："+rowsAffected);
     }
+
+    @Test
+    public void  testGetHomeworkExpiredByHomeCode(){
+        Boolean expired = homeworkMapper.gethomeworkExpiredByHomeCode("w0iNs82a");
+        System.out.println(expired);
+    }
 }
 

@@ -17,4 +17,6 @@
     <delete id="deleteByHomeworkId" parameterType="java.lang.Integer">
         delete from belong where belonghomeworkid = #{homeworkid}
     </delete>
+
+
 </mapper>

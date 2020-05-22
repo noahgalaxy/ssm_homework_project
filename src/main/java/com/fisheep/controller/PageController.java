@@ -6,6 +6,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -50,7 +51,14 @@ public class PageController {
                                    @PathVariable("homeworkId") String homeworkId){
 //        return "forward:single-homework?homeworkId="+homeworkId;
 //        return "forward:/WEB-INF/views/single-homework.html";
+        //请求转发url不变
         return "forward:/WEB-INF/views/single-homework.html?homeworkId="+homeworkId;
 //        return "single-homework.html";
+    }
+
+    @RequestMapping(path = "/toHomeworkSubmit/{code}")
+    public String toHomeworkSubmit(@PathVariable("code") String homeworkCode, HttpServletResponse response){
+        System.out.println("进入toHomeworkSubmit/"+homeworkCode);
+        return "forward:/WEB-INF/views/homeworksubmit.html";
     }
 }

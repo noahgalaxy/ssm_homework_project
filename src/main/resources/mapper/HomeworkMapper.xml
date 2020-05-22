@@ -70,4 +70,12 @@
         </if>
         where homeworkid = #{homeworkId}
     </update>
+
+    <select id="gethomeworkExpiredByHomeCode" parameterType="java.lang.String" resultType="java.lang.Boolean">
+        select expired from hw_homework where homeworkcode=#{code}
+    </select>
+
+    <select id="getHomeworkByHomeworkCode" parameterType="java.lang.String" resultType="com.fisheep.bean.Homework">
+        select * from hw_homework where homeworkcode=#{homeworkCode}
+    </select>
 </mapper>
