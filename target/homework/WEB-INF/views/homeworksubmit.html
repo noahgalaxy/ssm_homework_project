@@ -150,8 +150,15 @@
             data: formData,
             processData: false,
             contentType: false,
-            success:function () {
+            success:function (result) {
                 alert("success");
+                //1.文件上传成功之后清除表单内容
+                if(result.code == 100){
+                    $("#exampleInputPassword1").val("");
+                    $("#help-bloc-file-name").text("");
+                    $("#input-b2").val("");
+                }
+
             }
         })
     })

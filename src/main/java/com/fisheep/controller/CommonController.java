@@ -1,10 +1,14 @@
 package com.fisheep.controller;
 
+import com.fisheep.bean.Submit;
+import com.fisheep.service.SubmitService;
 import com.fisheep.utils.Msg;
 import com.fisheep.utils.SnowAlgorithum;
 import com.fisheep.utils.UploadFile;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
 import org.junit.runners.Parameterized;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,9 +22,13 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.io.IOException;
+import java.util.UUID;
 
 @Controller
 public class CommonController {
+
+    @Autowired
+    private SubmitService submitServiceImpl;
 
 //    再session里面获取uid
     @RequestMapping(path = "/getUidBySession")
@@ -80,8 +88,21 @@ public class CommonController {
         System.out.println("homeworkId  " + homeworkId + "\thomeworkCode  " + homeworkCode);
         System.out.println("location:" + location);
 //        String code = SnowAlgorithum.getCode();
-        String fileName = homeworkId+"_"+uploaderName+"_"+originalFilename;
-        Boolean fileSave = UploadFile.fileSave(multipartFile, UploadFile.getFileSavePath(), fileName);
+
+        //2.获取一个UUID用作文件名前缀
+        String uuid = UUID.randomUUID().toString();
+        System.out.println("UUID："+uuid);
+//        String fileName = homeworkId+"_"+uploaderName+"_"+originalFilename;
+//        String fileName = uuid+"_"+originalFilename;
+
+        //3.服务层处理，服务层加事务，处理保存和数据库插入
+        Submit submit = new Submit();
+        submit.setSubmitHomeworkId(homeworkId);
+        submit.setUploaderName(uploaderName);
+        submit.setSubmitLocation(location);
+        submit.setSubmitFileName(originalFilename);
+        submit.setFileSuffix(uuid);
+        Boolean fileSave = submitServiceImpl.insertSubmit(submit, multipartFile);
         if(fileSave){
             return Msg.success();
         }

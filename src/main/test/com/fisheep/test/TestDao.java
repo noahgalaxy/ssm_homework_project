@@ -3,9 +3,11 @@ package com.fisheep.test;
 
 import com.fisheep.bean.Belong;
 import com.fisheep.bean.Homework;
+import com.fisheep.bean.Submit;
 import com.fisheep.bean.UserHasGroup;
 import com.fisheep.dao.BelongMapper;
 import com.fisheep.dao.HomeworkMapper;
+import com.fisheep.dao.SubmitMapper;
 import com.fisheep.dao.UserHasGroupMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -28,6 +30,9 @@ public class TestDao {
 
     @Autowired
     HomeworkMapper homeworkMapper;
+
+    @Autowired
+    SubmitMapper submitMapper;
 
     @Test
     public void testUserHasGroupMapperGetGroupsByUid(){
@@ -108,6 +113,12 @@ public class TestDao {
     public void  testGetHomeworkExpiredByHomeCode(){
         Boolean expired = homeworkMapper.gethomeworkExpiredByHomeCode("w0iNs82a");
         System.out.println(expired);
+    }
+
+    @Test
+    public void testUpdateSubmit(){
+        Submit submit = new Submit("余扬", 4, " 31f25b", "new fasdile", "location");
+        submitMapper.updateSubmit(submit);
     }
 }
 

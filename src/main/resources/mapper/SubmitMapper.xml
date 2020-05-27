@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fisheep.dao.SubmitMapper">
+
+
+    <insert id="insertSubmit" parameterType="com.fisheep.bean.Submit">
+        insert into submit(uploaderName, submitHomeworkId, submitFileName, submitLocation, fileSuffix)
+                    values (#{uploaderName},#{submitHomeworkId}, #{submitFileName}, #{submitLocation}, #{fileSuffix})
+    </insert>
+
+    <select id="selectCountByHomeworkIdAndUploader" resultType="int">
+        <!--select count(1) from submit sub where sub.submitHomeworkId = #{0} and sub.uploaderName = #{1} -->
+        select count(1) from submit sub where sub.submitHomeworkId = #{submitHomeworkId} and sub.uploaderName = #{uploaderName}
+    </select>
+
+    <update id="updateSubmit" parameterType="com.fisheep.bean.Submit">
+        update submit
+            <set>
+                <if test="submitFileName != null">submitFileName = #{submitFileName},</if>
+                <if test="submitLocation != null">submitLocation = #{submitLocation},</if>
+                <if test="fileSuffix != null">fileSuffix = #{fileSuffix}</if>
+            </set>
+        where submitHomeworkId = #{submitHomeworkId} and uploaderName = #{uploaderName}
+    </update>
+
+    <delete id="deleteSubmitByHomeworkIdAndUploader">
+        delete from submit where uploaderName = #{uploaderName} and submitHomeworkId = #{submitHomeworkId}
+    </delete>
+</mapper>

@@ -38,6 +38,7 @@
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="com.fisheep.dao"></property>
     </bean>
+
 <!--    5.配置事务管理器，控制住上面那个数据源-->
     <bean name="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource"></property>
