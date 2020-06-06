@@ -78,4 +78,12 @@
     <select id="getHomeworkByHomeworkCode" parameterType="java.lang.String" resultType="com.fisheep.bean.Homework">
         select * from hw_homework where homeworkcode=#{homeworkCode}
     </select>
+
+    <update id="updateHomeworkSubmittedNumsPlus" parameterType="java.lang.Integer">
+         update hw_homework set homeworksubmittednums=homeworksubmittednums+1 where homeworkid= #{homweorkId}
+    </update>
+
+    <select id="getAllHomeworks" resultType="com.fisheep.bean.Homework">
+        select * from hw_homework;
+    </select>
 </mapper>

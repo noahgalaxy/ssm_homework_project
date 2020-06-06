@@ -3,7 +3,14 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.fisheep.dao.SubmitMapper">
-
+<resultMap id="submitMap" type="com.fisheep.bean.Submit">
+    <id property="submitId" column="submitId"></id>
+    <result property="uploaderName" column="uploaderName"></result>
+    <result property="submitHomeworkId" column="submitHomeworkId"></result>
+    <result property="fileSuffix" column="fileSuffix"></result>
+    <result property="submitFileName" column="submitFileName"></result>
+    <result property="submitLocation" column="submitLocation"></result>
+</resultMap>
 
     <insert id="insertSubmit" parameterType="com.fisheep.bean.Submit">
         insert into submit(uploaderName, submitHomeworkId, submitFileName, submitLocation, fileSuffix)
@@ -14,6 +21,15 @@
         <!--select count(1) from submit sub where sub.submitHomeworkId = #{0} and sub.uploaderName = #{1} -->
         select count(1) from submit sub where sub.submitHomeworkId = #{submitHomeworkId} and sub.uploaderName = #{uploaderName}
     </select>
+
+
+    <select id="selectPrefixAndFileNameByHomeworkIdAndUploader" resultMap="submitMap">
+        select *
+            from submit sub
+            where sub.submitHomeworkId = #{submitHomeworkId}
+                and sub.uploaderName = #{uploaderName}
+    </select>
+
 
     <update id="updateSubmit" parameterType="com.fisheep.bean.Submit">
         update submit
@@ -28,4 +44,8 @@
     <delete id="deleteSubmitByHomeworkIdAndUploader">
         delete from submit where uploaderName = #{uploaderName} and submitHomeworkId = #{submitHomeworkId}
     </delete>
+
+    <select id="selectAllByHomeworkId" resultType="com.fisheep.bean.Submit">
+        select s.* from submit s where submitHomeworkId = #{submitHomeworkId}
+    </select>
 </mapper>

@@ -1,4 +1,8 @@
 package com.fisheep.service;
 
-public interface redisService {
+
+public interface RedisService {
+
+
+    Boolean getExpired(String homeworkCode);
 }

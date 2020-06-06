@@ -86,10 +86,12 @@ public class HomeworkAndBelongServiceImpl implements HomeworkAndBelongService {
         //处理作业所属组字符串，返回由单个数字组成的列表
         List<Integer> groupsIdsList = StringToNum.numStringToSingleNum(homework.getGroupsIdString());
         System.out.println("groupsIdsList:"+groupsIdsList.toString()+"\nsize:"+groupsIdsList.size());
+        //首先删除原来的
+        belongMapper.deleteByHomeworkId(homework.getHomeworkId());
         //返回的列表不为空，且长度大于0，有值才能插入。
         if (null != groupsIdsList && groupsIdsList.size() > 0){
             //首先删除原来的
-            belongMapper.deleteByHomeworkId(homework.getHomeworkId());
+//            belongMapper.deleteByHomeworkId(homework.getHomeworkId());
             List<Belong> belongList = new ArrayList<>();
             for(int num: groupsIdsList){
                 belongList.add(new Belong(homework.getHomeworkId(), num));
@@ -102,7 +104,6 @@ public class HomeworkAndBelongServiceImpl implements HomeworkAndBelongService {
                 return false;
             }
         }
-
         return true;
     }
 }

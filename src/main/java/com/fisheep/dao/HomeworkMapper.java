@@ -20,4 +20,8 @@ public interface HomeworkMapper {
     Boolean gethomeworkExpiredByHomeCode(String code);
 
     Homework getHomeworkByHomeworkCode(String code);
+
+    void updateHomeworkSubmittedNumsPlus(int submitHomeworkId);
+
+    List<Homework> getAllHomeworks();
 }

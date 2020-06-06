@@ -2,7 +2,9 @@ package com.fisheep.controller;
 
 
 import com.fisheep.bean.Homework;
+import com.fisheep.bean.Submit;
 import com.fisheep.service.HomeworkService;
+import com.fisheep.service.SubmitService;
 import com.fisheep.utils.Msg;
 import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,10 +14,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.List;
+
 @Controller
 public class submitController {
     @Autowired
     HomeworkService homeworkServiceImpl;
+
+    @Autowired
+    SubmitService submitServiceImpl;
 
     /**
      * 失败返回info的值：
@@ -81,4 +88,10 @@ public class submitController {
         return Msg.success().add("homework", homework);
     }
 
+    @RequestMapping(path = {"submit/{submitHomeworkId}", "singlehomework/submit/{submitHomeworkId}"}, method = RequestMethod.GET)
+    @ResponseBody
+    public Msg getSubmitedHomeworksByhomeworkId(@PathVariable("submitHomeworkId") int submitHomeworkId){
+        List<Submit> submits = submitServiceImpl.selectAllByHomeworkId(submitHomeworkId);
+        return Msg.success().add("submits", submits);
+    }
 }

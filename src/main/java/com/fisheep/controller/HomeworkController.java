@@ -122,7 +122,7 @@ public class HomeworkController {
     }
 
     //跟据homeworkId查询单个作业
-    @RequestMapping(path = "/homework/{id}", method = RequestMethod.GET)
+    @RequestMapping(path = {"/homework/{id}", "/singlehomework/homework/{id}"}, method = RequestMethod.GET)
     @ResponseBody
     public Msg getHomeworkByHomeId(@PathVariable("id") Integer homeworkId){
         Homework homework = homeworkService.getHomeworkByHomeId(homeworkId);

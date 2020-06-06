@@ -3,6 +3,7 @@ package com.fisheep.test;
 import com.fisheep.bean.Homework;
 import com.fisheep.utils.SnowAlgorithum;
 import com.fisheep.utils.StringToNum;
+import com.fisheep.utils.UploadFile;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -61,5 +62,12 @@ public class TestUtils {
         ho.setGroupsIdString("-");
         System.out.println(ho.getGroupsIdString());
         System.out.println(StringToNum.numStringToSingleNum(ho.getGroupsIdString()));
+    }
+
+    @Test
+    public void testFileDelete(){
+        String filePath = "C:\\Users\\Fisheep\\Desktop\\Code\\homework\\src\\main\\webapp\\uploadfiles\\0beb3370-338a-46cb-aef9-bcee3063143e_抗拼接攻击的矢量瓦片数据水印算法_唐伟.pdf";
+        boolean isDelete = UploadFile.deleteFile(filePath);
+        System.out.println("isDelete: "+isDelete);
     }
 }
