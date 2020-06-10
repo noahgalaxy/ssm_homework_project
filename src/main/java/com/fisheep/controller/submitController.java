@@ -4,6 +4,7 @@ package com.fisheep.controller;
 import com.fisheep.bean.Homework;
 import com.fisheep.bean.Submit;
 import com.fisheep.service.HomeworkService;
+import com.fisheep.service.RedisService;
 import com.fisheep.service.SubmitService;
 import com.fisheep.utils.Msg;
 import com.sun.org.apache.xpath.internal.operations.Bool;
@@ -24,6 +25,9 @@ public class submitController {
     @Autowired
     SubmitService submitServiceImpl;
 
+    @Autowired
+    RedisService redisServiceImpl;
+
     /**
      * 失败返回info的值：
      *          0：空输入，
@@ -41,15 +45,19 @@ public class submitController {
         if (code == "") {
             return Msg.fail().add("info", 0);
         }
-        Boolean expired = homeworkServiceImpl.gethomeworkExpiredByHomeCode(code);
+        Boolean mysqlExpired = homeworkServiceImpl.gethomeworkExpiredByHomeCode(code);
+
+        //进入redis查询是否存在
+        Boolean redisExists = redisServiceImpl.getExpired(code);
         /*
         1.不存在，返回1
         2.作业过期--》返回2
          */
-        if (null == expired) {
+        if (null == mysqlExpired) {
             return Msg.fail().add("info", 1);
         }
-        if (expired){
+        //mysql里面是过期，redis里面不存在字段
+        if (mysqlExpired || !redisExists){
             return Msg.fail().add("info", 2);
         }
         return Msg.success();

@@ -1,6 +1,10 @@
 package com.fisheep.db;
 import com.alibaba.fastjson.JSON;
+import com.fisheep.bean.Belong;
+import com.fisheep.bean.Group;
 import com.fisheep.bean.Homework;
+import com.fisheep.dao.BelongMapper;
+import com.fisheep.dao.GroupMapper;
 import com.fisheep.dao.HomeworkMapper;
 import org.junit.After;
 import org.junit.Before;
@@ -36,6 +40,12 @@ public class Redis {
 
     @Autowired
     JedisPool jedisPool;
+
+    @Autowired
+    BelongMapper belongMapper;
+
+    @Autowired
+    GroupMapper groupMapper;
 
 
     @Before
@@ -73,20 +83,12 @@ public class Redis {
             objMap.put("homeworkDead", homework.getHomeworkDead());
             objMap.put("homeworkCreatorId", Integer.toString(homework.getHomeworkCreatorId()));
             objMap.put("homeworkTotalNums", Integer.toString(homework.getHomeworktotalnums()));
+            objMap.put("location", homework.getLocation());
             objMap.put("homeworksubmittednums", Integer.toString(homework.getHomeworksubmittednums()));
             objMap.put("expired", homework.isExpired() == true ? "1": "0");
-            Date date = null;
-            try{
-                date = dateFormat.parse(homework.getHomeworkDead());
-            }catch(ParseException e){
-                System.out.println("出错的时间格式："+homework.getHomeworkDead());
-                continue;
-            }
             //            直接gettime获取的是unix时间戳的毫秒形式，/1000可以换成s
-            long unixTime = date.getTime();
             System.out.println(objMap);
-            pipelined.hmset(homeworoId, objMap);
-            pipelined.pexpireAt(homeworoId, unixTime);
+            pipelined.hmset("homework:"+homeworoId, objMap);
 //            //1.监视keys
 //            jedis.watch(homeworoId);
 //            //2.开启事务
@@ -103,12 +105,40 @@ public class Redis {
         }
 //        将管道提交到redis
 //        Response<List<Object>> exec = pipelined.exec();
+//        System.out.println(exec);
         pipelined.sync();
+        System.out.println("homeworks 插入redis完成");
+
+        List<Belong> allBelongs = belongMapper.getAllBelong();
+        for (Belong allBelong : allBelongs) {
+            pipelined.set("belong:"+Integer.toString(allBelong.getBelongHomweorkId()), Integer.toString(allBelong.getBelongGroupId()));
+        }
+//        Response<List<Object>> exec1 = pipelined.exec();
+//        System.out.println(exec1);
+        pipelined.sync();
+        System.out.println("belong 插入redis完成");
+
+        List<Group> allGroups = groupMapper.getAllGroups();
+        for (Group allGroup : allGroups) {
+            objMap.clear();
+            objMap.put("groupId", Integer.toString(allGroup.getGroupId()));
+            objMap.put("groupName", allGroup.getGroupName());
+            objMap.put("groupCode", allGroup.getGroupCode());
+            objMap.put("creatorId", Integer.toString(allGroup.getCreatorId()));
+            pipelined.hmset("group:"+Integer.toString(allGroup.getGroupId()), objMap);
+        }
+//        Response<List<Object>> exec2 = pipelined.exec();
+//        System.out.println(exec2);
+        pipelined.sync();
+        System.out.println("group 进入redis完成");
+
 
     }
 
     @Test
     public void uploadHomeworkCodeToRedis(){
+        String auth = jedis.auth("Fisheep");
+        System.out.println("redis auth："+auth);
         System.out.println(jedis.ping());
         List<Homework> allHomeworks = getAllHomeworks();
 
@@ -128,8 +158,11 @@ public class Redis {
             pipelined.pexpireAt(key, unixTime);
         }
 
-        pipelined.sync();
-//        List<Object> objects = pipelined.syncAndReturnAll();
+//        pipelined.sync();
+        List<Object> objects = pipelined.syncAndReturnAll();
+        for (Object object : objects) {
+            System.out.println(object);
+        }
     }
 
     @Test
@@ -155,11 +188,20 @@ public class Redis {
         System.out.println(allHomeworks);
         return allHomeworks;
     }
-    public static void main(String[] args) {
-        try {
-            new Redis().redisMemchace();
-        } catch (ParseException e) {
-            e.printStackTrace();
+
+    @Test
+    public void testHashToObject(){
+        Map<String, String> testHash = jedis.hgetAll("testHash");
+        System.out.println(testHash);
+    }
+
+    @Test
+    public void saveDataToRedisCache(){
+        List<Homework> allHomeworks = getAllHomeworks();
+        Pipeline pipeline = jedis.pipelined();
+        Map<String, Object> map = new HashMap<>();
+        for (Homework allHomework : allHomeworks) {
+//            map.put()
         }
     }
 }

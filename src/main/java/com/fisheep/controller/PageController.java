@@ -80,10 +80,6 @@ public class PageController {
     @RequestMapping(path = "/toHomeworkSubmit/{code}")
     public String toHomeworkSubmit(@PathVariable("code") String homeworkCode, HttpServletResponse response){
         System.out.println("进入toHomeworkSubmit/"+homeworkCode);
-
-        //进入redis查询是否过期
-        Boolean exists = redisServiceImpl.getExpired(homeworkCode);
-
-        return exists? "forward:/WEB-INF/views/homeworksubmit.html":"redirect:/index.html";
+        return "forward:/WEB-INF/views/homeworksubmit.html";
     }
 }

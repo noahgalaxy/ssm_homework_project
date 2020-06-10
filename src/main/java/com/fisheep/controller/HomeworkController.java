@@ -2,10 +2,7 @@ package com.fisheep.controller;
 
 import com.fisheep.bean.Belong;
 import com.fisheep.bean.Homework;
-import com.fisheep.service.BelongService;
-import com.fisheep.service.HomeworkAndBelongService;
-import com.fisheep.service.HomeworkAndGroupService;
-import com.fisheep.service.HomeworkService;
+import com.fisheep.service.*;
 import com.fisheep.service.impl.HomeworkServiceImpl;
 import com.fisheep.utils.Msg;
 import com.fisheep.utils.SnowAlgorithum;
@@ -34,6 +31,9 @@ public class HomeworkController {
 
     @Autowired
     HomeworkAndBelongService homeworkAndBelongServiceImpl;
+
+    @Autowired
+    RedisService redisServiceImpl;
 
     @RequestMapping(path = "/homeworkRelease")
     @ResponseBody
@@ -79,13 +79,21 @@ public class HomeworkController {
         System.out.println("进入getHomeworksByUid");
 //        从seession里面拿出uid
         int uid = (int) session.getAttribute("uid");
-        List<Homework> homeworkList = homeworkService.getHomeworksWithGroupsByUid(uid);
-        if(homeworkList.size() == 0){
+
+        /*
+        这里加一个逻辑先进redis里面查
+         */
+
+        List<Homework> redisHomeworkList = redisServiceImpl.getHomeworksWithGroupsByUid(uid);
+        List<Homework> mysqlHomeworkList = homeworkService.getHomeworksWithGroupsByUid(uid);
+
+        if(mysqlHomeworkList.size() == 0){
             System.out.println("size为0");
             return Msg.fail();
         }
+
         List<Map<String, Object>> homeworks = new ArrayList<>();
-        for(Homework homework: homeworkList){
+        for(Homework homework: mysqlHomeworkList){
             Map<String, Object> homeworkMap = new HashMap<>();
             homeworkMap.put("homeworkId",homework.getHomeworkId());
             homeworkMap.put("homeworkName", homework.getHomeworkName());

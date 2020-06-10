@@ -31,6 +31,7 @@
     <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
         <property name="maxTotal" value="30"></property>
         <property name="maxIdle" value="10"></property>
+        <property name="minIdle" value="3"></property>
     </bean>
 
 <!--    注入redis连接池-->
@@ -38,6 +39,8 @@
         <constructor-arg name="poolConfig" ref="jedisPoolConfig"></constructor-arg>
         <constructor-arg name="host" value="120.26.179.169"></constructor-arg>
         <constructor-arg name="port" value="6380"></constructor-arg>
+        <constructor-arg name="timeout" value="2000"></constructor-arg>
+        <constructor-arg name="password" value="Fisheep"></constructor-arg>
     </bean>
 
     <!--3.配置和mybatis的整合,配置sqlSessionFactory-->
@@ -68,10 +71,19 @@
 <!--            这是默认的-->
             <tx:method name="*"/>
             <!-- 配置以get开始的方法，我们把这种开头的方法都为查询方法，所以后面可以做调优，read-only来做-->
+            <!--
+                name: 方法名，可以使用通配符的方式配置
+                propagation： 传播的行为，查询方法SUPPORTS， 增删改方法：REQUIRED
+                isolation： 隔离级别：一般选择数据库默认的隔离级别（一般不用配置）
+                read-only： 只读，查询使用只读操作，增删改使用非只读操作
+                time-out: 超时的时间定义，默认-1 ，永不超时（一般不用配置）
+             -->
             <tx:method name="get*" read-only="true"></tx:method>
             <tx:method name="insert*" propagation="REQUIRED" read-only="false" rollback-for="Exception"></tx:method>
             <tx:method name="update*" propagation="REQUIRED" read-only="false" rollback-for="Exception"></tx:method>
         </tx:attributes>
     </tx:advice>
+
+
 
 </beans>

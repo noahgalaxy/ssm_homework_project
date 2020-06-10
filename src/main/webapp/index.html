@@ -44,10 +44,11 @@
                         alert("作业码输入不能为空！");
                         // $("#code input").val("");
                     }else if(result.extend.info == 1){
-                        alert("码输入错误，不存在");
+                        alert("作业码输入错误，不存在");
                         // $("#code input").val("");
                     }else if(result.extend.info == 2){
-                        alert("作业已过期，请私发");
+                        alert("作业【"+code+"】已过期，请私发");
+                        $("#code input").val("");
                     }
                 }
             },

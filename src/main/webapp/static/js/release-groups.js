@@ -275,6 +275,7 @@ function openHomeworkModify(){
 // 2.构造td
 
 /**
+ * 创建作业目录
  * status 代表要加载的项目：
  *      1：全部加载；
  *      2：加载已截止；

@@ -1,10 +1,7 @@
 package com.fisheep.test;
 
 
-import com.fisheep.bean.Belong;
-import com.fisheep.bean.Homework;
-import com.fisheep.bean.Submit;
-import com.fisheep.bean.UserHasGroup;
+import com.fisheep.bean.*;
 import com.fisheep.dao.BelongMapper;
 import com.fisheep.dao.HomeworkMapper;
 import com.fisheep.dao.SubmitMapper;
@@ -33,6 +30,7 @@ public class TestDao {
 
     @Autowired
     SubmitMapper submitMapper;
+
 
     @Test
     public void testUserHasGroupMapperGetGroupsByUid(){
@@ -119,6 +117,15 @@ public class TestDao {
     public void testUpdateSubmit(){
         Submit submit = new Submit("余扬", 4, " 31f25b", "new fasdile", "location");
         submitMapper.updateSubmit(submit);
+    }
+
+    @Test
+    public void testGetAllBelong(){
+        List<Belong> allBelong = belongMapper.getAllBelong();
+        System.out.println(allBelong);
+        for (Belong belong : allBelong) {
+            System.out.println("belong:"+Integer.toString(belong.getBelongHomweorkId()));
+        }
     }
 }
 

@@ -7,80 +7,36 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="080d8b1e-07e4-4b55-999c-f5efe8c06f82" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/fisheep/service/RedisService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/fisheep/service/impl/RedisServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/test/com/fisheep/db/Redis.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/fisheep/dao/GroupMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/fisheep/utils/MapToJavaBean.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/mapper/GroupMapper.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/fisheep/controller/HomeworkController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fisheep/controller/HomeworkController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/fisheep/controller/PageController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fisheep/controller/PageController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/fisheep/controller/submitController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fisheep/controller/submitController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/fisheep/dao/HomeworkMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fisheep/dao/HomeworkMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/fisheep/dao/SubmitMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fisheep/dao/SubmitMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/fisheep/service/SubmitService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fisheep/service/SubmitService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/fisheep/service/impl/HomeworkAndBelongServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fisheep/service/impl/HomeworkAndBelongServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/fisheep/service/impl/SubmitServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fisheep/service/impl/SubmitServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/fisheep/utils/FontImage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fisheep/utils/FontImage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/fisheep/utils/UploadFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fisheep/utils/UploadFile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/HomeworkMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/HomeworkMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/SubmitMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/SubmitMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/fisheep/dao/BelongMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fisheep/dao/BelongMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/fisheep/service/RedisService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fisheep/service/RedisService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/fisheep/service/impl/RedisServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/fisheep/service/impl/RedisServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/BelongMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/BelongMapper.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/springContext.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/springContext.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/springMVC.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/springMVC.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/test/com/fisheep/test/TestUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/test/com/fisheep/test/TestUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/groups.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/groups.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/homeworksubmit.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/homeworksubmit.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/single-homework.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/single-homework.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/bootstrap-3.3.7-dist/fonts/glyphicons-halflings-regular.eot" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/bootstrap-3.3.7-dist/fonts/glyphicons-halflings-regular.eot" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/bootstrap-3.3.7-dist/fonts/glyphicons-halflings-regular.ttf" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/bootstrap-3.3.7-dist/fonts/glyphicons-halflings-regular.ttf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/bootstrap-3.3.7-dist/fonts/glyphicons-halflings-regular.woff" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/bootstrap-3.3.7-dist/fonts/glyphicons-halflings-regular.woff" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/bootstrap-3.3.7-dist/fonts/glyphicons-halflings-regular.woff2" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/bootstrap-3.3.7-dist/fonts/glyphicons-halflings-regular.woff2" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/test/com/fisheep/db/Redis.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/test/com/fisheep/db/Redis.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/test/com/fisheep/test/TestDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/test/com/fisheep/test/TestDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/test/com/fisheep/test/TestOther.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/test/com/fisheep/test/TestOther.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/views/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/static/js/release-groups.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/js/release-groups.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/static/js/single-homework.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/static/js/single-homework.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/uploadfiles/1587564894841_多媒体数字版权保护水印算法研究及应用_蒋铭.caj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/uploadfiles/1M1Fu1mYi_专业英语 - 论文.docx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/fisheep/controller/HomeworkController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fisheep/controller/HomeworkController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/fisheep/controller/PageController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fisheep/controller/PageController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/fisheep/controller/submitController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fisheep/controller/submitController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/fisheep/dao/HomeworkMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fisheep/dao/HomeworkMapper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/fisheep/dao/SubmitMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fisheep/dao/SubmitMapper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/fisheep/service/SubmitService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fisheep/service/SubmitService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/fisheep/service/impl/HomeworkAndBelongServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fisheep/service/impl/HomeworkAndBelongServiceImpl.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/fisheep/service/impl/SubmitServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fisheep/service/impl/SubmitServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/fisheep/utils/UploadFile.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/fisheep/utils/UploadFile.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/mapper/HomeworkMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mapper/HomeworkMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/mapper/SubmitMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mapper/SubmitMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/springMVC.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/springMVC.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/homework/WEB-INF/classes/com/fisheep/controller/HomeworkController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/homework/WEB-INF/classes/com/fisheep/controller/HomeworkController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/springContext.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/springContext.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/homework/WEB-INF/classes/com/fisheep/controller/PageController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/homework/WEB-INF/classes/com/fisheep/controller/PageController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/homework/WEB-INF/classes/com/fisheep/controller/submitController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/homework/WEB-INF/classes/com/fisheep/controller/submitController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/homework/WEB-INF/classes/com/fisheep/dao/HomeworkMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/homework/WEB-INF/classes/com/fisheep/dao/HomeworkMapper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/homework/WEB-INF/classes/com/fisheep/dao/SubmitMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/homework/WEB-INF/classes/com/fisheep/dao/SubmitMapper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/homework/WEB-INF/classes/com/fisheep/service/SubmitService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/homework/WEB-INF/classes/com/fisheep/service/SubmitService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/homework/WEB-INF/classes/com/fisheep/service/impl/HomeworkAndBelongServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/homework/WEB-INF/classes/com/fisheep/service/impl/HomeworkAndBelongServiceImpl.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/homework/WEB-INF/classes/com/fisheep/service/impl/SubmitServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/homework/WEB-INF/classes/com/fisheep/service/impl/SubmitServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/homework/WEB-INF/classes/com/fisheep/utils/UploadFile.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/homework/WEB-INF/classes/com/fisheep/utils/UploadFile.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/homework/WEB-INF/classes/mapper/HomeworkMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/homework/WEB-INF/classes/mapper/HomeworkMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/homework/WEB-INF/classes/mapper/SubmitMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/homework/WEB-INF/classes/mapper/SubmitMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/homework/WEB-INF/classes/springMVC.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/homework/WEB-INF/classes/springMVC.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/homework/WEB-INF/views/groups.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/homework/WEB-INF/views/groups.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/homework/WEB-INF/views/homeworksubmit.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/homework/WEB-INF/views/homeworksubmit.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/homework/WEB-INF/views/single-homework.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/homework/WEB-INF/views/single-homework.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/homework/static/bootstrap-3.3.7-dist/fonts/glyphicons-halflings-regular.eot" beforeDir="false" afterPath="$PROJECT_DIR$/target/homework/static/bootstrap-3.3.7-dist/fonts/glyphicons-halflings-regular.eot" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/homework/static/bootstrap-3.3.7-dist/fonts/glyphicons-halflings-regular.ttf" beforeDir="false" afterPath="$PROJECT_DIR$/target/homework/static/bootstrap-3.3.7-dist/fonts/glyphicons-halflings-regular.ttf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/homework/static/bootstrap-3.3.7-dist/fonts/glyphicons-halflings-regular.woff" beforeDir="false" afterPath="$PROJECT_DIR$/target/homework/static/bootstrap-3.3.7-dist/fonts/glyphicons-halflings-regular.woff" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/homework/static/bootstrap-3.3.7-dist/fonts/glyphicons-halflings-regular.woff2" beforeDir="false" afterPath="$PROJECT_DIR$/target/homework/static/bootstrap-3.3.7-dist/fonts/glyphicons-halflings-regular.woff2" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/homework/static/js/release-groups.js" beforeDir="false" afterPath="$PROJECT_DIR$/target/homework/static/js/release-groups.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/homework/uploadfiles/0458a921-de7c-4678-9253-e9253831f25b_翻译_余扬_622190070007.docx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/homework/uploadfiles/1587563714328_ATTACKS ON DIGITAL WATERMARKS FOR DEEP NEURAL NETWORKS.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/homework/uploadfiles/1587564894841_多媒体数字版权保护水印算法研究及应用_蒋铭.caj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/homework/uploadfiles/1587565951743_Q1A Novel Image Tamper Detection and Self-Recovery Algorithm Based on Watermarking and Chaotic System.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/homework/uploadfiles/1M1Fu1mYi_专业英语 - 论文.docx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/homework/uploadfiles/25a24283-2950-4982-9113-f404ebd6780e_人工智能大作业A（发散式）.doc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/homework/uploadfiles/3a4e811d-9ca8-4939-be7b-f31f07647cd9_人工智能大作业A（发散式）.doc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/homework/uploadfiles/3cbad499-98a4-4196-a562-6df5de0e3014_Automatic steganographic distortion learning using a generative adversarial network .pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/homework/uploadfiles/a12225a0-f57b-47ab-9900-381627d3f9aa_智慧城市发展历程.docx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/homework/uploadfiles/c3f0d545-a816-4232-a1d7-b77056cb5244_汽车移动物联网发展的新进展_刘经南.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/test-classes/com/fisheep/test/TestUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/com/fisheep/test/TestUtils.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/homework/WEB-INF/classes/springContext.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/homework/WEB-INF/classes/springContext.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/homework/WEB-INF/views/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/homework/WEB-INF/views/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/homework/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/homework/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/com/fisheep/db/Redis.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/com/fisheep/db/Redis.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/com/fisheep/test/TestOther.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/com/fisheep/test/TestOther.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -116,8 +72,8 @@
         <option value="Jsp File" />
         <option value="JavaScript File" />
         <option value="HTML File" />
-        <option value="Interface" />
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -158,6 +114,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="DatabaseDriversLRU" value="mysql" />
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
@@ -196,23 +153,7 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.Redis.uploadHomeworkCodeToRedis">
-    <configuration name="Redis.readMapMemcho" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="homework" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.fisheep.db.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.fisheep.db" />
-      <option name="MAIN_CLASS_NAME" value="com.fisheep.db.Redis" />
-      <option name="METHOD_NAME" value="readMapMemcho" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager" selected="JUnit.Redis.redisMemchace">
     <configuration name="Redis.redisMemchace" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="homework" />
       <extension name="coverage">
@@ -229,7 +170,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Redis.testUnixTime" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="Redis.testHashToObject" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="homework" />
       <extension name="coverage">
         <pattern>
@@ -239,29 +180,13 @@
       </extension>
       <option name="PACKAGE_NAME" value="com.fisheep.db" />
       <option name="MAIN_CLASS_NAME" value="com.fisheep.db.Redis" />
-      <option name="METHOD_NAME" value="testUnixTime" />
+      <option name="METHOD_NAME" value="testHashToObject" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Redis.uploadHomeworkCodeToRedis" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="homework" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.fisheep.db.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.fisheep.db" />
-      <option name="MAIN_CLASS_NAME" value="com.fisheep.db.Redis" />
-      <option name="METHOD_NAME" value="uploadHomeworkCodeToRedis" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="TestDao.testGetHomeworkByHomeId" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="TestDao" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="homework" />
       <extension name="coverage">
         <pattern>
@@ -271,7 +196,38 @@
       </extension>
       <option name="PACKAGE_NAME" value="com.fisheep.test" />
       <option name="MAIN_CLASS_NAME" value="com.fisheep.test.TestDao" />
-      <option name="METHOD_NAME" value="testGetHomeworkByHomeId" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TestDao.testGetAllBelong" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="homework" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.fisheep.test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.fisheep.test" />
+      <option name="MAIN_CLASS_NAME" value="com.fisheep.test.TestDao" />
+      <option name="METHOD_NAME" value="testGetAllBelong" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TestOther.testGetAll" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="homework" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.fisheep.test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.fisheep.test" />
+      <option name="MAIN_CLASS_NAME" value="com.fisheep.test.TestOther" />
+      <option name="METHOD_NAME" value="testGetAll" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -368,19 +324,19 @@
     <list>
       <item itemvalue="JUnit.TestService.testHomeWorkAndBelongService" />
       <item itemvalue="JUnit.Redis.redisMemchace" />
-      <item itemvalue="JUnit.Redis.readMapMemcho" />
+      <item itemvalue="JUnit.TestOther.testGetAll" />
       <item itemvalue="Tomcat Server.Tomcat8home" />
-      <item itemvalue="JUnit.TestDao.testGetHomeworkByHomeId" />
-      <item itemvalue="JUnit.Redis.testUnixTime" />
-      <item itemvalue="JUnit.Redis.uploadHomeworkCodeToRedis" />
+      <item itemvalue="JUnit.Redis.testHashToObject" />
+      <item itemvalue="JUnit.TestDao.testGetAllBelong" />
+      <item itemvalue="JUnit.TestDao" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.Redis.uploadHomeworkCodeToRedis" />
         <item itemvalue="JUnit.Redis.redisMemchace" />
-        <item itemvalue="JUnit.Redis.testUnixTime" />
-        <item itemvalue="JUnit.TestDao.testGetHomeworkByHomeId" />
-        <item itemvalue="JUnit.Redis.readMapMemcho" />
+        <item itemvalue="JUnit.TestDao.testGetAllBelong" />
+        <item itemvalue="JUnit.TestDao" />
+        <item itemvalue="JUnit.Redis.testHashToObject" />
+        <item itemvalue="JUnit.TestOther.testGetAll" />
       </list>
     </recent_temporary>
   </component>
@@ -446,6 +402,11 @@
       <workItem from="1591276107550" duration="4258000" />
       <workItem from="1591361425524" duration="3577000" />
       <workItem from="1591411743530" duration="18487000" />
+      <workItem from="1591511646814" duration="91000" />
+      <workItem from="1591512007548" duration="13000" />
+      <workItem from="1591529280464" duration="10817000" />
+      <workItem from="1591709839711" duration="861000" />
+      <workItem from="1591783019980" duration="12061000" />
     </task>
     <task id="LOCAL-00001" summary="发布作业模态框完成，正在做导航栏">
       <created>1588131274240</created>
@@ -486,10 +447,11 @@
     </state>
     <state x="274" y="31" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.738@0.0.1366.738" timestamp="1588085505178" />
     <state x="385" y="44" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1050@0.0.1920.1050" timestamp="1590296958350" />
-    <state x="561" y="100" key="#com.intellij.ide.util.MemberChooser" timestamp="1591425494812">
-      <screen x="0" y="0" width="1920" height="1050" />
+    <state x="561" y="99" key="#com.intellij.ide.util.MemberChooser" timestamp="1591795747487">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="399" y="70" key="#com.intellij.ide.util.MemberChooser/0.0.1366.738@0.0.1366.738" timestamp="1590055385560" />
+    <state x="561" y="99" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040/-1440.182.1440.856@0.0.1920.1040" timestamp="1591795747487" />
     <state x="561" y="100" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1050/-1440.182.1440.866@0.0.1920.1050" timestamp="1591425494812" />
     <state x="561" y="100" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1050@0.0.1920.1050" timestamp="1590565645169" />
     <state x="712" y="385" width="495" height="285" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1590297338752">
@@ -529,76 +491,92 @@
       <screen x="0" y="0" width="1366" height="738" />
     </state>
     <state x="334" y="311" width="1325" height="423" key="GridCell.Tab.-1.right/0.0.1366.738@0.0.1366.738" timestamp="1587713612117" />
-    <state width="1645" height="235" key="GridCell.Tab.0.bottom" timestamp="1591438541403">
-      <screen x="0" y="0" width="1920" height="1050" />
+    <state width="1879" height="125" key="GridCell.Tab.0.bottom" timestamp="1591795309571">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1152" height="129" key="GridCell.Tab.0.bottom/0.0.1366.738@0.0.1366.738" timestamp="1590159395374" />
+    <state width="1879" height="125" key="GridCell.Tab.0.bottom/0.0.1920.1040/-1440.182.1440.856@0.0.1920.1040" timestamp="1591795309571" />
+    <state width="1862" height="2" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1591599417334" />
     <state width="1645" height="235" key="GridCell.Tab.0.bottom/0.0.1920.1050/-1440.182.1440.866@0.0.1920.1050" timestamp="1591438541403" />
     <state width="1685" height="396" key="GridCell.Tab.0.bottom/0.0.1920.1050@0.0.1920.1050" timestamp="1591413797503" />
-    <state width="1645" height="235" key="GridCell.Tab.0.center" timestamp="1591438541403">
-      <screen x="0" y="0" width="1920" height="1050" />
+    <state width="1879" height="125" key="GridCell.Tab.0.center" timestamp="1591795309570">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1152" height="129" key="GridCell.Tab.0.center/0.0.1366.738@0.0.1366.738" timestamp="1590159395373" />
+    <state width="1879" height="125" key="GridCell.Tab.0.center/0.0.1920.1040/-1440.182.1440.856@0.0.1920.1040" timestamp="1591795309570" />
+    <state width="1862" height="2" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1591599417334" />
     <state width="1645" height="235" key="GridCell.Tab.0.center/0.0.1920.1050/-1440.182.1440.866@0.0.1920.1050" timestamp="1591438541403" />
     <state width="1685" height="396" key="GridCell.Tab.0.center/0.0.1920.1050@0.0.1920.1050" timestamp="1591413797503" />
-    <state width="1645" height="235" key="GridCell.Tab.0.left" timestamp="1591438541403">
-      <screen x="0" y="0" width="1920" height="1050" />
+    <state width="1879" height="125" key="GridCell.Tab.0.left" timestamp="1591795309570">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1152" height="129" key="GridCell.Tab.0.left/0.0.1366.738@0.0.1366.738" timestamp="1590159395373" />
+    <state width="1879" height="125" key="GridCell.Tab.0.left/0.0.1920.1040/-1440.182.1440.856@0.0.1920.1040" timestamp="1591795309570" />
+    <state width="1862" height="2" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1591599417333" />
     <state width="1645" height="235" key="GridCell.Tab.0.left/0.0.1920.1050/-1440.182.1440.866@0.0.1920.1050" timestamp="1591438541403" />
     <state width="1685" height="396" key="GridCell.Tab.0.left/0.0.1920.1050@0.0.1920.1050" timestamp="1591413797503" />
-    <state width="1645" height="235" key="GridCell.Tab.0.right" timestamp="1591438541403">
-      <screen x="0" y="0" width="1920" height="1050" />
+    <state width="1879" height="125" key="GridCell.Tab.0.right" timestamp="1591795309571">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1152" height="129" key="GridCell.Tab.0.right/0.0.1366.738@0.0.1366.738" timestamp="1590159395373" />
+    <state width="1879" height="125" key="GridCell.Tab.0.right/0.0.1920.1040/-1440.182.1440.856@0.0.1920.1040" timestamp="1591795309571" />
+    <state width="1862" height="2" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1591599417334" />
     <state width="1645" height="235" key="GridCell.Tab.0.right/0.0.1920.1050/-1440.182.1440.866@0.0.1920.1050" timestamp="1591438541403" />
     <state width="1685" height="396" key="GridCell.Tab.0.right/0.0.1920.1050@0.0.1920.1050" timestamp="1591413797503" />
-    <state width="1645" height="235" key="GridCell.Tab.1.bottom" timestamp="1591438541404">
-      <screen x="0" y="0" width="1920" height="1050" />
+    <state width="1879" height="383" key="GridCell.Tab.1.bottom" timestamp="1591794968533">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1152" height="129" key="GridCell.Tab.1.bottom/0.0.1366.738@0.0.1366.738" timestamp="1590159395374" />
+    <state width="1879" height="383" key="GridCell.Tab.1.bottom/0.0.1920.1040/-1440.182.1440.856@0.0.1920.1040" timestamp="1591794968533" />
     <state width="1645" height="235" key="GridCell.Tab.1.bottom/0.0.1920.1050/-1440.182.1440.866@0.0.1920.1050" timestamp="1591438541404" />
     <state width="1439" height="190" key="GridCell.Tab.1.bottom/0.0.1920.1050@0.0.1920.1050" timestamp="1591338993418" />
-    <state width="1645" height="235" key="GridCell.Tab.1.center" timestamp="1591438541404">
-      <screen x="0" y="0" width="1920" height="1050" />
+    <state width="1879" height="383" key="GridCell.Tab.1.center" timestamp="1591794968533">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1152" height="129" key="GridCell.Tab.1.center/0.0.1366.738@0.0.1366.738" timestamp="1590159395374" />
+    <state width="1879" height="383" key="GridCell.Tab.1.center/0.0.1920.1040/-1440.182.1440.856@0.0.1920.1040" timestamp="1591794968533" />
     <state width="1645" height="235" key="GridCell.Tab.1.center/0.0.1920.1050/-1440.182.1440.866@0.0.1920.1050" timestamp="1591438541404" />
     <state width="1439" height="190" key="GridCell.Tab.1.center/0.0.1920.1050@0.0.1920.1050" timestamp="1591338993418" />
-    <state width="1645" height="235" key="GridCell.Tab.1.left" timestamp="1591438541403">
-      <screen x="0" y="0" width="1920" height="1050" />
+    <state width="1879" height="383" key="GridCell.Tab.1.left" timestamp="1591794968533">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1152" height="129" key="GridCell.Tab.1.left/0.0.1366.738@0.0.1366.738" timestamp="1590159395374" />
+    <state width="1879" height="383" key="GridCell.Tab.1.left/0.0.1920.1040/-1440.182.1440.856@0.0.1920.1040" timestamp="1591794968533" />
     <state width="1645" height="235" key="GridCell.Tab.1.left/0.0.1920.1050/-1440.182.1440.866@0.0.1920.1050" timestamp="1591438541403" />
     <state width="1439" height="190" key="GridCell.Tab.1.left/0.0.1920.1050@0.0.1920.1050" timestamp="1591338993418" />
-    <state width="1645" height="235" key="GridCell.Tab.1.right" timestamp="1591438541404">
-      <screen x="0" y="0" width="1920" height="1050" />
+    <state width="1879" height="383" key="GridCell.Tab.1.right" timestamp="1591794968533">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1152" height="129" key="GridCell.Tab.1.right/0.0.1366.738@0.0.1366.738" timestamp="1590159395374" />
+    <state width="1879" height="383" key="GridCell.Tab.1.right/0.0.1920.1040/-1440.182.1440.856@0.0.1920.1040" timestamp="1591794968533" />
     <state width="1645" height="235" key="GridCell.Tab.1.right/0.0.1920.1050/-1440.182.1440.866@0.0.1920.1050" timestamp="1591438541404" />
     <state width="1439" height="190" key="GridCell.Tab.1.right/0.0.1920.1050@0.0.1920.1050" timestamp="1591338993418" />
-    <state x="334" y="311" width="1645" height="235" key="GridCell.Tab.2.bottom" timestamp="1591438541404">
-      <screen x="0" y="0" width="1920" height="1050" />
+    <state x="334" y="311" width="1645" height="151" key="GridCell.Tab.2.bottom" timestamp="1591786211686">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="334" y="311" width="1152" height="129" key="GridCell.Tab.2.bottom/0.0.1366.738@0.0.1366.738" timestamp="1590159395375" />
+    <state width="1645" height="151" key="GridCell.Tab.2.bottom/0.0.1920.1040/-1440.182.1440.856@0.0.1920.1040" timestamp="1591786211686" />
     <state width="1645" height="235" key="GridCell.Tab.2.bottom/0.0.1920.1050/-1440.182.1440.866@0.0.1920.1050" timestamp="1591438541404" />
     <state width="1439" height="190" key="GridCell.Tab.2.bottom/0.0.1920.1050@0.0.1920.1050" timestamp="1591338993418" />
-    <state x="334" y="311" width="1645" height="235" key="GridCell.Tab.2.center" timestamp="1591438541404">
-      <screen x="0" y="0" width="1920" height="1050" />
+    <state x="334" y="311" width="1645" height="151" key="GridCell.Tab.2.center" timestamp="1591786211686">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="334" y="311" width="1152" height="129" key="GridCell.Tab.2.center/0.0.1366.738@0.0.1366.738" timestamp="1590159395375" />
+    <state width="1645" height="151" key="GridCell.Tab.2.center/0.0.1920.1040/-1440.182.1440.856@0.0.1920.1040" timestamp="1591786211686" />
     <state width="1645" height="235" key="GridCell.Tab.2.center/0.0.1920.1050/-1440.182.1440.866@0.0.1920.1050" timestamp="1591438541404" />
     <state width="1439" height="190" key="GridCell.Tab.2.center/0.0.1920.1050@0.0.1920.1050" timestamp="1591338993418" />
-    <state x="334" y="311" width="1645" height="235" key="GridCell.Tab.2.left" timestamp="1591438541404">
-      <screen x="0" y="0" width="1920" height="1050" />
+    <state x="334" y="311" width="1645" height="151" key="GridCell.Tab.2.left" timestamp="1591786211686">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="334" y="311" width="1152" height="129" key="GridCell.Tab.2.left/0.0.1366.738@0.0.1366.738" timestamp="1590159395374" />
+    <state width="1645" height="151" key="GridCell.Tab.2.left/0.0.1920.1040/-1440.182.1440.856@0.0.1920.1040" timestamp="1591786211686" />
     <state width="1645" height="235" key="GridCell.Tab.2.left/0.0.1920.1050/-1440.182.1440.866@0.0.1920.1050" timestamp="1591438541404" />
     <state width="1439" height="190" key="GridCell.Tab.2.left/0.0.1920.1050@0.0.1920.1050" timestamp="1591338993418" />
-    <state x="334" y="311" width="1645" height="235" key="GridCell.Tab.2.right" timestamp="1591438541404">
-      <screen x="0" y="0" width="1920" height="1050" />
+    <state x="334" y="311" width="1645" height="151" key="GridCell.Tab.2.right" timestamp="1591786211686">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="334" y="311" width="1152" height="129" key="GridCell.Tab.2.right/0.0.1366.738@0.0.1366.738" timestamp="1590159395375" />
+    <state width="1645" height="151" key="GridCell.Tab.2.right/0.0.1920.1040/-1440.182.1440.856@0.0.1920.1040" timestamp="1591786211686" />
     <state width="1645" height="235" key="GridCell.Tab.2.right/0.0.1920.1050/-1440.182.1440.866@0.0.1920.1050" timestamp="1591438541404" />
     <state width="1439" height="190" key="GridCell.Tab.2.right/0.0.1920.1050@0.0.1920.1050" timestamp="1591338993418" />
     <state x="349" y="125" width="1325" height="368" key="GridCell.Tab.3.bottom" timestamp="1587713750717">
@@ -691,10 +669,11 @@
       <screen x="0" y="0" width="1366" height="738" />
     </state>
     <state x="206" y="55" width="922" height="357" key="dock-window-3/0.0.1366.738@0.0.1366.738" timestamp="1587555671849" />
-    <state x="0" y="76" key="new project wizard" timestamp="1590128310616">
-      <screen x="0" y="0" width="1366" height="738" />
+    <state x="141" y="89" key="new project wizard" timestamp="1591511735727">
+      <screen x="0" y="0" width="1920" height="1050" />
     </state>
     <state x="0" y="76" key="new project wizard/0.0.1366.738@0.0.1366.738" timestamp="1590128310616" />
+    <state x="141" y="89" key="new project wizard/0.0.1920.1050/-1440.182.1440.866@0.0.1920.1050" timestamp="1591511735727" />
     <state x="333" y="212" width="739" height="307" key="org.intellij.images.editor.actions.BackgroundImageDialog" timestamp="1588683172704">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
@@ -708,10 +687,11 @@
     </state>
     <state x="339" y="165" key="run.anything.popup/0.0.1366.738@0.0.1366.738" timestamp="1587785524515" />
     <state x="476" y="235" key="run.anything.popup/0.0.1920.1050/-1440.182.1440.866@0.0.1920.1050" timestamp="1590739717425" />
-    <state x="486" y="84" width="945" height="965" key="search.everywhere.popup" timestamp="1591421867080">
-      <screen x="0" y="0" width="1920" height="1050" />
+    <state x="486" y="83" width="945" height="956" key="search.everywhere.popup" timestamp="1591786654859">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="346" y="59" width="672" height="678" key="search.everywhere.popup/0.0.1366.738@0.0.1366.738" timestamp="1589286536206" />
+    <state x="486" y="83" width="945" height="956" key="search.everywhere.popup/0.0.1920.1040/-1440.182.1440.856@0.0.1920.1040" timestamp="1591786654859" />
     <state x="486" y="84" width="945" height="965" key="search.everywhere.popup/0.0.1920.1050/-1440.182.1440.866@0.0.1920.1050" timestamp="1591421867080" />
     <state x="486" y="84" width="945" height="965" key="search.everywhere.popup/0.0.1920.1050@0.0.1920.1050" timestamp="1591412191650" />
   </component>

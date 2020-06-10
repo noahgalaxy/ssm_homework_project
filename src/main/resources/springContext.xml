@@ -31,6 +31,7 @@
     <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
         <property name="maxTotal" value="30"></property>
         <property name="maxIdle" value="10"></property>
+        <property name="minIdle" value="3"></property>
     </bean>
 
 <!--    注入redis连接池-->
@@ -38,6 +39,8 @@
         <constructor-arg name="poolConfig" ref="jedisPoolConfig"></constructor-arg>
         <constructor-arg name="host" value="120.26.179.169"></constructor-arg>
         <constructor-arg name="port" value="6380"></constructor-arg>
+        <constructor-arg name="timeout" value="2000"></constructor-arg>
+        <constructor-arg name="password" value="Fisheep"></constructor-arg>
     </bean>
 
     <!--3.配置和mybatis的整合,配置sqlSessionFactory-->
