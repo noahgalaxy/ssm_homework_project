@@ -9,6 +9,8 @@ public interface HomeworkMapper {
 
     List<Homework> getHomeworksWithGroupsByUid(int uid);
 
+    List<Homework> getAllHomeworksWithGroups();
+
     int deleteHomeworkById(int homeworkId);
 
     int deleteHomeworkByBatchId(List<Integer> idList);

@@ -3,6 +3,13 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.fisheep.dao.BelongMapper">
+    <resultMap id="belongMap" type="com.fisheep.bean.Belong">
+        <id property="belongId" column=" belongid"></id>
+        <result property="belongHomweorkId" column="belonghomeworkid"></result>
+        <result property="belongGroupId" column="belonggroupid"></result>
+    </resultMap>
+
+
     <insert id="insertBelong" parameterType="java.util.List">
         insert into belong(belonghomeworkid, belonggroupid)
         values
@@ -17,6 +24,10 @@
     <delete id="deleteByHomeworkId" parameterType="java.lang.Integer">
         delete from belong where belonghomeworkid = #{homeworkid}
     </delete>
+
+    <select id="getAllBelong" resultMap="belongMap">
+        select * from belong;
+    </select>
 
 
 </mapper>

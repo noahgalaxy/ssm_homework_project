@@ -10,5 +10,5 @@ public interface RedisService {
 
     Boolean getExpired(String homeworkCode);
 
-    List<Homework> getHomeworksWithGroupsByUid(int uid);
+    List<Homework> getHomeworksWithGroupsByUid(int uid) throws IllegalAccessException;
 }

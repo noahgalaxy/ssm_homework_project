@@ -20,6 +20,12 @@ public class Belong implements Serializable {
         this.belongGroupId = belongGroupId;
     }
 
+    public Belong(int belongId, int belongHomweorkId, int belongGroupId){
+        this.belongId = belongId;
+        this.belongHomweorkId = belongHomweorkId;
+        this.belongGroupId = belongGroupId;
+    }
+
     @Override
     public String toString() {
         return "Belong{" +

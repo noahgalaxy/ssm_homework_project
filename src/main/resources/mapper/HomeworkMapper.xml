@@ -8,6 +8,8 @@
         <result property="homeworkName" column="homeworkname"></result>
         <result property="homeworkCode" column="homeworkcode"></result>
         <result property="homeworkDead" column="homeworkdead"></result>
+        <result property="location" column="location"></result>
+        <result property="homeworkCreatorId" column="homeworkcreatorid"></result>
         <result property="homeworktotalnums" column="homeworktotalnums"></result>
         <result property="homeworksubmittednums" column="homeworksubmittednums"></result>
         <result property="expired" column="expired"></result>
@@ -38,6 +40,16 @@
                 left join hw_group gr on be.belonggroupid=gr.groupid
                 where hi.homeworkcreatorid=#{uid};
     </select>
+
+    <select id="getAllHomeworksWithGroups"  resultMap="homeworksWithGroups">
+        select hi.*,
+                gr.*
+                from hw_homework hi
+                left join belong be on hi.homeworkid=be.belonghomeworkid
+                left join hw_group gr on be.belonggroupid=gr.groupid;
+    </select>
+
+
 
     <delete id="deleteHomeworkByBatchId" parameterType="java.util.List">
         delete from hw_homework where homeworkid in

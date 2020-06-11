@@ -6,6 +6,7 @@ import com.fisheep.bean.Homework;
 import com.fisheep.dao.BelongMapper;
 import com.fisheep.dao.GroupMapper;
 import com.fisheep.dao.HomeworkMapper;
+import org.apache.commons.beanutils.ConvertUtils;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -16,13 +17,13 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import redis.clients.jedis.*;
 
+import javax.lang.model.util.AbstractElementVisitor6;
+import java.lang.reflect.Field;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.jar.JarOutputStream;
+
 
 @RunWith(value = SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:springContext.xml", "classpath:springMVC.xml"})
@@ -196,12 +197,111 @@ public class Redis {
     }
 
     @Test
-    public void saveDataToRedisCache(){
-        List<Homework> allHomeworks = getAllHomeworks();
-        Pipeline pipeline = jedis.pipelined();
-        Map<String, Object> map = new HashMap<>();
-        for (Homework allHomework : allHomeworks) {
-//            map.put()
+    public void testGetHomeworkWithGroups(){
+        jedis = jedisPool.getResource();
+        Pipeline pipelined = jedis.pipelined();
+
+        Response<Map<String, String>> response = pipelined.hgetAll("homework:40");
+        Response<String> stringResponse = pipelined.get("belong:40");
+        pipelined.sync();
+        System.out.println(response.toString());
+        System.out.println(response.get().toString());
+        System.out.println(stringResponse.get());
+    }
+
+    @Test
+    public void testGroupListCache(){
+        jedis = jedisPool.getResource();
+        Pipeline pipelined = jedis.pipelined();
+
+        List<Homework> homeworkList = homeworkMapper.getAllHomeworksWithGroups();
+        System.out.println(homeworkList);
+        Map<String, String> map = new HashMap<>();
+        for (Homework homework : homeworkList) {
+            map.clear();
+            System.out.println(homework);
+
+            String homeworoId = Integer.toString(homework.getHomeworkId());
+            map.put("homeworkId", homeworoId);
+            map.put("homeworkName", homework.getHomeworkName());
+            map.put("homeworkCode", homework.getHomeworkCode());
+            map.put("homeworkDead", homework.getHomeworkDead());
+            map.put("homeworkCreatorId", Integer.toString(homework.getHomeworkCreatorId()));
+            map.put("homeworktotalnums", Integer.toString(homework.getHomeworktotalnums()));
+            map.put("location", homework.getLocation());
+            map.put("homeworksubmittednums", Integer.toString(homework.getHomeworksubmittednums()));
+            map.put("expired", homework.isExpired() == true ? "1": "0");
+
+            List<Group> groups = homework.getGroups();
+
+            String groupsString = groups.size() == 0? "-": JSON.toJSONString(groups);
+            System.out.println("groupsString"+groupsString);
+
+            map.put("groups", groupsString);
+
+            //键结构  homework：HomeworkCreatorId ：HomeworkId
+            pipelined.hmset("homework:"+Integer.toString(homework.getHomeworkCreatorId())+":"+
+                    Integer.toString(homework.getHomeworkId()), map);
+        }
+        pipelined.sync();
+        pipelined.close();
+    }
+
+    @Test
+    public void testGetHomeworksFromCache() throws IllegalAccessException, InstantiationException, NoSuchFieldException, ClassNotFoundException {
+        jedis = jedisPool.getResource();
+        Pipeline pipelined = jedis.pipelined();
+        Response<Set<String>> keys = pipelined.keys("homework:2:*");
+        pipelined.sync();
+        pipelined.close();
+
+        System.out.println(keys.get());
+
+        Pipeline pipelined1 = jedis.pipelined();
+        for (String key : keys.get()) {
+            pipelined1.hgetAll(key);
+        }
+        List<Object> homeworks = pipelined1.syncAndReturnAll();
+        pipelined1.close();
+        List<Homework> homeworkList = new ArrayList<>();
+        for (Object homework : homeworks) {
+            Map homeworkMap = (HashMap) homework;
+//            System.out.println((homework.getClass().getName()));
+
+            Iterator entryIterator = homeworkMap.entrySet().iterator();
+            Homework homework2 = (Homework) Class.forName("com.fisheep.bean.Homework").newInstance();
+            while (entryIterator.hasNext()){
+                Map.Entry entry = (Map.Entry) entryIterator.next();
+                String key = (String) entry.getKey();
+                Object value = entry.getValue();
+
+                System.out.println("key:"+key+"\nvalue:"+value.toString());
+
+                if(key.equals("groups") && ((String)value).equals("-")) continue;
+                if(key.equals("groups")  && !((String)value).equals("-")){
+                    List<Group> groupList = (List<Group>) JSON.parse((String) value);
+                    value = groupList;
+                }
+
+                if(key.equals("expired")){
+                    value = value.equals("0")? false:true;
+                }
+
+                Field declaredField = homework2.getClass().getDeclaredField(key);
+
+                //                    String typeName = declaredField.getGenericType().getTypeName();
+                declaredField.setAccessible(true);
+                declaredField.set(homework2, ConvertUtils.convert(value, declaredField.getType()));
+                declaredField.setAccessible(false);
+
+            }
+            homeworkList.add(homework2);
+            System.out.println("=============================");
+            }
+        System.out.println(homeworkList);
+        for (Homework homework : homeworkList) {
+            System.out.println(homework);
         }
     }
+
 }

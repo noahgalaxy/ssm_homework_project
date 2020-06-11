@@ -311,7 +311,7 @@ function getHomeworks(status) {
                     var submitAndTotal = $("<td></td>").text(homework.homeworksubmittednums+"/"+homework.homeworktotalnums);
                     var homeGroupString = "-";
                     var homeGroupIdString = "-";
-                    if(homework.groups.length != 0){
+                    if(homework.groups != null && homework.groups.length != 0){
                         homeGroupIdString = "";
                         homeGroupString = "";
                         for(var group of homework.groups){

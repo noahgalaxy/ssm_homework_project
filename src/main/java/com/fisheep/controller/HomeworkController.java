@@ -52,7 +52,6 @@ public class HomeworkController {
         }catch (NullPointerException e){
             e.printStackTrace();
 //            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-
         }
         //作业名字不能为空，发布者id不能为0或空，截止日期不能为空，作业全部数量不能为空
         if(homework.getHomeworkName() == "" || homework.getHomeworkCreatorId() == 0 ||
@@ -69,6 +68,7 @@ public class HomeworkController {
         if(!flag){
             return Msg.fail();
         }
+        //数据库插入之后，缓存插入
         return Msg.success();
 
     }
@@ -84,7 +84,18 @@ public class HomeworkController {
         这里加一个逻辑先进redis里面查
          */
 
-        List<Homework> redisHomeworkList = redisServiceImpl.getHomeworksWithGroupsByUid(uid);
+        List<Homework> redisHomeworkList = null;
+        try {
+            redisHomeworkList = redisServiceImpl.getHomeworksWithGroupsByUid(uid);
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+        //缓存命中直接返回不走mysql
+        if(redisHomeworkList != null){
+            System.out.println("缓存命中，走缓存");
+            return Msg.success().add("homeworks", redisHomeworkList);
+        }
+
         List<Homework> mysqlHomeworkList = homeworkService.getHomeworksWithGroupsByUid(uid);
 
         if(mysqlHomeworkList.size() == 0){
@@ -106,6 +117,7 @@ public class HomeworkController {
             homeworks.add(homeworkMap);
         }
         System.out.println("homeworks"+homeworks);
+        System.out.println("缓存没命中，走mysql");
         return Msg.success().add("homeworks", homeworks);
     }
 

@@ -275,6 +275,7 @@ function openHomeworkModify(){
 // 2.构造td
 
 /**
+ * 创建作业目录
  * status 代表要加载的项目：
  *      1：全部加载；
  *      2：加载已截止；
@@ -310,7 +311,7 @@ function getHomeworks(status) {
                     var submitAndTotal = $("<td></td>").text(homework.homeworksubmittednums+"/"+homework.homeworktotalnums);
                     var homeGroupString = "-";
                     var homeGroupIdString = "-";
-                    if(homework.groups.length != 0){
+                    if(homework.groups != null && homework.groups.length != 0){
                         homeGroupIdString = "";
                         homeGroupString = "";
                         for(var group of homework.groups){
