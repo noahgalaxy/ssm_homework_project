@@ -2,10 +2,7 @@ package com.fisheep.test;
 
 
 import com.fisheep.bean.*;
-import com.fisheep.dao.BelongMapper;
-import com.fisheep.dao.HomeworkMapper;
-import com.fisheep.dao.SubmitMapper;
-import com.fisheep.dao.UserHasGroupMapper;
+import com.fisheep.dao.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +27,9 @@ public class TestDao {
 
     @Autowired
     SubmitMapper submitMapper;
+
+    @Autowired
+    GroupMapper groupMapper;
 
 
     @Test
@@ -126,6 +126,16 @@ public class TestDao {
         for (Belong belong : allBelong) {
             System.out.println("belong:"+Integer.toString(belong.getBelongHomweorkId()));
         }
+    }
+
+    @Test
+    public void testSelectGroupsByGroupIdsList(){
+        List<Integer> groupIdsList = new ArrayList<>();
+        groupIdsList.add(5);
+        groupIdsList.add(6);
+        groupIdsList.add(10);
+        List<Group> groupList = groupMapper.selectGroupsByGroupIdsList(groupIdsList);
+        System.out.println(groupList);
     }
 }
 

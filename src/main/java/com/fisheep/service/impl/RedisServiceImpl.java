@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.fisheep.bean.Group;
 import com.fisheep.bean.Homework;
 import com.fisheep.service.RedisService;
+import com.fisheep.utils.RedisUtil;
 import org.apache.commons.beanutils.ConvertUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -49,52 +50,55 @@ public class RedisServiceImpl implements RedisService {
         for (Object homework : homeworks) {
             Map homeworkMap = (HashMap) homework;
 //            System.out.println((homework.getClass().getName()));
-
-            Iterator entryIterator = homeworkMap.entrySet().iterator();
-            Homework homework2 = null;
-            try {
-                homework2 = (Homework) Class.forName("com.fisheep.bean.Homework").newInstance();
-            } catch (Exception e) {
-                return null;
-            }
-            while (entryIterator.hasNext()){
-                Map.Entry entry = (Map.Entry) entryIterator.next();
-                String key = (String) entry.getKey();
-                Object value = entry.getValue();
-
-//                System.out.println("key:"+key+"\nvalue:"+value.toString());
-
-                if(key.equals("groups") && ((String)value).equals("-")) continue;
-                if(key.equals("groups")  && !((String)value).equals("-")){
-                    List<Group> groupList = (List<Group>) JSON.parse((String) value);
-                    value = groupList;
-                }
-
-                if(key.equals("expired")){
-                    value = value.equals("0")? false:true;
-                }
-
-                Field declaredField = null;
-                try {
-                    declaredField = homework2.getClass().getDeclaredField(key);
-                } catch (NoSuchFieldException e) {
-                    e.printStackTrace();
-                    continue;
-                }
-
-                //                    String typeName = declaredField.getGenericType().getTypeName();
-                declaredField.setAccessible(true);
-                declaredField.set(homework2, ConvertUtils.convert(value, declaredField.getType()));
-                declaredField.setAccessible(false);
-
-            }
-            homeworkList.add(homework2);
+            //将redis查询出来的hash对象转换成Homework对象
+            Homework homework1 = RedisUtil.redisHomeworkToObject(homeworkMap);
+            homeworkList.add(homework1);
 //            System.out.println("=============================");
         }
-//        System.out.println(homeworkList);
-//        for (Homework homework : homeworkList) {
-//            System.out.println(homework);
-//        }
         return homeworkList;
+    }
+
+    @Override
+    public Homework getHomeworkByHomeId(Integer homeworkId) {
+        Jedis jedis = jedisPool.getResource();
+
+        Set<String> keys = jedis.keys("homework:*:" + homeworkId.toString());
+//        redis缓存命中，且键唯一
+        if(!keys.isEmpty() && keys.size() == 1){
+            Map<String, String> homeworkMap = jedis.hgetAll(keys.iterator().next());
+            // 空值处理再RedisUtil里面进行
+            Homework homework = RedisUtil.redisHomeworkToObject(homeworkMap);
+            return homework;
+        }
+        return null;
+    }
+
+    @Override
+    public void insertHomework(Homework homework) {
+        Map<String, String> homeworkMap = RedisUtil.homeworkToRedisMap(homework);
+        Jedis jedis = jedisPool.getResource();
+        jedis.hmset("homework:"+Integer.toString(homework.getHomeworkCreatorId())+":"+
+                Integer.toString(homework.getHomeworkId()), homeworkMap);
+    }
+
+    /**
+     * 如果没有时间，则不设置过期，即是永不过期
+     * @param homeworkCode
+     * @param homeworkId
+     * @param homeworkDead
+     */
+    @Override
+    public void insertCodeIdExpire(String homeworkCode, int homeworkId, String homeworkDead) {
+        Long unixTime = RedisUtil.parseDateToUnixTime(homeworkDead);
+        Jedis jedis = jedisPool.getResource();
+        if(unixTime != null){
+            Pipeline pipelined = jedis.pipelined();
+            pipelined.set("code_id:"+homeworkCode, Integer.toString(homeworkId));
+            pipelined.pexpireAt("code_id:"+homeworkCode, unixTime);
+            pipelined.sync();
+            pipelined.close();
+        }else {
+            jedis.setnx("code_id:"+homeworkCode, Integer.toString(homeworkId));
+        }
     }
 }

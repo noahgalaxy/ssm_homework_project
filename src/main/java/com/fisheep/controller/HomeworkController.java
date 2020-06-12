@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisPool;
 
 import javax.servlet.http.HttpSession;
 import java.text.ParseException;
@@ -34,6 +36,9 @@ public class HomeworkController {
 
     @Autowired
     RedisService redisServiceImpl;
+
+    @Autowired
+    JedisPool jedisPool;
 
     @RequestMapping(path = "/homeworkRelease")
     @ResponseBody
@@ -68,7 +73,7 @@ public class HomeworkController {
         if(!flag){
             return Msg.fail();
         }
-        //数据库插入之后，缓存插入
+
         return Msg.success();
 
     }
@@ -145,8 +150,15 @@ public class HomeworkController {
     @RequestMapping(path = {"/homework/{id}", "/singlehomework/homework/{id}"}, method = RequestMethod.GET)
     @ResponseBody
     public Msg getHomeworkByHomeId(@PathVariable("id") Integer homeworkId){
+        //进入redis查询
+        Homework redisHomework = redisServiceImpl.getHomeworkByHomeId(homeworkId);
+        if(redisHomework != null){
+            System.out.println("/singlehomework/homework"+homeworkId.toString()+"\t缓存命中");
+            return Msg.success().add("homework",redisHomework);
+        }
+        //缓存没命中，进入mysql查询
         Homework homework = homeworkService.getHomeworkByHomeId(homeworkId);
-        System.out.println("收到的homeworkId: "+homeworkId+"\ngetHomeworkByHomeId :"+homework);
+        System.out.println("/singlehomework/homework"+homeworkId.toString()+"\t缓存未命中，走mysql");
         return homework == null ? Msg.fail():Msg.success().add("homework",homework);
     }
 

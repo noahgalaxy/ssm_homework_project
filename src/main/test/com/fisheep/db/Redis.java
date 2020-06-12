@@ -161,9 +161,9 @@ public class Redis {
 
 //        pipelined.sync();
         List<Object> objects = pipelined.syncAndReturnAll();
-        for (Object object : objects) {
-            System.out.println(object);
-        }
+//        for (Object object : objects) {
+//            System.out.println(object);
+//        }
     }
 
     @Test
