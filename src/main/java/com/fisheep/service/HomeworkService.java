@@ -17,4 +17,8 @@ public interface HomeworkService {
     Homework getHomeworkByHomeId(Integer homeworkId);
 
     int updateHomework(Homework homework);
+
+    Boolean gethomeworkExpiredByHomeCode(String code);
+
+    Homework getHomeworkByHomeworkCode(String code);
 }

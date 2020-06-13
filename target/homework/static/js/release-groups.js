@@ -31,13 +31,16 @@ function openHomeworkModal(release) {
         console.log("clickOpenModalBtn：" + clickOpenModalBtn);
         console.log("111点击homeworkGroup：" + homeworkGroup);
         if (release == "release") {
+            createGroupselect("#homework-group");
             console.log("发布作业模态框获取option：" + $("#modal_homework_release").find("option:eq(0)").text());
             //如果是修改框，还需要给修改框赋值
         }
         if (release == "modify") {
+            createGroupselect("#homework-modify-group");
             var homeworkId = $(this).prev("span").attr("homeworkid");
             console.log("这里这里这里：" + $("#homework-modify-group").find("option:eq(0)").text());
             console.log("homeworkId: " + homeworkId);
+            //这个函数里面创建选择
             getHomeworkByHomeId(homeworkId);
             // $(document).ready(function() {
             //
@@ -59,10 +62,12 @@ function createGroupselect(homeworkGroup){
         url:"/homework/getUidBySession",
         // <%--url:"${pageContext.request.contextPath}/getUidBySession",--%>
         type:"GET",
+        async: false,
         success:function (result) {
             // console.log("result:"+result);
             if(result.code == 100){
                 getGroupByUid(result.extend.uid, homeworkGroup);
+                // getGroupByUid(result.extend.uid, homeworkGroup);
                 // var groupsResult = getGroupByUid(4);
                 // var groups = groupsResult.extend.groupsMap;
                 // //2.用uid查询组
@@ -71,8 +76,30 @@ function createGroupselect(homeworkGroup){
         }
     })
 }
+// function createGroupselect(){
+//     console.log("createGroupselect__homeworkGroup：")
+//     //1.建立之前需要到数据库查询这个user已经有了的组
+//     //2.拿到uid，再查询uid的组
+//     $.ajax({
+//         url:"/homework/getUidBySession",
+//         // <%--url:"${pageContext.request.contextPath}/getUidBySession",--%>
+//         type:"GET",
+//         success:function (result) {
+//             // console.log("result:"+result);
+//             if(result.code == 100){
+//                 getGroupByUid(result.extend.uid, "#homework-modify-group");
+//                 getGroupByUid(result.extend.uid, "#homework-group");
+//                 // var groupsResult = getGroupByUid(4);
+//                 // var groups = groupsResult.extend.groupsMap;
+//                 // //2.用uid查询组
+//                 // console.log(groups);
+//             }
+//         }
+//     })
+// }
 
 //用uid查询组；
+//这里的ajax需要异步加载，不然后面的定义不
 function getGroupByUid(uid, homeworkGroup) {
     //清楚样式
     // $("#homework-group").removeAttr("disabled");
@@ -82,6 +109,7 @@ function getGroupByUid(uid, homeworkGroup) {
     $.ajax({
         url:"/homework/getGroupByUid/"+uid,
         type: "GET",
+        async: false,
         success:function (result) {
             if(result.code == 100){
                 var groupsList = result.extend.groupsList;
@@ -101,7 +129,7 @@ function getGroupByUid(uid, homeworkGroup) {
     })
 }
 
-// 发布作业模态框提交
+// 发布和修改作业模态框提交
 function homeworkSubmit(release){
     var modalSubmitButtonClick = "#modal-homework-relese-submit";
     var modalSubmitForm = "#modal-homework-form";
@@ -110,6 +138,7 @@ function homeworkSubmit(release){
     var method = "GET";
     var successMessage = "发布成功";
     var failMessage = "发布失败，请重试";
+    var modal = "#modal_homework_release";
 
     if(release == "modify"){
         modalSubmitButtonClick = "#btn-homework-modify-submit";
@@ -119,6 +148,7 @@ function homeworkSubmit(release){
         method = "PUT";
         successMessage = "修改成功";
         failMessage = "修改失败，请重试";
+        modal = "#modal_homework_modify";
     }
     $(document).on("click",modalSubmitButtonClick, function () {
         var groupsIdString = getSelectedGroup(whichSelect);
@@ -140,8 +170,10 @@ function homeworkSubmit(release){
             success:function (result) {
                 if(result.code == 100){
                     //1.显示成功消息；
-                    alert(successMessage)
-                    //2.刷新作业页面；
+                    alert(successMessage);
+                    //2.关闭模态框
+                    $(modal).modal('hide');
+                    //3.刷新作业页面；
                     getHomeworks(1);
                 }else{
                     //1.显示失败消息
@@ -215,6 +247,7 @@ function getHomeworkByHomeId(homeworkId) {
 
 /**
  * 给更改作业按钮绑定打开事件
+ * 这个func目前没有用
  */
 function openHomeworkModify(){
     $(document).on("click",".btn.glyphicon.glyphicon-pencil",function () {
@@ -242,6 +275,7 @@ function openHomeworkModify(){
 // 2.构造td
 
 /**
+ * 创建作业目录
  * status 代表要加载的项目：
  *      1：全部加载；
  *      2：加载已截止；
@@ -277,7 +311,7 @@ function getHomeworks(status) {
                     var submitAndTotal = $("<td></td>").text(homework.homeworksubmittednums+"/"+homework.homeworktotalnums);
                     var homeGroupString = "-";
                     var homeGroupIdString = "-";
-                    if(homework.groups.length != 0){
+                    if(homework.groups != null && homework.groups.length != 0){
                         homeGroupIdString = "";
                         homeGroupString = "";
                         for(var group of homework.groups){
@@ -307,8 +341,9 @@ function getHomeworks(status) {
                         .appendTo("#homework_table tbody");
                 });
                 //此外还需要构建模态框的组，select里面的组option
-                createGroupselect("#homework-modify-group");
-                createGroupselect("#homework-group");
+                // createGroupselect("#homework-modify-group");
+                // createGroupselect("#homework-group");
+                // createGroupselect()
             }
             else{
                 alert("后端获取失败")
@@ -322,7 +357,7 @@ function getHomeworks(status) {
 $(document).on("click",".glyphicon-remove",function () {
     var deleteHomeworkName = $(this).parents("tr").find("td:eq(2)").text();
     var deleteHomeworkId = $(this).attr("homeworkid");
-    console.log()
+    console.log();
     if(confirm("确认删除作业【"+deleteHomeworkName+"】吗？")){
         deleteHomeworkByIds(deleteHomeworkId)
     }

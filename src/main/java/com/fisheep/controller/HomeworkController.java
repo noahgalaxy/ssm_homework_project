@@ -2,10 +2,7 @@ package com.fisheep.controller;
 
 import com.fisheep.bean.Belong;
 import com.fisheep.bean.Homework;
-import com.fisheep.service.BelongService;
-import com.fisheep.service.HomeworkAndBelongService;
-import com.fisheep.service.HomeworkAndGroupService;
-import com.fisheep.service.HomeworkService;
+import com.fisheep.service.*;
 import com.fisheep.service.impl.HomeworkServiceImpl;
 import com.fisheep.utils.Msg;
 import com.fisheep.utils.SnowAlgorithum;
@@ -20,6 +17,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisPool;
 
 import javax.servlet.http.HttpSession;
 import java.text.ParseException;
@@ -34,6 +33,12 @@ public class HomeworkController {
 
     @Autowired
     HomeworkAndBelongService homeworkAndBelongServiceImpl;
+
+    @Autowired
+    RedisService redisServiceImpl;
+
+    @Autowired
+    JedisPool jedisPool;
 
     @RequestMapping(path = "/homeworkRelease")
     @ResponseBody
@@ -52,7 +57,6 @@ public class HomeworkController {
         }catch (NullPointerException e){
             e.printStackTrace();
 //            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-
         }
         //作业名字不能为空，发布者id不能为0或空，截止日期不能为空，作业全部数量不能为空
         if(homework.getHomeworkName() == "" || homework.getHomeworkCreatorId() == 0 ||
@@ -65,6 +69,7 @@ public class HomeworkController {
         //设置存放目录
         homework.setLocation("upload");
         System.out.println("--------------\n"+homework);
+        //就是在这个service里面同时进行发布作业插入到mysql和redis缓存的
         boolean flag = homeworkAndBelongServiceImpl.insertHomeworkAndBelong(homework);
         if(!flag){
             return Msg.fail();
@@ -79,13 +84,29 @@ public class HomeworkController {
         System.out.println("进入getHomeworksByUid");
 //        从seession里面拿出uid
         int uid = (int) session.getAttribute("uid");
-        List<Homework> homeworkList = homeworkService.getHomeworksWithGroupsByUid(uid);
-        if(homeworkList.size() == 0){
+
+
+        List<Homework> redisHomeworkList = null;
+        try {
+            redisHomeworkList = redisServiceImpl.getHomeworksWithGroupsByUid(uid);
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+        //缓存命中直接返回不走mysql
+        if(redisHomeworkList != null){
+            System.out.println("缓存命中，走缓存");
+            return Msg.success().add("homeworks", redisHomeworkList);
+        }
+
+        List<Homework> mysqlHomeworkList = homeworkService.getHomeworksWithGroupsByUid(uid);
+
+        if(mysqlHomeworkList.size() == 0){
             System.out.println("size为0");
             return Msg.fail();
         }
+
         List<Map<String, Object>> homeworks = new ArrayList<>();
-        for(Homework homework: homeworkList){
+        for(Homework homework: mysqlHomeworkList){
             Map<String, Object> homeworkMap = new HashMap<>();
             homeworkMap.put("homeworkId",homework.getHomeworkId());
             homeworkMap.put("homeworkName", homework.getHomeworkName());
@@ -98,6 +119,7 @@ public class HomeworkController {
             homeworks.add(homeworkMap);
         }
         System.out.println("homeworks"+homeworks);
+        System.out.println("缓存没命中，走mysql");
         return Msg.success().add("homeworks", homeworks);
     }
 
@@ -114,19 +136,28 @@ public class HomeworkController {
                 idList.add(Integer.parseInt(id));
             }
             rowsAffected = homeworkService.deleteHomeworkByBatchId(idList);
+            redisServiceImpl.deleteHomeworkByIdOrBatchId(idList);
         }else{
             int homeworkId = Integer.parseInt(homeworkIds);
             rowsAffected = homeworkService.deleteHomeworkById(homeworkId);
+            redisServiceImpl.deleteHomeworkByIdOrBatchId(homeworkId);
         }
         return rowsAffected == 0?Msg.fail():Msg.success();
     }
 
     //跟据homeworkId查询单个作业
-    @RequestMapping(path = "/homework/{id}", method = RequestMethod.GET)
+    @RequestMapping(path = {"/homework/{id}", "/singlehomework/homework/{id}"}, method = RequestMethod.GET)
     @ResponseBody
     public Msg getHomeworkByHomeId(@PathVariable("id") Integer homeworkId){
+        //进入redis查询
+        Homework redisHomework = redisServiceImpl.getHomeworkByHomeId(homeworkId);
+        if(redisHomework != null){
+            System.out.println("/singlehomework/homework"+homeworkId.toString()+"\t缓存命中");
+            return Msg.success().add("homework",redisHomework);
+        }
+        //缓存没命中，进入mysql查询
         Homework homework = homeworkService.getHomeworkByHomeId(homeworkId);
-        System.out.println("收到的homeworkId: "+homeworkId+"\ngetHomeworkByHomeId :"+homework);
+        System.out.println("/singlehomework/homework"+homeworkId.toString()+"\t缓存未命中，走mysql");
         return homework == null ? Msg.fail():Msg.success().add("homework",homework);
     }
 
@@ -146,6 +177,7 @@ public class HomeworkController {
             return Msg.fail();
         }
         boolean flag = homeworkAndBelongServiceImpl.updateHomeworkAndBelong(homework);
+        //再修改缓存
         return flag == true?Msg.success():Msg.fail();
     }
 }

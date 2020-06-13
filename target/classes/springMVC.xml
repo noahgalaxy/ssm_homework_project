@@ -11,6 +11,7 @@
        http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
     <mvc:default-servlet-handler/>
+<!--    <mvc:resources mapping="/static/**" location="/static/"></mvc:resources>-->
 
 <!--    1.配置要扫描的controller得包-->
     <context:component-scan base-package="com.fisheep.controller">

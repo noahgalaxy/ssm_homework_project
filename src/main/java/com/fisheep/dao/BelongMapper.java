@@ -8,4 +8,6 @@ public interface BelongMapper {
     int insertBelong(List<Belong> belongList);
 
     int deleteByHomeworkId(int homeworkId);
+
+    List<Belong> getAllBelong();
 }

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fisheep.dao.GroupMapper">
+    <resultMap id="groupMap" type="com.fisheep.bean.Group">
+        <id property="groupId" column="groupid"></id>
+        <result property="groupName" column="groupname"></result>
+        <result property="groupCode" column="groupcode"></result>
+        <result property="creatorId" column="creatorid"></result>
+    </resultMap>
+
+    <select id="getAllGroups" resultType="com.fisheep.bean.Group">
+        select * from hw_group;
+    </select>
+
+    <select id="selectGroupsByGroupIdsList" parameterType="java.util.ArrayList" resultMap="groupMap">
+        select * from hw_group
+        <where>
+            <if test="groupsIdsList != null and groupsIdsList.size()>0">
+                groupId in
+                <foreach item="item" index="index" collection="groupsIdsList"
+                         open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+            </if>
+        </where>
+
+    </select>
+</mapper>

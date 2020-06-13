@@ -24,4 +24,38 @@
         <a href="/homework/toLogin" type="button" class="btn btn-primary">我要发布</a>
     </div>
 </body>
+<script>
+    $(document).on("click","#btn-code-submit", function () {
+        let code = $("#code input").val();
+        code = code.replace(/\s/g, "");
+        if(code == ""){
+            alert("作业码不能为空哟~~");
+            return;
+        }
+        $.ajax({
+            url:"/homework/homeworkCode/"+code,
+            type:"GET",
+            success:function (result) {
+                if(result.code == 100){
+                    window.location.href="/homework/toHomeworkSubmit/"+code;
+                }
+                if(result.code == 200){
+                    if(result.extend.info == 0){
+                        alert("作业码输入不能为空！");
+                        // $("#code input").val("");
+                    }else if(result.extend.info == 1){
+                        alert("作业码输入错误，不存在");
+                        // $("#code input").val("");
+                    }else if(result.extend.info == 2){
+                        alert("作业【"+code+"】已过期，请私发");
+                        $("#code input").val("");
+                    }
+                }
+            },
+            error:function () {
+                alert("前端提交错误！请重试")
+            },
+        })
+    });
+</script>
 </html>

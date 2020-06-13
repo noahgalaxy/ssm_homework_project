@@ -8,6 +8,8 @@
         <result property="homeworkName" column="homeworkname"></result>
         <result property="homeworkCode" column="homeworkcode"></result>
         <result property="homeworkDead" column="homeworkdead"></result>
+        <result property="location" column="location"></result>
+        <result property="homeworkCreatorId" column="homeworkcreatorid"></result>
         <result property="homeworktotalnums" column="homeworktotalnums"></result>
         <result property="homeworksubmittednums" column="homeworksubmittednums"></result>
         <result property="expired" column="expired"></result>
@@ -38,6 +40,16 @@
                 left join hw_group gr on be.belonggroupid=gr.groupid
                 where hi.homeworkcreatorid=#{uid};
     </select>
+
+    <select id="getAllHomeworksWithGroups"  resultMap="homeworksWithGroups">
+        select hi.*,
+                gr.*
+                from hw_homework hi
+                left join belong be on hi.homeworkid=be.belonghomeworkid
+                left join hw_group gr on be.belonggroupid=gr.groupid;
+    </select>
+
+
 
     <delete id="deleteHomeworkByBatchId" parameterType="java.util.List">
         delete from hw_homework where homeworkid in
@@ -70,4 +82,20 @@
         </if>
         where homeworkid = #{homeworkId}
     </update>
+
+    <select id="gethomeworkExpiredByHomeCode" parameterType="java.lang.String" resultType="java.lang.Boolean">
+        select expired from hw_homework where homeworkcode=#{code}
+    </select>
+
+    <select id="getHomeworkByHomeworkCode" parameterType="java.lang.String" resultType="com.fisheep.bean.Homework">
+        select * from hw_homework where homeworkcode=#{homeworkCode}
+    </select>
+
+    <update id="updateHomeworkSubmittedNumsPlus" parameterType="java.lang.Integer">
+         update hw_homework set homeworksubmittednums=homeworksubmittednums+1 where homeworkid= #{homweorkId}
+    </update>
+
+    <select id="getAllHomeworks" resultType="com.fisheep.bean.Homework">
+        select * from hw_homework;
+    </select>
 </mapper>

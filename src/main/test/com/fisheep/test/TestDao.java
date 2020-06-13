@@ -1,12 +1,8 @@
 package com.fisheep.test;
 
 
-import com.fisheep.bean.Belong;
-import com.fisheep.bean.Homework;
-import com.fisheep.bean.UserHasGroup;
-import com.fisheep.dao.BelongMapper;
-import com.fisheep.dao.HomeworkMapper;
-import com.fisheep.dao.UserHasGroupMapper;
+import com.fisheep.bean.*;
+import com.fisheep.dao.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +24,13 @@ public class TestDao {
 
     @Autowired
     HomeworkMapper homeworkMapper;
+
+    @Autowired
+    SubmitMapper submitMapper;
+
+    @Autowired
+    GroupMapper groupMapper;
+
 
     @Test
     public void testUserHasGroupMapperGetGroupsByUid(){
@@ -102,6 +105,37 @@ public class TestDao {
         homework.setHomeworkDead("2055-9-21 20：");
         int rowsAffected = homeworkMapper.updateHomework(homework);
         System.out.println("更新后受影响的行："+rowsAffected);
+    }
+
+    @Test
+    public void  testGetHomeworkExpiredByHomeCode(){
+        Boolean expired = homeworkMapper.gethomeworkExpiredByHomeCode("w0iNs82a");
+        System.out.println(expired);
+    }
+
+    @Test
+    public void testUpdateSubmit(){
+        Submit submit = new Submit("余扬", 4, " 31f25b", "new fasdile", "location");
+        submitMapper.updateSubmit(submit);
+    }
+
+    @Test
+    public void testGetAllBelong(){
+        List<Belong> allBelong = belongMapper.getAllBelong();
+        System.out.println(allBelong);
+        for (Belong belong : allBelong) {
+            System.out.println("belong:"+Integer.toString(belong.getBelongHomweorkId()));
+        }
+    }
+
+    @Test
+    public void testSelectGroupsByGroupIdsList(){
+        List<Integer> groupIdsList = new ArrayList<>();
+        groupIdsList.add(5);
+        groupIdsList.add(6);
+        groupIdsList.add(10);
+        List<Group> groupList = groupMapper.selectGroupsByGroupIdsList(groupIdsList);
+        System.out.println(groupList);
     }
 }
 

@@ -1138,270 +1138,341 @@
     <table id="287" parent="2" name="hw_user">
       <Collation>utf8_general_ci</Collation>
     </table>
-    <table id="288" parent="2" name="user">
+    <table id="288" parent="2" name="submit">
       <Collation>utf8_general_ci</Collation>
     </table>
-    <table id="289" parent="2" name="userhasgroup">
+    <table id="289" parent="2" name="user">
       <Collation>utf8_general_ci</Collation>
     </table>
-    <column id="290" parent="284" name="belongid">
+    <table id="290" parent="2" name="userhasgroup">
+      <Collation>utf8_general_ci</Collation>
+    </table>
+    <column id="291" parent="284" name="belongid">
       <Position>1</Position>
       <DataType>int unsigned|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="291" parent="284" name="belonghomeworkid">
+    <column id="292" parent="284" name="belonghomeworkid">
       <Position>2</Position>
       <Comment>homework id</Comment>
       <DataType>int unsigned|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="292" parent="284" name="belonggroupid">
+    <column id="293" parent="284" name="belonggroupid">
       <Position>3</Position>
       <Comment>belong to which group</Comment>
       <DataType>int unsigned|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="293" parent="284" name="belong_homework">
+    <index id="294" parent="284" name="belong_homework">
       <ColNames>belonghomeworkid</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="294" parent="284" name="belong_group">
+    <index id="295" parent="284" name="belong_group">
       <ColNames>belonggroupid</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="295" parent="284" name="PRIMARY">
+    <key id="296" parent="284" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>belongid</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="296" parent="284" name="belong_homework">
+    <foreign-key id="297" parent="284" name="belong_homework">
       <ColNames>belonghomeworkid</ColNames>
       <RefTableName>hw_homework</RefTableName>
       <RefColNames>homeworkid</RefColNames>
       <OnDelete>cascade</OnDelete>
     </foreign-key>
-    <foreign-key id="297" parent="284" name="belong_group">
+    <foreign-key id="298" parent="284" name="belong_group">
       <ColNames>belonggroupid</ColNames>
       <RefTableName>hw_group</RefTableName>
       <RefColNames>groupid</RefColNames>
       <OnDelete>cascade</OnDelete>
     </foreign-key>
-    <column id="298" parent="285" name="groupid">
+    <column id="299" parent="285" name="groupid">
       <Position>1</Position>
       <DataType>int unsigned|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="299" parent="285" name="groupname">
+    <column id="300" parent="285" name="groupname">
       <Position>2</Position>
       <Comment>group name</Comment>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="300" parent="285" name="groupcode">
+    <column id="301" parent="285" name="groupcode">
       <Position>3</Position>
       <Comment>group code</Comment>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="301" parent="285" name="creatorid">
+    <column id="302" parent="285" name="creatorid">
       <Position>4</Position>
       <Comment>who create this group</Comment>
       <DataType>int unsigned|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="302" parent="285" name="groupcode1">
+    <index id="303" parent="285" name="groupcode1">
       <ColNames>groupcode</ColNames>
       <Unique>1</Unique>
       <Type>btree</Type>
     </index>
-    <index id="303" parent="285" name="user_group">
+    <index id="304" parent="285" name="user_group">
       <ColNames>creatorid</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="304" parent="285" name="PRIMARY">
+    <key id="305" parent="285" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>groupid</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="305" parent="285" name="groupcode1">
+    <key id="306" parent="285" name="groupcode1">
       <ColNames>groupcode</ColNames>
       <UnderlyingIndexName>groupcode1</UnderlyingIndexName>
     </key>
-    <foreign-key id="306" parent="285" name="user_group">
+    <foreign-key id="307" parent="285" name="user_group">
       <ColNames>creatorid</ColNames>
       <RefTableName>hw_user</RefTableName>
       <RefColNames>uid</RefColNames>
       <OnDelete>cascade</OnDelete>
     </foreign-key>
-    <column id="307" parent="286" name="homeworkid">
+    <column id="308" parent="286" name="homeworkid">
       <Position>1</Position>
       <DataType>int unsigned|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="308" parent="286" name="homeworkname">
+    <column id="309" parent="286" name="homeworkname">
       <Position>2</Position>
       <Comment>name of homework</Comment>
       <DataType>varchar(60)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="309" parent="286" name="homeworkcode">
+    <column id="310" parent="286" name="homeworkcode">
       <Position>3</Position>
       <Comment>unique code of homework</Comment>
       <DataType>varchar(60)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="310" parent="286" name="homeworkdead">
+    <column id="311" parent="286" name="homeworkdead">
       <Position>4</Position>
       <DataType>varchar(20)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="311" parent="286" name="location">
+    <column id="312" parent="286" name="location">
       <Position>5</Position>
       <Comment>file location to save homework</Comment>
       <DataType>varchar(100)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="312" parent="286" name="homeworkcreatorid">
+    <column id="313" parent="286" name="homeworkcreatorid">
       <Position>6</Position>
       <Comment>who create this homework</Comment>
       <DataType>int unsigned|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="313" parent="286" name="homeworktotalnums">
+    <column id="314" parent="286" name="homeworktotalnums">
       <Position>7</Position>
       <DataType>int unsigned|0s</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>&apos;0&apos;</DefaultExpression>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="314" parent="286" name="homeworksubmittednums">
+    <column id="315" parent="286" name="homeworksubmittednums">
       <Position>8</Position>
       <DataType>int unsigned|0s</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>&apos;0&apos;</DefaultExpression>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="315" parent="286" name="homeworkcode">
+    <column id="316" parent="286" name="expired">
+      <Position>9</Position>
+      <DataType>tinyint(1)|0s</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>0</DefaultExpression>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <index id="317" parent="286" name="homeworkcode">
       <ColNames>homeworkcode</ColNames>
       <Unique>1</Unique>
       <Type>btree</Type>
     </index>
-    <index id="316" parent="286" name="homework_user">
+    <index id="318" parent="286" name="homework_user">
       <ColNames>homeworkcreatorid</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="317" parent="286" name="PRIMARY">
+    <key id="319" parent="286" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>homeworkid</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="318" parent="286" name="homeworkcode">
+    <key id="320" parent="286" name="homeworkcode">
       <ColNames>homeworkcode</ColNames>
       <UnderlyingIndexName>homeworkcode</UnderlyingIndexName>
     </key>
-    <foreign-key id="319" parent="286" name="homework_user">
+    <foreign-key id="321" parent="286" name="homework_user">
       <ColNames>homeworkcreatorid</ColNames>
       <RefTableName>hw_user</RefTableName>
       <RefColNames>uid</RefColNames>
       <OnDelete>cascade</OnDelete>
     </foreign-key>
-    <column id="320" parent="287" name="uid">
+    <column id="322" parent="287" name="uid">
       <Position>1</Position>
       <DataType>int unsigned|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="321" parent="287" name="email">
+    <column id="323" parent="287" name="email">
       <Position>2</Position>
       <Comment>user email, as login account</Comment>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="322" parent="287" name="password">
+    <column id="324" parent="287" name="password">
       <Position>3</Position>
       <Comment>login password</Comment>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="323" parent="287" name="username">
+    <column id="325" parent="287" name="username">
       <Position>4</Position>
       <Comment>username,seted by user</Comment>
       <DataType>varchar(20)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="324" parent="287" name="email">
+    <index id="326" parent="287" name="email">
       <ColNames>email</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="325" parent="287" name="PRIMARY">
+    <key id="327" parent="287" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>uid</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="326" parent="288" name="id">
+    <column id="328" parent="288" name="submitId">
+      <Position>1</Position>
+      <DataType>int unsigned|0s</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="329" parent="288" name="uploaderName">
+      <Position>2</Position>
+      <Comment>who submited this homework</Comment>
+      <DataType>varchar(20)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="330" parent="288" name="submitHomeworkId">
+      <Position>3</Position>
+      <Comment>homeworkId</Comment>
+      <DataType>int unsigned|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="331" parent="288" name="submitFileName">
+      <Position>4</Position>
+      <Comment>file name of homework file</Comment>
+      <DataType>varchar(60)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="332" parent="288" name="submitLocation">
+      <Position>5</Position>
+      <Comment>dir to save</Comment>
+      <DataType>varchar(40)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="333" parent="288" name="fileSuffix">
+      <Position>6</Position>
+      <Comment>unique uuid suffix of homeworkFileName</Comment>
+      <DataType>varchar(60)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <index id="334" parent="288" name="submitHomeworkId">
+      <ColNames>submitHomeworkId</ColNames>
+      <Unique>1</Unique>
+      <Type>btree</Type>
+    </index>
+    <key id="335" parent="288" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>submitId</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <key id="336" parent="288" name="submitHomeworkId">
+      <ColNames>submitHomeworkId</ColNames>
+      <UnderlyingIndexName>submitHomeworkId</UnderlyingIndexName>
+    </key>
+    <column id="337" parent="289" name="id">
       <Position>1</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="327" parent="288" name="email">
+    <column id="338" parent="289" name="email">
       <Position>2</Position>
       <DataType>varchar(40)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="328" parent="288" name="password">
+    <column id="339" parent="289" name="password">
       <Position>3</Position>
       <DataType>varchar(40)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="329" parent="288" name="PRIMARY">
+    <column id="340" parent="289" name="man">
+      <Position>4</Position>
+      <DataType>tinyint(1)|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <key id="341" parent="289" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="330" parent="289" name="uhgid">
+    <column id="342" parent="290" name="uhgid">
       <Position>1</Position>
       <DataType>int unsigned|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="331" parent="289" name="uhguid">
+    <column id="343" parent="290" name="uhguid">
       <Position>2</Position>
       <Comment>uid of table hw_user</Comment>
       <DataType>int unsigned|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="332" parent="289" name="uhggroupid">
+    <column id="344" parent="290" name="uhggroupid">
       <Position>3</Position>
       <Comment>groupid of table hw_group</Comment>
       <DataType>int unsigned|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="333" parent="289" name="PRIMARY">
+    <key id="345" parent="290" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>uhgid</ColNames>
       <Primary>1</Primary>

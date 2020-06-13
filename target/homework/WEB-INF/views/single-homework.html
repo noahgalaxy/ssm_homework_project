@@ -1,31 +1,92 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <script type="text/javascript" src="/homework/static/js/jquery-1.12.4.min.js"></script>
-    <title>single homework</title>
+    <link href="/homework/static/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="/homework/static/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdn.bootcss.com/moment.js/2.24.0/moment.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+
+    <script src="/homework/static/js/single-homework.js"></script>
+
+    <title>Gruops</title>
 </head>
 <body>
-<h1>to single homework page</h1>
-</body>
 
+<div class="container">
+    <div class="row">
+        <br>
+        <br>
+        <br>
+    </div>
+    <div class="row">
+        <div class="col-md-12" id="single-homework-info">
+            <blockquote>
+                <h1></h1>
+                <br>
+                <footer>截止时间：</footer>
+                <br>
+                <footer>提交人数：</footer>
+                <br>
+                <footer>作业码：</footer>
+                <br>
+                <footer>Group：</footer>
+            </blockquote>
+            <hr />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <p>下面是交了作业的同学名单  请以文件名为准  嘻嘻</p>
+            <hr />
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12" id="div-table-list">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th style="width: 60px">编号</th>
+                    <th style="width: 80px">姓名</th>
+                    <th>文件名</th>
+                </tr>
+                </thead>
+                <tbody>
+<!--                <tr>-->
+<!--                    <td>余扬</td>-->
+<!--                    <td>622190070007_余扬_大数据分析</td>-->
+<!--                </tr>-->
+<!--                <tr>-->
+<!--                    <td>小明</td>-->
+<!--                    <td>6221900500435_小明_智慧交通概论</td>-->
+<!--                </tr>-->
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+</body>
 <script>
     $(function () {
         let url = decodeURIComponent(window.location.href);
         console.log("url:"+url);
         console.log("hahahahaha____");
-        console.log(url.substr(url.lastIndexOf("/")+1));
+        var homeworkId = url.substr(url.lastIndexOf("/")+1);
+        console.log(homeworkId);
+        createPage(homeworkId);
     });
 
-    function getUrlParam (name) {
-        let url = decodeURIComponent(window.location.href);
-        name = name.replace(/[\[\]]/g, "\\$&");
-        let regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)");
-        let results = regex.exec(url);
-        if (!results||!results[2]) {
-            return '';
-        }
-        return results[2].replace(/\+/g, " ");
-    }
+
 </script>
 </html>
