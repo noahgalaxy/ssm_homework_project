@@ -17,4 +17,10 @@ public interface RedisService {
     void insertHomework(Homework homework);
 
     void insertCodeIdExpire(String homeworkCode, int homeworkId, String homeworkDead);
+
+    void deleteHomeworkById(int homeworkId);
+
+    void deleteHomeworkByIdOrBatchId(List<Integer> idList);
+
+    void deleteHomeworkByIdOrBatchId(int homeworkId);
 }

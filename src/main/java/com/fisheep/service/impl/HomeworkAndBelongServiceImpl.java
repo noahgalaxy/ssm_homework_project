@@ -98,6 +98,7 @@ public class HomeworkAndBelongServiceImpl implements HomeworkAndBelongService {
         //2.再进行belong的修改
                 //如果要修改的groupsId为空，则不修改
                 //不为空，则先删除belong表下面的指定belonghomeworkid行，再插入
+
         int homeRowsAffected = homeworkMapper.updateHomework(homework);
         if (homeRowsAffected==0){return false;}
         //处理作业所属组字符串，返回由单个数字组成的列表
@@ -105,6 +106,7 @@ public class HomeworkAndBelongServiceImpl implements HomeworkAndBelongService {
         System.out.println("groupsIdsList:"+groupsIdsList.toString()+"\nsize:"+groupsIdsList.size());
         //首先删除原来的
         belongMapper.deleteByHomeworkId(homework.getHomeworkId());
+
         //返回的列表不为空，且长度大于0，有值才能插入。
         if (null != groupsIdsList && groupsIdsList.size() > 0){
             //首先删除原来的
@@ -113,6 +115,7 @@ public class HomeworkAndBelongServiceImpl implements HomeworkAndBelongService {
             for(int num: groupsIdsList){
                 belongList.add(new Belong(homework.getHomeworkId(), num));
             }
+
             System.out.println("belongList:"+belongList);
             //插入的行数
             int belongRowsAffected = belongMapper.insertBelong(belongList);

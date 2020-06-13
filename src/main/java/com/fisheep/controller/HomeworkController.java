@@ -69,11 +69,11 @@ public class HomeworkController {
         //设置存放目录
         homework.setLocation("upload");
         System.out.println("--------------\n"+homework);
+        //就是在这个service里面同时进行发布作业插入到mysql和redis缓存的
         boolean flag = homeworkAndBelongServiceImpl.insertHomeworkAndBelong(homework);
         if(!flag){
             return Msg.fail();
         }
-
         return Msg.success();
 
     }
@@ -85,9 +85,6 @@ public class HomeworkController {
 //        从seession里面拿出uid
         int uid = (int) session.getAttribute("uid");
 
-        /*
-        这里加一个逻辑先进redis里面查
-         */
 
         List<Homework> redisHomeworkList = null;
         try {
@@ -139,9 +136,11 @@ public class HomeworkController {
                 idList.add(Integer.parseInt(id));
             }
             rowsAffected = homeworkService.deleteHomeworkByBatchId(idList);
+            redisServiceImpl.deleteHomeworkByIdOrBatchId(idList);
         }else{
             int homeworkId = Integer.parseInt(homeworkIds);
             rowsAffected = homeworkService.deleteHomeworkById(homeworkId);
+            redisServiceImpl.deleteHomeworkByIdOrBatchId(homeworkId);
         }
         return rowsAffected == 0?Msg.fail():Msg.success();
     }
@@ -178,6 +177,7 @@ public class HomeworkController {
             return Msg.fail();
         }
         boolean flag = homeworkAndBelongServiceImpl.updateHomeworkAndBelong(homework);
+        //再修改缓存
         return flag == true?Msg.success():Msg.fail();
     }
 }

@@ -304,4 +304,42 @@ public class Redis {
         }
     }
 
+    @Test
+    public void testDeleteRedis(){
+        Jedis jedis = jedisPool.getResource();
+        Pipeline pipeline = jedis.pipelined();
+        for (int i = 1; i <= 3 ; i++) {
+            HashMap<String, String> hashMap = new HashMap<>();
+            hashMap.put("name", Integer.toString(i));
+            pipeline.hset("test:"+Integer.toString(i), hashMap);
+        }
+        pipeline.sync();
+        System.out.println("====================================");
+
+        for (int i = 1; i <= 3; i++) {
+            pipeline.keys("test:"+Integer.toString(i));
+        }
+
+        List<Object> keysList1 = pipeline.syncAndReturnAll();
+        System.out.println(keysList1);
+
+
+        for (Object key : keysList1) {
+            System.out.println(key.getClass().getName());
+            if(Set.class.isInstance(key)){
+                String next = (String) ((Set) key).iterator().next();
+                System.out.println(next);
+                pipeline.hget(next, "name");
+                pipeline.del(next);
+            }
+        }
+        System.out.println("++++++++++++++++++++++++++++++++");
+        List<Object> objectList = pipeline.syncAndReturnAll();
+        for (Object o : objectList) {
+            System.out.println(o.getClass().getName());
+            System.out.println(o.toString());
+        }
+
+    }
+
 }
