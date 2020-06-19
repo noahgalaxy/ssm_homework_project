@@ -84,7 +84,7 @@ public class HomeworkController {
         System.out.println("进入getHomeworksByUid");
 //        从seession里面拿出uid
         int uid = (int) session.getAttribute("uid");
-
+        System.out.println("getHomeworksByUid 请求里面的uid为："+uid);
 
         List<Homework> redisHomeworkList = null;
         try {
@@ -93,15 +93,16 @@ public class HomeworkController {
             e.printStackTrace();
         }
         //缓存命中直接返回不走mysql
-        if(redisHomeworkList != null){
+        System.out.println("redisHomeworkList 缓存获取"+redisHomeworkList);
+        if(null != redisHomeworkList && !redisHomeworkList.isEmpty()){
             System.out.println("缓存命中，走缓存");
             return Msg.success().add("homeworks", redisHomeworkList);
         }
 
         List<Homework> mysqlHomeworkList = homeworkService.getHomeworksWithGroupsByUid(uid);
-
-        if(mysqlHomeworkList.size() == 0){
-            System.out.println("size为0");
+        System.out.println("mysqlHomeworkList mysql获取"+mysqlHomeworkList);
+        if(mysqlHomeworkList.isEmpty()){
+            System.out.println("size为0, mysql没找到记录");
             return Msg.fail();
         }
 
@@ -118,8 +119,7 @@ public class HomeworkController {
             homeworkMap.put("expired", homework.isExpired());
             homeworks.add(homeworkMap);
         }
-        System.out.println("homeworks"+homeworks);
-        System.out.println("缓存没命中，走mysql");
+        System.out.println("缓存没命中，走的mysql查询homeworks:\n"+homeworks);
         return Msg.success().add("homeworks", homeworks);
     }
 
@@ -158,6 +158,12 @@ public class HomeworkController {
         //缓存没命中，进入mysql查询
         Homework homework = homeworkService.getHomeworkByHomeId(homeworkId);
         System.out.println("/singlehomework/homework"+homeworkId.toString()+"\t缓存未命中，走mysql");
+
+        //填充至缓存
+        if(homework != null){
+            System.out.println("缓存不存在，进行填充: "+homework.toString());
+            redisServiceImpl.insertHomework(homework);
+        }
         return homework == null ? Msg.fail():Msg.success().add("homework",homework);
     }
 
@@ -171,13 +177,33 @@ public class HomeworkController {
             System.out.println("session is new!! ");
             return Msg.fail();
         }
+        uid = (int) session.getAttribute("uid");
+        homework.setHomeworkCreatorId(uid);
         //作业名字不能为空，截止日期不能为空，作业全部数量不能为空
         if(homework.getHomeworkName() == "" || homework.getHomeworkDead() == "" || homework.getHomeworktotalnums() == 0){
             System.out.println("修改字段空");
             return Msg.fail();
         }
         boolean flag = homeworkAndBelongServiceImpl.updateHomeworkAndBelong(homework);
-        //再修改缓存
+        /*
+        再修改缓存,采用延迟双删方式
+        更新的时候需要更新redis里面的两个key：
+            code_id:homeCode
+            homework:
+        */
+        //1.先删除缓存
+        redisServiceImpl.deleteHomeworkById(homework.getHomeworkId());
+        //2.更新db
+        redisServiceImpl.updateHomework(homework.getHomeworkId());
+        //3.线程休眠
+//        try {
+//            Thread.sleep(500);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+        //4.直接更新redis
+        redisServiceImpl.updateHomework(homework);
+
         return flag == true?Msg.success():Msg.fail();
     }
 }

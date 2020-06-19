@@ -1,6 +1,8 @@
 package com.fisheep.bean;
 
-public class Submit {
+import java.io.Serializable;
+
+public class Submit implements Serializable {
     private int submitId;
     private String uploaderName;
     private int submitHomeworkId;

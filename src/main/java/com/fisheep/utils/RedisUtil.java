@@ -59,6 +59,7 @@ public class RedisUtil {
     }
 
     public static Map<String, String> homeworkToRedisMap(Homework homework){
+        System.out.println("homeworkToRedisMap收到的homework：\n"+homework);
         Map<String, String> map= new HashMap<>();
         String homeworoId = Integer.toString(homework.getHomeworkId());
         map.put("homeworkId", homeworoId);
@@ -73,10 +74,11 @@ public class RedisUtil {
 
         List<Group> groups = homework.getGroups();
 
-        String groupsString = groups.size() == 0? "-": JSON.toJSONString(groups);
+        String groupsString = (groups == null)? "-": JSON.toJSONString(groups);
         System.out.println("groupsString"+groupsString);
 
         map.put("groups", groupsString);
+        System.out.println("处理homework之后得到的map："+map);
         return map;
     }
 

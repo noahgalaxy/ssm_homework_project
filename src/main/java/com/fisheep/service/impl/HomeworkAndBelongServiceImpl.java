@@ -12,6 +12,9 @@ import com.fisheep.utils.StringToNum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisPool;
+import redis.clients.jedis.Pipeline;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +40,9 @@ public class HomeworkAndBelongServiceImpl implements HomeworkAndBelongService {
 
     @Autowired
     GroupService groupServiceImpl;
+
+    @Autowired
+    JedisPool jedisPool;
 
     /**
      * 接收一个待插入的homerk对象，对象里面包含groupsString，取出这个属性解析出groupIds，
@@ -64,8 +70,8 @@ public class HomeworkAndBelongServiceImpl implements HomeworkAndBelongService {
         System.out.println("groupsIdsList:"+groupsIdsList.toString()+"\nsize:"+groupsIdsList.size());
         List<Group> groupList = null;
 
-        //返回的列表不为空，且长度大于0，有值才能插入。
-        if (null != groupsIdsList && groupsIdsList.size() > 0){
+        //返回的列表不为空，且长度大于0，有值才能插入
+        if (null != groupsIdsList && !groupsIdsList.isEmpty()){
 
             /*测试异常回滚
             System.out.println("1/0之前");
@@ -85,9 +91,10 @@ public class HomeworkAndBelongServiceImpl implements HomeworkAndBelongService {
             }
             groupList = groupServiceImpl.selectGroupsByGroupIdsList(groupsIdsList);
             homework.setGroups(groupList);
-            redisServiceImpl.insertHomework(homework);
-            redisServiceImpl.insertCodeIdExpire(homework.getHomeworkCode(), homework.getHomeworkId(), homework.getHomeworkDead());
+
         }
+        redisServiceImpl.insertHomework(homework);
+        redisServiceImpl.insertCodeIdExpire(homework.getHomeworkCode(), homework.getHomeworkId(), homework.getHomeworkDead());
 //        homeworkServiceImpl.insertBelong()
         return true;
     }
@@ -120,10 +127,20 @@ public class HomeworkAndBelongServiceImpl implements HomeworkAndBelongService {
             //插入的行数
             int belongRowsAffected = belongMapper.insertBelong(belongList);
             System.out.println("belongRowsAffected:"+belongRowsAffected+"\tgroupsIdsList.size():"+groupsIdsList.size());
-            if(belongRowsAffected != groupsIdsList.size()){
-                return false;
-            }
+//            if(belongRowsAffected != groupsIdsList.size()){
+//                return false;
+//            }
         }
+
+        homeworkMapper.getHomeworkByHomeId(homework.getHomeworkId());
+        /*
+        1.更新缓存的key的field；
+        2.然后单独查询groups，序列化为JSON字符串，再更新缓存里面的groups；
+         */
+        Jedis jedis = jedisPool.getResource();
+        Pipeline pipeline = jedis.pipelined();
+
+
         return true;
     }
 }

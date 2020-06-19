@@ -342,4 +342,16 @@ public class Redis {
 
     }
 
+    @Test
+    public void testGetUidHomeworklist(){
+        Set<String> keys = jedis.keys("homework:" + 2 + ":*");
+        System.out.println(keys.size());
+        Iterator<String> keysIterator = keys.iterator();
+
+        while (keysIterator.hasNext()){
+            String key = keysIterator.next();
+            System.out.println(key);
+        }
+    }
+
 }

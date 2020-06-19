@@ -33,17 +33,22 @@ public class RedisServiceImpl implements RedisService {
     @Override
     public List<Homework> getHomeworksWithGroupsByUid(int uid) throws IllegalAccessException {
         Jedis jedis = jedisPool.getResource();
-        Pipeline pipelined = jedis.pipelined();
-        Response<Set<String>> keys = pipelined.keys("homework:"+uid+":*");
-        pipelined.sync();
-        pipelined.close();
+        Set<String> keys = jedis.keys("homework:" + uid + ":*");
+        Iterator<String> keysIterator = keys.iterator();
+        if(!keysIterator.hasNext()){
+            System.out.println("getHomeworksWithGroupsByUid取不到"+Integer.toString(uid)+"缓存，返回null");
+            return null;
+        }
 
 //        System.out.println(keys.get());
 
         Pipeline pipelined1 = jedis.pipelined();
-        for (String key : keys.get()) {
+
+        while (keysIterator.hasNext()){
+            String key = keysIterator.next();
             pipelined1.hgetAll(key);
         }
+
         List<Object> homeworks = pipelined1.syncAndReturnAll();
         pipelined1.close();
         List<Homework> homeworkList = new ArrayList<>();
@@ -79,6 +84,7 @@ public class RedisServiceImpl implements RedisService {
         Jedis jedis = jedisPool.getResource();
         jedis.hmset("homework:"+Integer.toString(homework.getHomeworkCreatorId())+":"+
                 Integer.toString(homework.getHomeworkId()), homeworkMap);
+        System.out.println("jedis 插入缓存 insertHomework");
     }
 
     /**
@@ -102,11 +108,24 @@ public class RedisServiceImpl implements RedisService {
         }
     }
 
+    /**
+     * 跟据homeworkId删除缓存；
+     * @param homeworkId
+     */
     @Override
     public void deleteHomeworkById(int homeworkId) {
         Jedis jedis = jedisPool.getResource();
         Set<String> keys = jedis.keys("homework:*" + Integer.toString(homeworkId));
-
+        if(!keys.isEmpty()){
+            Pipeline pipeline = jedis.pipelined();
+            Iterator<String> keyIterator = keys.iterator();
+            while (keyIterator.hasNext()){
+                pipeline.del(keyIterator.next());
+            }
+            pipeline.sync();
+            System.out.print("删除成功\t");
+        }
+        System.out.println("删除keys:"+keys.toString());
     }
 
     @Override
