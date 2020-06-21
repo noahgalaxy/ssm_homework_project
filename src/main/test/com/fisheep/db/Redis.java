@@ -354,4 +354,16 @@ public class Redis {
         }
     }
 
+    @Test
+    public void testPilelineHmset(){
+        Jedis jedis = jedisPool.getResource();
+        Pipeline pipelined = jedis.pipelined();
+        Map<String, String> map = new HashMap<>();
+        map.put("name", "xiaoming");
+        map.put("age", "22");
+        pipelined.hmset("test:5", map);
+        List<Object> syncAndReturnAll = pipelined.syncAndReturnAll();
+        System.out.println(syncAndReturnAll.toString());
+    }
+
 }

@@ -132,13 +132,6 @@ public class HomeworkAndBelongServiceImpl implements HomeworkAndBelongService {
 //            }
         }
 
-        homeworkMapper.getHomeworkByHomeId(homework.getHomeworkId());
-        /*
-        1.更新缓存的key的field；
-        2.然后单独查询groups，序列化为JSON字符串，再更新缓存里面的groups；
-         */
-        Jedis jedis = jedisPool.getResource();
-        Pipeline pipeline = jedis.pipelined();
 
 
         return true;

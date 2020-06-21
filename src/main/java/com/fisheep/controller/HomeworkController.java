@@ -184,7 +184,7 @@ public class HomeworkController {
             System.out.println("修改字段空");
             return Msg.fail();
         }
-        boolean flag = homeworkAndBelongServiceImpl.updateHomeworkAndBelong(homework);
+
         /*
         再修改缓存,采用延迟双删方式
         更新的时候需要更新redis里面的两个key：
@@ -192,9 +192,9 @@ public class HomeworkController {
             homework:
         */
         //1.先删除缓存
-        redisServiceImpl.deleteHomeworkById(homework.getHomeworkId());
+//        redisServiceImpl.deleteHomeworkById(homework.getHomeworkId());
         //2.更新db
-        redisServiceImpl.updateHomework(homework.getHomeworkId());
+        boolean flag = homeworkAndBelongServiceImpl.updateHomeworkAndBelong(homework);
         //3.线程休眠
 //        try {
 //            Thread.sleep(500);
@@ -203,7 +203,6 @@ public class HomeworkController {
 //        }
         //4.直接更新redis
         redisServiceImpl.updateHomework(homework);
-
         return flag == true?Msg.success():Msg.fail();
     }
 }

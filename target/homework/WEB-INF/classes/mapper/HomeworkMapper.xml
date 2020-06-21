@@ -77,7 +77,7 @@
         <if test="homeworkDead != null">
             ,homeworkdead = #{homeworkDead}
         </if>
-        <if test="homeworktotalnums != null">
+        <if test="homeworktotalnums != 0">
             ,homeworktotalnums = #{homeworktotalnums}
         </if>
         where homeworkid = #{homeworkId}

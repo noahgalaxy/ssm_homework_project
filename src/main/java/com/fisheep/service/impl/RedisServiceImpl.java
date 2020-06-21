@@ -1,10 +1,13 @@
 package com.fisheep.service.impl;
 
 import com.alibaba.fastjson.JSON;
+import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fisheep.bean.Group;
 import com.fisheep.bean.Homework;
+import com.fisheep.dao.GroupMapper;
 import com.fisheep.service.RedisService;
 import com.fisheep.utils.RedisUtil;
+import com.fisheep.utils.StringToNum;
 import org.apache.commons.beanutils.ConvertUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +23,9 @@ import java.util.*;
 public class RedisServiceImpl implements RedisService {
     @Autowired
     JedisPool jedisPool;
+
+    @Autowired
+    GroupMapper groupMapper;
 
     @Override
     public Boolean getExpired(String homeworkCode) {
@@ -173,5 +179,51 @@ public class RedisServiceImpl implements RedisService {
         List<Integer> arrayList = new ArrayList<>();
         arrayList.add(homeworkId);
         this.deleteHomeworkByIdOrBatchId(arrayList);
+    }
+
+    /*
+    主要更新的有：
+        homework:creatorId:homeworkId中的：
+            homeworkName    homeworktotalnums   homeworkDead    groups
+        如果homeworkDead改变的话还需要更新：code_id
+     */
+    @Override
+    public void updateHomework(Homework homework) {
+        String groupString = "-";
+        String homeworkName = homework.getHomeworkName();
+        String homeworkDead = homework.getHomeworkDead();
+        int homeworktotalnums = homework.getHomeworktotalnums();
+        long unixTime = -1;
+        Map<String, String> updatedFieldsMap = new HashMap<>();
+        List<Integer> list = StringToNum.numStringToSingleNum(homework.getGroupsIdString());
+        if(list != null){
+            if(!list.isEmpty()){
+                List<Group> groupList = groupMapper.selectGroupsByGroupIdsList(list);
+                groupString = JSON.toJSONString(groupList);
+                System.out.println("updateHomework查询出来的："+groupString);
+            }
+        }
+        updatedFieldsMap.put("groups", groupString);
+        if(homeworkName != null){
+            updatedFieldsMap.put("homeworkName", homeworkName);
+        }
+        if(homeworktotalnums != 0){
+            updatedFieldsMap.put("homeworktotalnums", Integer.toString(homeworktotalnums));
+        }
+        if(homeworkDead != null){
+            updatedFieldsMap.put("homeworkDead", homeworkDead);
+            unixTime = RedisUtil.parseDateToUnixTime(homeworkDead);
+        }
+        System.out.println("缓存更新updateHomework："+updatedFieldsMap);
+        Jedis jedis = jedisPool.getResource();
+        Pipeline pipeline = jedis.pipelined();
+        pipeline.hmset("homework:"+Integer.toString(homework.getHomeworkCreatorId())+":"+Integer.toString(homework.getHomeworkId()),
+                updatedFieldsMap);
+        if(unixTime>0){
+            pipeline.pexpireAt("code_id:"+homework.getHomeworkCode(),unixTime);
+        }
+
+        List<Object> syncAndReturnAll = pipeline.syncAndReturnAll();
+        System.out.println("缓存修改结果：\n"+syncAndReturnAll.toString());
     }
 }

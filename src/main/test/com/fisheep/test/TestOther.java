@@ -1,5 +1,7 @@
 package com.fisheep.test;
 
+import com.fisheep.bean.Homework;
+import com.sun.javafx.scene.layout.region.SliceSequenceConverter;
 import org.junit.Test;
 
 import java.text.SimpleDateFormat;
@@ -42,5 +44,12 @@ public class TestOther {
         String s = null;
         System.out.println(null != s);
 
+    }
+
+    @Test
+    public void testGetAttributrByReflict(){
+//        List<Integer> nums = new ArrayList<>();
+        List<Integer> nums = null;
+        System.out.println(nums.isEmpty() || nums == null);
     }
 }

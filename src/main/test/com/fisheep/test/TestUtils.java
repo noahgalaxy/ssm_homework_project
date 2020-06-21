@@ -45,7 +45,7 @@ public class TestUtils {
 ////                System.out.print("解析："+Integer.parseInt(sss)+"\t");
             List<Integer> o = StringToNum.numStringToSingleNum(ss);
             System.out.print(o+"\t");
-            System.out.println("size："+o.size());
+//            System.out.println("size："+o.size());
             if(null != o){
                 System.out.print("比较："+o.size());
 

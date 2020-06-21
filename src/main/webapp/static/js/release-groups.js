@@ -15,6 +15,7 @@ function openHomeworkModal(release) {
         homeworkDead = "#homeworkDead-modify";
         modal = "#modal_homework_modify";
         $("#homework-modify-name").attr("homework-modify-id","")
+        $("#homework-modify-name").attr("homework-modify-code","")
     }
     $(document).on("click", clickOpenModalBtn, function () {
         //1.首先清空模态框中的表单中的值
@@ -155,9 +156,11 @@ function homeworkSubmit(release){
         var data = $(modalSubmitForm).serialize()+"&groupsIdString="+groupsIdString;
         if(release == "modify"){
             //首先将拿到作业id这个属性，拼接到表单内数据里面
-            data+="&homeworkId="+$("#homework-modify-name").attr("homework-modify-id");
+            data+="&homeworkId="+$("#homework-modify-name").attr("homework-modify-id")
+            +"&homeworkCode="+$("#homework-modify-name").attr("homework-modify-code");
             //然后将这个属性置空
             $("#homework-modify-name").attr("homework-modify-id","")
+            $("#homework-modify-name").attr("homework-modify-code","")
         }
         console.log("序列化表单：\n"+$("#modal-homework-form").serialize());
         $.ajax({
@@ -217,6 +220,7 @@ function getHomeworkByHomeId(homeworkId) {
         success:function (result) {
             if(result.code == 100){
                 $("#homework-modify-name").attr("homework-modify-id",result.extend.homework.homeworkId);
+                $("#homework-modify-name").attr("homework-modify-code",result.extend.homework.homeworkCode);
                 $("#homework-modify-name").val(result.extend.homework.homeworkName);
                 $("#homework-modify-total-students").val(result.extend.homework.homeworktotalnums);
                 $("#homeworkDead-modify").val(result.extend.homework.homeworkDead);

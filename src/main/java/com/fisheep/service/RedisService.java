@@ -23,4 +23,6 @@ public interface RedisService {
     void deleteHomeworkByIdOrBatchId(List<Integer> idList);
 
     void deleteHomeworkByIdOrBatchId(int homeworkId);
+
+    void updateHomework(Homework homework);
 }
