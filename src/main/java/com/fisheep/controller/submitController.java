@@ -8,6 +8,8 @@ import com.fisheep.service.RedisService;
 import com.fisheep.service.SubmitService;
 import com.fisheep.utils.Msg;
 import com.sun.org.apache.xpath.internal.operations.Bool;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,6 +21,9 @@ import java.util.List;
 
 @Controller
 public class submitController {
+
+    private static Logger logger = LogManager.getLogger(submitController.class.getName());
+
     @Autowired
     HomeworkService homeworkServiceImpl;
 
@@ -43,6 +48,7 @@ public class submitController {
         code = code.replaceAll(" ","");
 
         if (code == "") {
+            logger.info("get提交的作业码为空:"+code);
             return Msg.fail().add("info", 0);
         }
         Boolean mysqlExpired = homeworkServiceImpl.gethomeworkExpiredByHomeCode(code);
@@ -54,12 +60,15 @@ public class submitController {
         2.作业过期--》返回2
          */
         if (null == mysqlExpired) {
+            logger.info("get提交的作业码不存在:"+code);
             return Msg.fail().add("info", 1);
         }
         //mysql里面是过期，redis里面不存在字段
         if (mysqlExpired || !redisExists){
+            logger.info("get提交的作业码过期:"+code);
             return Msg.fail().add("info", 2);
         }
+        logger.info("get提交的作业码有效:"+code);
         return Msg.success();
     }
 
@@ -99,6 +108,7 @@ public class submitController {
     @RequestMapping(path = {"submit/{submitHomeworkId}", "singlehomework/submit/{submitHomeworkId}"}, method = RequestMethod.GET)
     @ResponseBody
     public Msg getSubmitedHomeworksByhomeworkId(@PathVariable("submitHomeworkId") int submitHomeworkId){
+        logger.info("提交的submitHomeworkId："+submitHomeworkId);
         List<Submit> submits = submitServiceImpl.selectAllByHomeworkId(submitHomeworkId);
         return Msg.success().add("submits", submits);
     }

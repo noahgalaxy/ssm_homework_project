@@ -21,4 +21,6 @@ public interface HomeworkService {
     Boolean gethomeworkExpiredByHomeCode(String code);
 
     Homework getHomeworkByHomeworkCode(String code);
+
+    String getHomeworkNameById(int homeworkid);
 }

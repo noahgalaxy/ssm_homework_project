@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       https://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/aop
+       https://www.springframework.org/schema/aop/spring-aop.xsd
+       http://www.springframework.org/schema/tx
+       https://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <description>Shiro Configuration</description>
+
+    <context:component-scan base-package="com.fisheep.shiro"></context:component-scan>
+
+    <!-- Shiro's main business-tier object for web-enabled applications -->
+    <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+        <property name="cacheManager" ref="cacheManager"></property>
+        <property name="realm" ref="FirstShiroRealm"></property>
+    </bean>
+
+    <!-- 用户授权信息Cache -->
+    <bean id="cacheManager" class="org.apache.shiro.cache.MemoryConstrainedCacheManager" />
+
+    <!-- 項目自定义的Realm -->
+    <bean id="FirstShiroRealm" class="com.fisheep.shiro.realms.FirstShiroRealm"></bean>
+
+
+    <!-- 保证实现了Shiro内部lifecycle函数的bean执行,可以自定的来调用配置在Spring IOC容器中shiro bean 的生命周期方法.    -->
+    <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor" />
+
+    <!-- AOP式方法级权限检查,启用IOC容器中shiro相关的注解，但必须在配置了LifecycleBeanPostProcessor之后才可以使用 -->
+    <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"
+          depends-on="lifecycleBeanPostProcessor">
+        <property name="proxyTargetClass" value="true" />
+    </bean>
+
+    <!-- 
+    Shiro Filter ，这里的id需要和web.xml里面的那个shiroFilter的name标签一样；
+    -->
+    <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+        <property name="securityManager" ref="securityManager" />
+        <property name="loginUrl" value="/index.html" />
+        <property name="unauthorizedUrl" value="/tmp.html"></property>
+        <!--
+		这里配置哪些页面需要保护，以及访问这些页面需要哪些权限;
+		/login.jhtml = anon：
+		        表示这个页面，或者前面配置请求的时候，可以被匿名访问，后面的anon表示可以被匿名访问；
+		/** = authc ：
+		        这种使用通配符的方式，表示除了特殊指定的，余下的所有都许哟啊经过认证之后才能被访问，
+		        authc表示需要经过认证（登陆）；当认证不通过的时候，shiro会自动重定向到上卖弄的login.jhtml页面；
+		-->
+        <property name="filterChainDefinitions">
+            <value>
+                /index.html = anon
+<!--                /** = authc-->
+            </value>
+        </property>
+    </bean>
+
+
+    <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+        <property name="securityManager" ref="securityManager" />
+    </bean>
+
+</beans>

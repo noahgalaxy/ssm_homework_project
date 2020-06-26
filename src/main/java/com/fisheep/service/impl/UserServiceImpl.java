@@ -36,9 +36,6 @@ public class UserServiceImpl implements UserService {
         System.out.println("传进来的user:"+user);
         System.out.println("数据库查询到的user:"+user1);
 
-        if(null != user1 && user.getPassWord().equals(user1.getPassWord())){
-            return user1;
-        }
-        return null;
+        return user1;
     }
 }

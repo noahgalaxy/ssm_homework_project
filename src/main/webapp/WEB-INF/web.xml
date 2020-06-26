@@ -9,10 +9,24 @@
     <param-name>contextConfigLocation</param-name>
     <param-value>classpath:springContext.xml</param-value>
   </context-param>
+<!--  classpath:spring-shiro.xml-->
   <context-param>
     <param-name>webAppRootKey</param-name>
     <param-value>homework.webapp</param-value>
   </context-param>
+
+  <!-- log4j2-start -->
+  <context-param>
+    <param-name>log4jConfiguration</param-name>
+    <param-value>classpath:log4j2.xml</param-value>
+  </context-param>
+  <!--动态修改log4j2.xml：容器会每60秒扫描log4j的配置文件-->
+  <context-param>
+    <param-name>log4jRefreshInterval</param-name>
+    <param-value>60000</param-value>
+  </context-param>
+  <!-- log4j2-end -->
+
 
 <!--  1.配置字符编码过滤-->
   <filter>
@@ -37,6 +51,30 @@
     <filter-class>org.springframework.web.filter.HttpPutFormContentFilter</filter-class>
   </filter>
 
+
+  <!-- The filter-name matches name of a 'shiroFilter' bean inside applicationContext.xml -->
+  <filter>
+    <filter-name>shiroFilter</filter-name>
+    <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+    <init-param>
+      <param-name>targetFilterLifecycle</param-name>
+      <param-value>true</param-value>
+    </init-param>
+  </filter>
+
+
+<!--日志-->
+  <filter>
+    <filter-name>log4jServletFilter</filter-name>
+    <filter-class>org.apache.logging.log4j.web.Log4jServletFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>log4jServletFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+  <!--日志-->
+
+
   <filter-mapping>
     <filter-name>characterEncodingFilter</filter-name>
     <url-pattern>/*</url-pattern>
@@ -46,10 +84,24 @@
     <url-pattern>/*</url-pattern>
   </filter-mapping>
 
+
+  <!-- Make sure any request you want accessible to Shiro is filtered. /* catches all -->
+  <!-- requests.  Usually this filter mapping is defined first (before all others) to -->
+  <!-- ensure that Shiro works in subsequent filters in the filter chain:             -->
+  <filter-mapping>
+    <filter-name>shiroFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+
   <listener>
     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
   </listener>
 
+<!--日志文件-->
+  <listener>
+    <listener-class>org.apache.logging.log4j.web.Log4jServletContextListener</listener-class>
+  </listener>
+  <!--日志文件-->
   <servlet>
     <servlet-name>dispatcherServlet</servlet-name>
     <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
@@ -64,4 +116,5 @@
     <servlet-name>dispatcherServlet</servlet-name>
     <url-pattern>/</url-pattern>
   </servlet-mapping>
+
 </web-app>

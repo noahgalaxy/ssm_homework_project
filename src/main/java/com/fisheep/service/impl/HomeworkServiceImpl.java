@@ -55,5 +55,11 @@ public class HomeworkServiceImpl implements HomeworkService {
         return homeworkMapper.getHomeworkByHomeworkCode(code);
     }
 
+    @Override
+    public String getHomeworkNameById(int homeworkid) {
+        String homeworkName = homeworkMapper.getHomeworkNameById(homeworkid);
+        return homeworkName;
+    }
+
 
 }

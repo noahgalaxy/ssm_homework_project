@@ -23,6 +23,12 @@
     <div>
         <a href="/homework/toLogin" type="button" class="btn btn-primary">我要发布</a>
     </div>
+    <br>
+    <br>
+    <div>
+        <a id="btn-downloads" type="button" class="btn btn-primary">downloads</a>
+    </div>
+
 </body>
 <script>
     $(document).on("click","#btn-code-submit", function () {
@@ -57,5 +63,17 @@
             },
         })
     });
+
+    $(document).on("click", "#btn-downloads", function () {
+        // $.ajax({
+        //     url:"/homework/filesDownload/"+"7",
+        //     type: "get",
+        //     sync:true,
+        //     success:function (result) {
+        //         console.log(result.toString());
+        //     }
+        // })
+        window.location.href = "/homework/filesDownload/"+"29";
+    })
 </script>
 </html>

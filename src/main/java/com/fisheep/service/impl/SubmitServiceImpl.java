@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
+import java.io.File;
 import java.util.List;
 
 
@@ -24,13 +25,13 @@ public class SubmitServiceImpl implements SubmitService {
 
     /**
      * 这里需要新增或者修改submit， 于此同时，需要redis里面新增计数器
-     *
      * @param submit
      * @param multipartFile
+     * @param uploadFilesPath:要保存文件到哪个目录下面
      * @return
      */
     @Override
-    public Boolean insertSubmit(Submit submit, CommonsMultipartFile multipartFile) {
+    public Boolean insertSubmit(Submit submit, CommonsMultipartFile multipartFile, String uploadFilesPath) {
 
 //        int count = submitMapper.selectCountByHomeworkIdAndUploader(submit.getSubmitHomeworkId(), submit.getUploaderName());
         List<Submit> submits = submitMapper.selectPrefixAndFileNameByHomeworkIdAndUploader(submit.getSubmitHomeworkId(), submit.getUploaderName());
@@ -49,8 +50,11 @@ public class SubmitServiceImpl implements SubmitService {
                 submitMapper.updateSubmit(submit);
                 for (Submit submitTmp : submits) {
 //                    String filePath = "src/main/webapp/uploadfiles/"+submitTmp.getSubmitLocation()+"/"+submitTmp.getFileSuffix()+submitTmp.getSubmitFileName();
-                    String existFilePath = "C:\\Users\\Fisheep\\Desktop\\Code\\homework\\src\\main\\webapp\\uploadfiles\\"
+//                    String existFilePath = "C:\\Users\\Fisheep\\Desktop\\Code\\homework\\src\\main\\webapp\\uploadfiles\\"
+//                            +submitTmp.getFileSuffix()+"_"+submitTmp.getSubmitFileName();
+                    String existFilePath = uploadFilesPath+ File.separator
                             +submitTmp.getFileSuffix()+"_"+submitTmp.getSubmitFileName();
+
                     boolean isDelete = UploadFile.deleteFile(existFilePath);
                     if(!isDelete){
                         System.out.println("文件删除失败，事务回滚:"+existFilePath);
@@ -67,7 +71,7 @@ public class SubmitServiceImpl implements SubmitService {
 
         //保存文件
         String fileName = submit.getFileSuffix() + "_" + submit.getSubmitFileName();
-        Boolean fileSave = UploadFile.fileSave(multipartFile, UploadFile.getFileSavePath(), fileName);
+        Boolean fileSave = UploadFile.fileSave(multipartFile, uploadFilesPath, fileName);
         return fileSave;
     }
 
@@ -75,5 +79,11 @@ public class SubmitServiceImpl implements SubmitService {
     @Override
     public List<Submit> selectAllByHomeworkId(int submitHomeworkId) {
         return submitMapper.selectAllByHomeworkId(submitHomeworkId);
+    }
+
+    @Override
+    public List<Submit> getSubmittedFilesByHomeworkId(int homeworkid) {
+        List<Submit> submits =  submitMapper.getSubmittedFilesByHomeworkId(homeworkid);
+        return submits;
     }
 }

@@ -26,4 +26,6 @@ public interface HomeworkMapper {
     void updateHomeworkSubmittedNumsPlus(int submitHomeworkId);
 
     List<Homework> getAllHomeworks();
+
+    String getHomeworkNameById(int homeworkid);
 }

@@ -137,5 +137,12 @@ public class TestDao {
         List<Group> groupList = groupMapper.selectGroupsByGroupIdsList(groupIdsList);
         System.out.println(groupList);
     }
+
+    @Test
+    public void testGetSubmittedFilesByHomeworkId(){
+//        List<Submit> submits = submitMapper.getSubmittedFilesByHomeworkId(29);
+        String homeworkNameById = homeworkMapper.getHomeworkNameById(29);
+        System.out.println(homeworkNameById); }
+
 }
 

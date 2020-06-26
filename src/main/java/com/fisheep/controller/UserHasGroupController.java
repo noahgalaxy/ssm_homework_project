@@ -3,6 +3,8 @@ package com.fisheep.controller;
 import com.fisheep.bean.UserHasGroup;
 import com.fisheep.service.UserHasGroupService;
 import com.fisheep.utils.Msg;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -18,6 +20,7 @@ import java.util.Map;
 
 @Controller
 public class UserHasGroupController {
+    private static Logger logger = LogManager.getLogger(UserHasGroupController.class.getName());
 
     @Autowired
     @Qualifier("userHasGroupServiceImpl")
@@ -26,7 +29,8 @@ public class UserHasGroupController {
     @RequestMapping(path = "/getGroupByUid/{uid}", method = RequestMethod.GET)
     @ResponseBody
     public Msg getGroupByUid(@PathVariable("uid") Integer uid){
-        System.out.println("getGroupByUid里面uid:"+uid);
+        logger.info("getGroupByUid里面uid:"+uid);
+//        System.out.println("getGroupByUid里面uid:"+uid);
         List<UserHasGroup> uhgGroups = userHasGroupServiceImpl.getGroupsByUid(uid);
         if(!uhgGroups.isEmpty()){
             //map存放查询到的这个uid所有的组
@@ -37,9 +41,11 @@ public class UserHasGroupController {
                 map.put("groupName", uhgGroup.getGroup().getGroupName());
                 groupsList.add(map);
             }
+            logger.info("有所属组:"+uid);
             return Msg.success().add("groupsList", groupsList);
         }
         //这种情况是代表没有所属组
+        logger.info("无所属组:"+uid);
         return Msg.fail();
     }
 }

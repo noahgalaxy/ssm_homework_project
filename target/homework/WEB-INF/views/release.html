@@ -165,13 +165,14 @@
                         <th>Group</th>
                         <th>截止时间</th>
                         <th>已提交/总人数</th>
-                        <th>删除 / 修改 / 更多</th>
+                        <th>删除 / 修改 / 下载</th>
                     </tr>
                     </thead>
                     <tbody>
                     </tbody>
                 </table>
             </div>
+            <textarea id='hiden-element' style='position: absolute;top: 0; left: 0;opacity: 0;z-index: -10;'>name</textarea>
         </div>
     </div>
 </body>
@@ -194,6 +195,12 @@
     openHomeworkModal("modify");
     homeworkSubmit("release");
     homeworkSubmit("modify");
+
+    $(document).on("click", ".btn.glyphicon.glyphicon-download", function () {
+        var homeworkId = $(this).parent().find("span").first().attr("homeworkid");
+        console.log("点击下载："+homeworkId);
+        window.location.href = "/homework/filesDownload/"+homeworkId;
+    })
 
 </script>
 </html>

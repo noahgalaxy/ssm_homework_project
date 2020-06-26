@@ -22,4 +22,6 @@ public interface SubmitMapper {
 
 
     List<Submit> selectAllByHomeworkId(int submitHomeworkId);
+
+    List<Submit> getSubmittedFilesByHomeworkId(int homeworkid);
 }

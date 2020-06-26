@@ -48,4 +48,8 @@
     <select id="selectAllByHomeworkId" resultType="com.fisheep.bean.Submit">
         select s.* from submit s where submitHomeworkId = #{submitHomeworkId}
     </select>
+
+    <select id="getSubmittedFilesByHomeworkId" parameterType="java.lang.Integer" resultMap="submitMap">
+        select s.* from submit s where submitHomeworkId = #{homeworkId}
+    </select>
 </mapper>

@@ -310,7 +310,9 @@ function getHomeworks(status) {
                     var homeId = $("<td></td>").text(homework.homeworkId);
                     var homeName = $("<td></td>").addClass("clickkk").text(homework.homeworkName.length <= 10?
                         homework.homeworkName:homework.homeworkName.substr(0, 10) + "...");
-                    var homeCode = $("<td></td>").text(homework.homeworkCode);
+
+                    var homeCode = $("<td></td>").addClass("codeCopy").text(homework.homeworkCode);
+
                     var homeDead = $("<td></td>").text(homework.homeworkDead);
                     var submitAndTotal = $("<td></td>").text(homework.homeworksubmittednums+"/"+homework.homeworktotalnums);
                     var homeGroupString = "-";
@@ -334,7 +336,7 @@ function getHomeworks(status) {
                         // .append($("<span></span>").addClass("glyphicon glyphicon-remove").attr("aria-hidden", true))
                         // .attr("type", "button");
                     var btnModify = $("<span></span>").addClass("btn glyphicon glyphicon-pencil").attr("aria-hidden", true);
-                    var btnGetList = $("<span></span>").addClass("btn glyphicon glyphicon-th-large").attr("aria-hidden", true);
+                    var btnGetList = $("<span></span>").addClass("btn glyphicon glyphicon-download").attr("aria-hidden", true);
                     var btnOperation = $("<td></td>").append(btnDelete).append(btnModify).append(btnGetList);
 
                     $("<tr></tr>").append(singleCheckBox).append(homeId).append(homeName).append(homeCode)
@@ -344,13 +346,16 @@ function getHomeworks(status) {
                         .append(btnOperation)
                         .appendTo("#homework_table tbody");
                 });
+
                 //此外还需要构建模态框的组，select里面的组option
                 // createGroupselect("#homework-modify-group");
                 // createGroupselect("#homework-group");
                 // createGroupselect()
             }
             else{
-                alert("后端获取失败")
+                console.log("无作业");
+                $("#homework_table tbody").empty();
+                $("<p>还没有发布作业哦</p>").appendTo($("#homework_table tbody"));
             }
         }
     })
@@ -412,6 +417,16 @@ $(document).on("click","td[class='clickkk']", function () {
     //     type:"GET"
     // })
 
+$(document).on("click", "td[class='codeCopy']", function () {
+    var url = window.location.host;
+    var submitLink = $(this).text();
+    console.log("复制事件点击了："+submitLink)
+    var element = document.getElementById("hiden-element");
+    element.value = url+"/homework/toHomeworkSubmit/"+submitLink;
+    element.select();
+    document.execCommand("copy"); // 执行浏览器复制命令
+    alert("提交链接已复制");
+})
 
 function tdclick() {
     let homeworkId = $(this).parent().find("td:eq(1)").text();

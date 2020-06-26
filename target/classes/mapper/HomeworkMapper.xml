@@ -98,4 +98,8 @@
     <select id="getAllHomeworks" resultType="com.fisheep.bean.Homework">
         select * from hw_homework;
     </select>
+
+    <select id="getHomeworkNameById" parameterType="java.lang.Integer" resultType="java.lang.String">
+        select homeworkName from hw_homework where homeworkid = #{homeworkId}
+    </select>
 </mapper>
